@@ -159,9 +159,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="under-construction-interindividual-differences.html"><a href="under-construction-interindividual-differences.html"><i class="fa fa-check"></i><b>6</b> [under construction] Interindividual Differences</a></li>
 <li class="chapter" data-level="7" data-path="under-construction-custom-contrasts.html"><a href="under-construction-custom-contrasts.html"><i class="fa fa-check"></i><b>7</b> [under construction] Custom Contrasts</a></li>
 <li class="chapter" data-level="8" data-path="under-construction-between-subject-factors.html"><a href="under-construction-between-subject-factors.html"><i class="fa fa-check"></i><b>8</b> [under construction] Between-Subject Factors</a></li>
-<li class="chapter" data-level="9" data-path="under-construction-visualization.html"><a href="under-construction-visualization.html"><i class="fa fa-check"></i><b>9</b> [under construction] Visualization</a></li>
-<li class="chapter" data-level="10" data-path="outlook.html"><a href="outlook.html"><i class="fa fa-check"></i><b>10</b> Outlook</a><ul>
-<li class="chapter" data-level="10.1" data-path="outlook.html"><a href="outlook.html#roadmap"><i class="fa fa-check"></i><b>10.1</b> Roadmap</a></li>
+<li class="chapter" data-level="9" data-path="under-construction-covariance-structures.html"><a href="under-construction-covariance-structures.html"><i class="fa fa-check"></i><b>9</b> [under construction] Covariance Structures</a></li>
+<li class="chapter" data-level="10" data-path="under-construction-visualization.html"><a href="under-construction-visualization.html"><i class="fa fa-check"></i><b>10</b> [under construction] Visualization</a></li>
+<li class="chapter" data-level="11" data-path="outlook.html"><a href="outlook.html"><i class="fa fa-check"></i><b>11</b> Outlook</a><ul>
+<li class="chapter" data-level="11.1" data-path="outlook.html"><a href="outlook.html#roadmap"><i class="fa fa-check"></i><b>11.1</b> Roadmap</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
@@ -183,10 +184,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="example" class="section level1">
 <h1><span class="header-section-number">2</span> Example</h1>
-<p><code>semnova</code> is a package intended for latent RM-ANOVA. In the following, we will download a publicly available dataset by <span class="citation">Qu et al. (<a href="references.html#ref-Qu2015">2015</a>)</span> and perform latent RM-ANOVA on a subset of the data.</p>
+<p><code>semnova</code> is a package intended for latent RM-ANOVA. In the following, we will download a publicly available dataset by <span class="citation">Qu et al. (<a href="references.html#ref-Qu2015a">2015</a>)</span> and perform latent RM-ANOVA on a subset of the data.</p>
 <div id="getting-the-data" class="section level2">
 <h2><span class="header-section-number">2.1</span> Getting the Data</h2>
-<p>The data set can be downloaded from the <em>PLoS ONE</em> website. We use the <code>openxlsx</code> package for importing the data and the <code>tidyverse</code> collection for further data manipulations.</p>
+<p>The data set can be downloaded from the <em>PLoS ONE</em> website. We use the <code>openxlsx</code> package for importing the data and the <code>tidyverse</code> collection <span class="citation">(Wickham et al., <a href="references.html#ref-Wickham2019a">2019</a>)</span> for further data manipulations.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&quot;openxlsx&quot;</span>, <span class="dt">character.only =</span> T)) {</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">  <span class="kw">install.packages</span>(<span class="st">&quot;openxlsx&quot;</span>)</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3">  <span class="kw">library</span>(openxlsx)</a>
@@ -202,7 +203,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="introducing-the-data" class="section level2">
 <h2><span class="header-section-number">2.2</span> Introducing the Data</h2>
-<p>Let’s briefly introduce the study conducted by <span class="citation">Qu et al. (<a href="references.html#ref-Qu2015">2015</a>)</span>. The authors investigated a bystander effect in a virtual classroom setting. In particular, participants first witnessed virtual students answering questions from a teacher in a training for spoken English. The participants afterwards answered questions themselves. During both parts of the experiment, virtual students (bystanders) whispered and commented on the virtual speaker and the human speaker, respectively. The whispering was either positive or negative. This resulted in a two by two within subject repeated measures design. Every participant received every condition. The relevant sub scale used in our analysis is the <em>virtual students’ performance</em>. We only use two items from this sub scale measuring attitudes towards the virtual bystanders and the performance of the virtual bystanders on an 11-point scale reaching from 0 (very bad) to 11 (very good).</p>
+<p>Let’s briefly introduce the study conducted by <span class="citation">Qu et al. (<a href="references.html#ref-Qu2015a">2015</a>)</span>. The authors investigated a bystander effect in a virtual classroom setting. In particular, participants first witnessed virtual students answering questions from a teacher in a training for spoken English. The participants afterwards answered questions themselves. During both parts of the experiment, virtual students (bystanders) whispered and commented on the virtual speaker and the human speaker, respectively. The whispering was either positive or negative. This resulted in a two by two within subject repeated measures design. Every participant received every condition. The relevant sub scale used in our analysis is the <em>virtual students’ performance</em>. We only use two items from this sub scale measuring attitudes towards the virtual bystanders and the performance of the virtual bystanders on an 11-point scale reaching from 0 (very bad) to 11 (very good).</p>
 <p>A graphical illustration of these items can be found in Figure <a href="example.html#fig:plot">2.1</a></p>
 <div class="figure"><span id="fig:plot"></span>
 <img src="semnova-man_files/figure-html/plot-1.png" alt="Means and standard errors for the the investigated items across the four experimental conditions." width="672" />

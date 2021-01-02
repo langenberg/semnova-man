@@ -14,6 +14,7 @@ under-construction-fit-measures
 under-construction-interindividual-differences
 under-construction-custom-contrasts
 under-construction-between-subject-factors
+under-construction-covariance-structures
 under-construction-visualization
 outlook
 roadmap

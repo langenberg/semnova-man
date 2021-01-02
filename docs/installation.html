@@ -1,38 +1,38 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1 Installation | semnova: An R package for latent reapeated measures ANOVA</title>
-  <meta name="description" content="1 Installation | semnova: An R package for latent reapeated measures ANOVA" />
-  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+  <title>1 Installation | semnova: An R package for latent repeated measures ANOVA</title>
+  <meta name="description" content="1 Installation | semnova: An R package for latent repeated measures ANOVA" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1 Installation | semnova: An R package for latent reapeated measures ANOVA" />
+  <meta property="og:title" content="1 Installation | semnova: An R package for latent repeated measures ANOVA" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="1 Installation | semnova: An R package for latent reapeated measures ANOVA" />
+  <meta property="og:description" content="1 Installation | semnova: An R package for latent repeated measures ANOVA" />
   <meta name="github-repo" content="langenberg/semnova-man" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1 Installation | semnova: An R package for latent reapeated measures ANOVA" />
+  <meta name="twitter:title" content="1 Installation | semnova: An R package for latent repeated measures ANOVA" />
   
-  <meta name="twitter:description" content="1 Installation | semnova: An R package for latent reapeated measures ANOVA" />
+  <meta name="twitter:description" content="1 Installation | semnova: An R package for latent repeated measures ANOVA" />
   
 
-<meta name="author" content="Benedikt Langenberg" />
+<meta name="author" content="Benedikt Langenberg and Axel Mayer" />
 
 
-<meta name="date" content="2019-07-08" />
+<meta name="date" content="2021-01-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html">
-<link rel="next" href="how-to-use-semnova.html">
+<link rel="prev" href="index.html"/>
+<link rel="next" href="example.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -55,7 +58,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -130,13 +132,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
-<li><a href="index.html#about-semnova">About <strong>semnova</strong></a></li>
+<li><a href="index.html#about-semnova">About <code>semnova</code></a></li>
+<li><a href="index.html#citing-semnova">Citing <code>semnova</code></a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#changelog"><i class="fa fa-check"></i>Changelog</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>1</b> Installation</a></li>
-<li class="chapter" data-level="2" data-path="how-to-use-semnova.html"><a href="how-to-use-semnova.html"><i class="fa fa-check"></i><b>2</b> How to use <strong>semnova</strong></a><ul>
-<li class="chapter" data-level="2.1" data-path="how-to-use-semnova.html"><a href="how-to-use-semnova.html#getting-some-data"><i class="fa fa-check"></i><b>2.1</b> Getting some data</a></li>
+<li class="chapter" data-level="1" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>1</b> Installation</a><ul>
+<li class="chapter" data-level="1.1" data-path="installation.html"><a href="installation.html#installation-via-devtools-recommended"><i class="fa fa-check"></i><b>1.1</b> Installation via <code>devtools</code> (recommended)</a></li>
+<li class="chapter" data-level="1.2" data-path="installation.html"><a href="installation.html#installation-via-cran"><i class="fa fa-check"></i><b>1.2</b> Installation via <code>cran</code></a></li>
 </ul></li>
+<li class="chapter" data-level="2" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>2</b> Example</a><ul>
+<li class="chapter" data-level="2.1" data-path="example.html"><a href="example.html#getting-the-data"><i class="fa fa-check"></i><b>2.1</b> Getting the Data</a></li>
+<li class="chapter" data-level="2.2" data-path="example.html"><a href="example.html#introducing-the-data"><i class="fa fa-check"></i><b>2.2</b> Introducing the Data</a></li>
+<li class="chapter" data-level="2.3" data-path="example.html"><a href="example.html#preparing-the-data"><i class="fa fa-check"></i><b>2.3</b> Preparing the Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="latent-repeated-measures-anova.html"><a href="latent-repeated-measures-anova.html"><i class="fa fa-check"></i><b>3</b> Latent repeated measures ANOVA</a><ul>
+<li class="chapter" data-level="3.1" data-path="latent-repeated-measures-anova.html"><a href="latent-repeated-measures-anova.html#arguments"><i class="fa fa-check"></i><b>3.1</b> Arguments</a><ul>
+<li><a href="latent-repeated-measures-anova.html#formula"><code>formula</code></a></li>
+<li><a href="latent-repeated-measures-anova.html#idata"><code>idata</code></a></li>
+<li><a href="latent-repeated-measures-anova.html#idesign"><code>idesign</code></a></li>
+<li><a href="latent-repeated-measures-anova.html#mmodel"><code>mmodel</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="latent-repeated-measures-anova.html"><a href="latent-repeated-measures-anova.html#the-first-analysis"><i class="fa fa-check"></i><b>3.2</b> The first analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="traditional-anova.html"><a href="traditional-anova.html"><i class="fa fa-check"></i><b>4</b> Traditional ANOVA</a></li>
+<li class="chapter" data-level="5" data-path="under-construction-fit-measures.html"><a href="under-construction-fit-measures.html"><i class="fa fa-check"></i><b>5</b> [under construction] Fit Measures</a></li>
+<li class="chapter" data-level="6" data-path="under-construction-interindividual-differences.html"><a href="under-construction-interindividual-differences.html"><i class="fa fa-check"></i><b>6</b> [under construction] Interindividual Differences</a></li>
+<li class="chapter" data-level="7" data-path="under-construction-custom-contrasts.html"><a href="under-construction-custom-contrasts.html"><i class="fa fa-check"></i><b>7</b> [under construction] Custom Contrasts</a></li>
+<li class="chapter" data-level="8" data-path="under-construction-between-subject-factors.html"><a href="under-construction-between-subject-factors.html"><i class="fa fa-check"></i><b>8</b> [under construction] Between-Subject Factors</a></li>
+<li class="chapter" data-level="9" data-path="under-construction-visualization.html"><a href="under-construction-visualization.html"><i class="fa fa-check"></i><b>9</b> [under construction] Visualization</a></li>
+<li class="chapter" data-level="10" data-path="outlook.html"><a href="outlook.html"><i class="fa fa-check"></i><b>10</b> Outlook</a><ul>
+<li class="chapter" data-level="10.1" data-path="outlook.html"><a href="outlook.html#roadmap"><i class="fa fa-check"></i><b>10.1</b> Roadmap</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
       </nav>
@@ -146,7 +173,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><strong>semnova</strong>: An R package for latent reapeated measures ANOVA</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>semnova</code>: An R package for latent repeated measures ANOVA</a>
           </h1>
         </div>
 
@@ -156,14 +183,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="installation" class="section level1">
 <h1><span class="header-section-number">1</span> Installation</h1>
-<p><strong>semnova</strong> is not currently available on CRAN. It is therefore required to install <strong>semnova</strong> via github using, for instance, the <strong>devtools</strong> package. Make sure you installed the package beforehand or simply copy the following code to install both packages in one step.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&quot;devtools&quot;</span>, <span class="dt">character.only =</span> T)) {
-    <span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)
-}
+<p><code>semnova</code> is available on <code>cran</code>. It is, however, recommended to install the latest version from github via the <code>devtools</code> package. In the installation process, a couple of other packages will be installed. In particular, <code>semnova</code> strongly depends on the structural equation modeling software <code>lavaan</code> <span class="citation">(Rosseel, <a href="references.html#ref-Rosseel2012a">2012</a>)</span>.</p>
+<div id="installation-via-devtools-recommended" class="section level2">
+<h2><span class="header-section-number">1.1</span> Installation via <code>devtools</code> (recommended)</h2>
+<p>Make sure to install <code>devtools</code> first. Just copy and run the following lines within <code>R</code>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&quot;devtools&quot;</span>, <span class="dt">character.only =</span> T)) {</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">}</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;langenberg/semnova&quot;</span>)</a></code></pre></div>
+</div>
+<div id="installation-via-cran" class="section level2">
+<h2><span class="header-section-number">1.2</span> Installation via <code>cran</code></h2>
+<p>Simply run this code to install <code>semnova</code> via cran.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&quot;semnova&quot;</span>)</a></code></pre></div>
 
-devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;langenberg/semnova&quot;</span>)</code></pre>
-<p>After running these lines, we are ready to go and perform our first analysis.</p>
-
+</div>
 </div>
             </section>
 
@@ -171,16 +206,18 @@ devtools<span class="op">::</span><span class="kw">install_github</span>(<span c
         </div>
       </div>
 <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="how-to-use-semnova.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="example.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -198,9 +235,14 @@ gitbook.start({
 "link": null,
 "text": null
 },
+"view": {
+"link": null,
+"text": null
+},
 "download": ["semnova-man.pdf", "semnova-man.epub"],
 "toc": {
-"collapse": "subsection"
+"collapse": "section",
+"scroll_highlight": true
 }
 });
 });

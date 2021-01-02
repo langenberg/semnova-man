@@ -4,21 +4,21 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 How to use semnova | semnova: An R package for latent repeated measures ANOVA</title>
-  <meta name="description" content="2 How to use semnova | semnova: An R package for latent repeated measures ANOVA" />
+  <title>References | semnova: An R package for latent repeated measures ANOVA</title>
+  <meta name="description" content="References | semnova: An R package for latent repeated measures ANOVA" />
   <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2 How to use semnova | semnova: An R package for latent repeated measures ANOVA" />
+  <meta property="og:title" content="References | semnova: An R package for latent repeated measures ANOVA" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="2 How to use semnova | semnova: An R package for latent repeated measures ANOVA" />
+  <meta property="og:description" content="References | semnova: An R package for latent repeated measures ANOVA" />
   <meta name="github-repo" content="langenberg/semnova-man" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 How to use semnova | semnova: An R package for latent repeated measures ANOVA" />
+  <meta name="twitter:title" content="References | semnova: An R package for latent repeated measures ANOVA" />
   
-  <meta name="twitter:description" content="2 How to use semnova | semnova: An R package for latent repeated measures ANOVA" />
+  <meta name="twitter:description" content="References | semnova: An R package for latent repeated measures ANOVA" />
   
 
 <meta name="author" content="Benedikt Langenberg" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="installation.html">
-<link rel="next" href="semnova.html">
+<link rel="prev" href="references.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -140,10 +140,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3" data-path="how-to-use-semnova.html"><a href="how-to-use-semnova.html#preparing-the-data"><i class="fa fa-check"></i><b>2.3</b> Preparing the data</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="semnova.html"><a href="semnova.html"><i class="fa fa-check"></i><b>3</b> SEMNOVA</a></li>
-<li class="chapter" data-level="4" data-path="outlook.html"><a href="outlook.html"><i class="fa fa-check"></i><b>4</b> Outlook</a><ul>
-<li class="chapter" data-level="4.1" data-path="outlook.html"><a href="outlook.html#roadmap"><i class="fa fa-check"></i><b>4.1</b> Roadmap</a></li>
-</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="" data-path="references-1.html"><a href="references-1.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
       </nav>
@@ -161,63 +159,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="how-to-use-semnova" class="section level1">
-<h1><span class="header-section-number">2</span> How to use <strong>semnova</strong></h1>
-<p><strong>semnova</strong> is a package intended for latent repeated measures ANOVA. In the following, we will download a publicly available data set by <span class="citation">Qu et al. (<a href="references.html#ref-Qu2015">2015</a>)</span> and perform a latent repeated measures ANOVA on a subset of the data.</p>
-<div id="getting-the-data" class="section level2">
-<h2><span class="header-section-number">2.1</span> Getting the data</h2>
-<p>The data set can be downloaded from the <em>PLoS ONE</em> website. We use the <strong>openxlsx</strong> package for importing the data and the <strong>tidyverse</strong> collection for further data manipulations.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&quot;openxlsx&quot;</span>, <span class="dt">character.only =</span> T)) {
-    <span class="kw">install.packages</span>(<span class="st">&quot;openxlsx&quot;</span>)
-}
+<div id="references-1" class="section level1 unnumbered">
+<h1>References</h1>
 
-<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&quot;tidyverse&quot;</span>, <span class="dt">character.only =</span> T)) {
-    <span class="kw">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)
-    <span class="kw">library</span>(tidyverse)
-}
-
-d_raw &lt;-<span class="st"> </span>openxlsx<span class="op">::</span><span class="kw">read.xlsx</span>(<span class="st">&quot;https://doi.org/10.1371/journal.pone.0125279.s001&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">as_tibble</span>()</code></pre>
+<div id="refs" class="references">
+<div>
+<p>Qu, Chao, Yun Ling, Ingrid Heynderickx, and Willem Paul Brinkman. 2015. “Virtual bystanders in a language lesson: Examining the effect of social evaluation, vicarious experience, cognitive consistency and praising on students’ beliefs, self-efficacy and anxiety in a virtual reality environment.” <em>PLoS ONE</em> 10 (4): 1–26. <a href="https://doi.org/10.1371/journal.pone.0125279">https://doi.org/10.1371/journal.pone.0125279</a>.</p>
 </div>
-<div id="introducing-the-data" class="section level2">
-<h2><span class="header-section-number">2.2</span> Introducing the data</h2>
-<p>Let’s briefly introduce the study conducted by <span class="citation">Qu et al. (<a href="references.html#ref-Qu2015">2015</a>)</span>. The authors investigated a bystander effect in a virtual classroom setting. In particular, participants first witnessed virtual students answering questions from a teacher in a training for spoken English. The participants afterwards answered questions themselves. During both parts of the experiment, virtual students (bystanders) whispered and commented on the virtual speaker and the human speaker, respectively. The whispering was either positive or negative. This resulted in a two by two within subject repeated measures design. Every participant received. The relevant sub scale used in our analysis is the <em>virtual students’ performance</em>. We only use two items from this sub scale measuring attitudes towards the virtual bystanders and the performance of the virtual bystanders on an 11-point scale reaching from 0 (very bad) to 11 (very good).</p>
-<p>A graphical illustration of these items can be found in Figure <a href="how-to-use-semnova.html#fig:plot">2.1</a></p>
-<div class="figure"><span id="fig:plot"></span>
-<img src="semnova-man_files/figure-html/plot-1.png" alt="Means and standard errors for the the investigated items across the four experimental conditions." width="672" />
-<p class="caption">
-Figure 2.1: Means and standard errors for the the investigated items across the four experimental conditions.
-</p>
-</div>
-</div>
-<div id="preparing-the-data" class="section level2">
-<h2><span class="header-section-number">2.3</span> Preparing the data</h2>
-<p>First of all, we will need some additional packages for data wrangling.</p>
-<pre class="sourceCode r"><code class="sourceCode r">d_wide &lt;-<span class="st"> </span>d_raw <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(ID, S1PP<span class="op">:</span>S2NN)
-
-d_wide</code></pre>
-<pre><code>## # A tibble: 26 x 9
-##       ID   S1PP   S1NP   S1PN    S1NN   S2PP  S2NP   S2PN    S2NN
-##    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
-##  1     1  0.913 0.177  -0.927 -0.927   0.913 0.177 -0.927 -0.927 
-##  2     2  0.752 1.56    0.128 -1.81    0.565 0.939 -0.246 -2.12  
-##  3     3  0.238 0.238  -1.32   0.0275  0.660 0.238 -1.49  -0.689 
-##  4     4 -1.54  1.47    1.09   1.60   -0.552 1.09   0.655  1.52  
-##  5     5 -0.269 0.120  -0.269  0.120  -0.269 0.120 -0.269  0.509 
-##  6     6  0.463 0.0686  0.108  0.858   0.463 0.858  0.463  0.0686
-##  7     7  1.10  0.707  -0.701 -1.49    0.663 0.179 -0.657 -0.657 
-##  8     8  0.200 0.777   0.392  0.585  -0.665 0.873 -0.665  1.07  
-##  9     9  1.88  0.356   0.297  0.297   1.47  1.17  -0.287 -0.521 
-## 10    10  0.600 1.44    0.676  0.216   0.753 0.753  0.830 -0.168 
-## # … with 16 more rows</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># idata and idesign similar to car package input</span>
-idata &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">Peer =</span> <span class="kw">c</span>(<span class="st">&quot;negative&quot;</span>, <span class="st">&quot;positive&quot;</span>), <span class="dt">Human =</span> <span class="kw">c</span>(<span class="st">&quot;negative&quot;</span>, 
-    <span class="st">&quot;positive&quot;</span>))
-
-<span class="co"># measurement model</span>
-mmodel &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">NN =</span> <span class="kw">c</span>(<span class="st">&quot;S1NN&quot;</span>, <span class="st">&quot;S2NN&quot;</span>), <span class="dt">PN =</span> <span class="kw">c</span>(<span class="st">&quot;S1PN&quot;</span>, <span class="st">&quot;S2PN&quot;</span>), <span class="dt">NP =</span> <span class="kw">c</span>(<span class="st">&quot;S1NP&quot;</span>, 
-    <span class="st">&quot;S2NP&quot;</span>), <span class="dt">PP =</span> <span class="kw">c</span>(<span class="st">&quot;S1PP&quot;</span>, <span class="st">&quot;S2PP&quot;</span>))</code></pre>
-
 </div>
 </div>
             </section>
@@ -225,8 +173,8 @@ mmodel &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="d
           </div>
         </div>
       </div>
-<a href="installation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="semnova.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="references.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

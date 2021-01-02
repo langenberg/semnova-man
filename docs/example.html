@@ -4,21 +4,21 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>semnova: An R package for latent repeated measures ANOVA</title>
-  <meta name="description" content="semnova: An R package for latent repeated measures ANOVA" />
+  <title>2 Example | semnova: An R package for latent repeated measures ANOVA</title>
+  <meta name="description" content="2 Example | semnova: An R package for latent repeated measures ANOVA" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="semnova: An R package for latent repeated measures ANOVA" />
+  <meta property="og:title" content="2 Example | semnova: An R package for latent repeated measures ANOVA" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="semnova: An R package for latent repeated measures ANOVA" />
+  <meta property="og:description" content="2 Example | semnova: An R package for latent repeated measures ANOVA" />
   <meta name="github-repo" content="langenberg/semnova-man" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="semnova: An R package for latent repeated measures ANOVA" />
+  <meta name="twitter:title" content="2 Example | semnova: An R package for latent repeated measures ANOVA" />
   
-  <meta name="twitter:description" content="semnova: An R package for latent repeated measures ANOVA" />
+  <meta name="twitter:description" content="2 Example | semnova: An R package for latent repeated measures ANOVA" />
   
 
 <meta name="author" content="Benedikt Langenberg and Axel Mayer" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="installation.html"/>
+<link rel="prev" href="installation.html"/>
+<link rel="next" href="latent-repeated-measures-anova.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -181,28 +181,57 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title"><code>semnova</code>: An R package for latent repeated measures ANOVA</h1>
-<p class="author"><em>Benedikt Langenberg and Axel Mayer</em></p>
-<p class="date"><em>2021-01-02</em></p>
+<div id="example" class="section level1">
+<h1><span class="header-section-number">2</span> Example</h1>
+<p><code>semnova</code> is a package intended for latent RM-ANOVA. In the following, we will download a publicly available dataset by <span class="citation">Qu et al. (<a href="references.html#ref-Qu2015">2015</a>)</span> and perform latent RM-ANOVA on a subset of the data.</p>
+<div id="getting-the-data" class="section level2">
+<h2><span class="header-section-number">2.1</span> Getting the Data</h2>
+<p>The data set can be downloaded from the <em>PLoS ONE</em> website. We use the <code>openxlsx</code> package for importing the data and the <code>tidyverse</code> collection for further data manipulations.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&quot;openxlsx&quot;</span>, <span class="dt">character.only =</span> T)) {</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">  <span class="kw">install.packages</span>(<span class="st">&quot;openxlsx&quot;</span>)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">  <span class="kw">library</span>(openxlsx)</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&quot;tidyverse&quot;</span>, <span class="dt">character.only =</span> T)) {</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">  <span class="kw">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">  <span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">}</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">d_raw &lt;-<span class="st"> </span><span class="kw">read.xlsx</span>(<span class="st">&quot;https://doi.org/10.1371/journal.pone.0125279.s001&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="st">  </span><span class="kw">as_tibble</span>()</a></code></pre></div>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<div id="about-semnova" class="section level2 unnumbered">
-<h2>About <code>semnova</code></h2>
-<p><code>semnova</code> is an <code>R</code> package for analyzing data from repeated measures experimental designs. <code>semnova</code> implements latent repeated measures analysis of variance (RM-ANOVA) which is a structural equation modeling based alternative to tradtional RM-ANOVA. <em>Traditional</em> RM-ANOVA is a widely used statistical tool in the field of psychology and social sciences. RM-ANOVA can analyze data such as test scores, questionnaire items, reaction times, attitudes, characteristics, or motives. Oftentimes, the construct of interest cannot be observed directly and the aforementioned measures contain measurement errors. <em>Latent</em> RM-ANOVA can include multiple indicators that measure the same latent construct of and prune of measurement error. <em>Latent</em> RM-ANOVA can furthermore be used to examine interindividual differences in main and interaction effects of experimental factors and introduces a whole lot of other advantages from the structural equation modeling framework.</p>
-<p>This very short tutorial is mainly based on the article by <span class="citation">Langenberg et al. (<a href="references.html#ref-Langenberg2020b">2020</a>)</span>. This tutorial, however, only covers how to use <code>semnova</code> for latent RM-ANOVA. If you would like to know more about the methods behind the software, check out the article.</p>
+<div id="introducing-the-data" class="section level2">
+<h2><span class="header-section-number">2.2</span> Introducing the Data</h2>
+<p>Let’s briefly introduce the study conducted by <span class="citation">Qu et al. (<a href="references.html#ref-Qu2015">2015</a>)</span>. The authors investigated a bystander effect in a virtual classroom setting. In particular, participants first witnessed virtual students answering questions from a teacher in a training for spoken English. The participants afterwards answered questions themselves. During both parts of the experiment, virtual students (bystanders) whispered and commented on the virtual speaker and the human speaker, respectively. The whispering was either positive or negative. This resulted in a two by two within subject repeated measures design. Every participant received every condition. The relevant sub scale used in our analysis is the <em>virtual students’ performance</em>. We only use two items from this sub scale measuring attitudes towards the virtual bystanders and the performance of the virtual bystanders on an 11-point scale reaching from 0 (very bad) to 11 (very good).</p>
+<p>A graphical illustration of these items can be found in Figure <a href="example.html#fig:plot">2.1</a></p>
+<div class="figure"><span id="fig:plot"></span>
+<img src="semnova-man_files/figure-html/plot-1.png" alt="Means and standard errors for the the investigated items across the four experimental conditions." width="672" />
+<p class="caption">
+Figure 2.1: Means and standard errors for the the investigated items across the four experimental conditions.
+</p>
 </div>
-<div id="citing-semnova" class="section level2 unnumbered">
-<h2>Citing <code>semnova</code></h2>
-<p>Please use this reference to cite the software package:</p>
-<p>Langenberg, B., Helm, J. L., &amp; Mayer, A. (2020). Repeated measures ANOVA with latent variables to analyze interindividual differences in contrasts. <em>Multivariate Behavioral Research</em>, 1–19. <a href="https://doi.org/10.1080/00273171.2020.1803038" class="uri">https://doi.org/10.1080/00273171.2020.1803038</a></p>
 </div>
-<div id="changelog" class="section level2 unnumbered">
-<h2>Changelog</h2>
-<ul>
-<li>2019-06-13: First Commit</li>
-</ul>
+<div id="preparing-the-data" class="section level2">
+<h2><span class="header-section-number">2.3</span> Preparing the Data</h2>
+<p>The dataset contains a lot of variables. In the next step, we select only the relevant variables.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">d_wide &lt;-<span class="st"> </span>d_raw <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(ID, S1PP<span class="op">:</span>S2NN)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">d_wide</a></code></pre></div>
+<pre><code>## # A tibble: 26 x 9
+##       ID   S1PP   S1NP   S1PN    S1NN   S2PP  S2NP   S2PN    S2NN
+##    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+##  1     1  0.913 0.177  -0.927 -0.927   0.913 0.177 -0.927 -0.927 
+##  2     2  0.752 1.56    0.128 -1.81    0.565 0.939 -0.246 -2.12  
+##  3     3  0.238 0.238  -1.32   0.0275  0.660 0.238 -1.49  -0.689 
+##  4     4 -1.54  1.47    1.09   1.60   -0.552 1.09   0.655  1.52  
+##  5     5 -0.269 0.120  -0.269  0.120  -0.269 0.120 -0.269  0.509 
+##  6     6  0.463 0.0686  0.108  0.858   0.463 0.858  0.463  0.0686
+##  7     7  1.10  0.707  -0.701 -1.49    0.663 0.179 -0.657 -0.657 
+##  8     8  0.200 0.777   0.392  0.585  -0.665 0.873 -0.665  1.07  
+##  9     9  1.88  0.356   0.297  0.297   1.47  1.17  -0.287 -0.521 
+## 10    10  0.600 1.44    0.676  0.216   0.753 0.753  0.830 -0.168 
+## # … with 16 more rows</code></pre>
 
 </div>
 </div>
@@ -211,8 +240,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-
-<a href="installation.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="installation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="latent-repeated-measures-anova.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

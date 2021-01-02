@@ -4,21 +4,21 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>semnova: An R package for latent repeated measures ANOVA</title>
-  <meta name="description" content="semnova: An R package for latent repeated measures ANOVA" />
+  <title>4 Traditional ANOVA | semnova: An R package for latent repeated measures ANOVA</title>
+  <meta name="description" content="4 Traditional ANOVA | semnova: An R package for latent repeated measures ANOVA" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="semnova: An R package for latent repeated measures ANOVA" />
+  <meta property="og:title" content="4 Traditional ANOVA | semnova: An R package for latent repeated measures ANOVA" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="semnova: An R package for latent repeated measures ANOVA" />
+  <meta property="og:description" content="4 Traditional ANOVA | semnova: An R package for latent repeated measures ANOVA" />
   <meta name="github-repo" content="langenberg/semnova-man" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="semnova: An R package for latent repeated measures ANOVA" />
+  <meta name="twitter:title" content="4 Traditional ANOVA | semnova: An R package for latent repeated measures ANOVA" />
   
-  <meta name="twitter:description" content="semnova: An R package for latent repeated measures ANOVA" />
+  <meta name="twitter:description" content="4 Traditional ANOVA | semnova: An R package for latent repeated measures ANOVA" />
   
 
 <meta name="author" content="Benedikt Langenberg and Axel Mayer" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="installation.html"/>
+<link rel="prev" href="latent-repeated-measures-anova.html"/>
+<link rel="next" href="under-construction-fit-measures.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -181,38 +181,170 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title"><code>semnova</code>: An R package for latent repeated measures ANOVA</h1>
-<p class="author"><em>Benedikt Langenberg and Axel Mayer</em></p>
-<p class="date"><em>2021-01-02</em></p>
-</div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<div id="about-semnova" class="section level2 unnumbered">
-<h2>About <code>semnova</code></h2>
-<p><code>semnova</code> is an <code>R</code> package for analyzing data from repeated measures experimental designs. <code>semnova</code> implements latent repeated measures analysis of variance (RM-ANOVA) which is a structural equation modeling based alternative to tradtional RM-ANOVA. <em>Traditional</em> RM-ANOVA is a widely used statistical tool in the field of psychology and social sciences. RM-ANOVA can analyze data such as test scores, questionnaire items, reaction times, attitudes, characteristics, or motives. Oftentimes, the construct of interest cannot be observed directly and the aforementioned measures contain measurement errors. <em>Latent</em> RM-ANOVA can include multiple indicators that measure the same latent construct of and prune of measurement error. <em>Latent</em> RM-ANOVA can furthermore be used to examine interindividual differences in main and interaction effects of experimental factors and introduces a whole lot of other advantages from the structural equation modeling framework.</p>
-<p>This very short tutorial is mainly based on the article by <span class="citation">Langenberg et al. (<a href="references.html#ref-Langenberg2020b">2020</a>)</span>. This tutorial, however, only covers how to use <code>semnova</code> for latent RM-ANOVA. If you would like to know more about the methods behind the software, check out the article.</p>
-</div>
-<div id="citing-semnova" class="section level2 unnumbered">
-<h2>Citing <code>semnova</code></h2>
-<p>Please use this reference to cite the software package:</p>
-<p>Langenberg, B., Helm, J. L., &amp; Mayer, A. (2020). Repeated measures ANOVA with latent variables to analyze interindividual differences in contrasts. <em>Multivariate Behavioral Research</em>, 1–19. <a href="https://doi.org/10.1080/00273171.2020.1803038" class="uri">https://doi.org/10.1080/00273171.2020.1803038</a></p>
-</div>
-<div id="changelog" class="section level2 unnumbered">
-<h2>Changelog</h2>
-<ul>
-<li>2019-06-13: First Commit</li>
-</ul>
+<div id="traditional-anova" class="section level1">
+<h1><span class="header-section-number">4</span> Traditional ANOVA</h1>
+<p>In this section, traditional RM-ANOVA is performed for a brief comparison with latent RM-ANOVA. For this analysis, the two indicators are averaged for each subject within each of the experimental conditions as RM-ANOVA can only deal with manifest variables. The <code>car</code> package is used for this analysis.</p>
+<p>First of all, a new dataset is needed containing the averaged indicators. This is being done using the <code>tidyverse</code> collection. In the next chunk, the long format dataset is only an auxiliary dataset as averaging more convenient with long data.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&quot;car&quot;</span>, <span class="dt">character.only =</span> T)) {</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">  <span class="kw">install.packages</span>(<span class="st">&quot;car&quot;</span>)</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">}</a>
+<a class="sourceLine" id="cb14-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="kw">library</span>(car)</a>
+<a class="sourceLine" id="cb14-6" data-line-number="6"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb14-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb14-8" data-line-number="8">d_long &lt;-<span class="st"> </span>d_wide <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-9" data-line-number="9"><span class="st">  </span><span class="kw">gather</span>(condition, value, <span class="op">-</span>ID) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-10" data-line-number="10"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">item =</span> <span class="kw">substr</span>(condition, <span class="dv">1</span>, <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb14-11" data-line-number="11">         <span class="dt">condition =</span> <span class="kw">substr</span>(condition, <span class="dv">3</span>, <span class="dv">4</span>))</a>
+<a class="sourceLine" id="cb14-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb14-13" data-line-number="13">d_mean_wide &lt;-<span class="st"> </span>d_long <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-14" data-line-number="14"><span class="st">  </span><span class="kw">group_by</span>(ID, condition) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-15" data-line-number="15"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">value =</span> <span class="kw">mean</span>(value)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-16" data-line-number="16"><span class="st">  </span><span class="kw">spread</span>(condition, value)</a>
+<a class="sourceLine" id="cb14-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb14-18" data-line-number="18">d_mean_wide</a></code></pre></div>
+<pre><code>## # A tibble: 26 x 5
+## # Groups:   ID [26]
+##       ID      NN    NP       PN     PP
+##    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;
+##  1     1 -0.927  0.177 -0.927    0.913
+##  2     2 -1.96   1.25  -0.0588   0.659
+##  3     3 -0.331  0.238 -1.40     0.449
+##  4     4  1.56   1.28   0.870   -1.05 
+##  5     5  0.314  0.120 -0.269   -0.269
+##  6     6  0.463  0.463  0.286    0.463
+##  7     7 -1.07   0.443 -0.679    0.883
+##  8     8  0.825  0.825 -0.136   -0.232
+##  9     9 -0.112  0.765  0.00506  1.67 
+## 10    10  0.0236 1.10   0.753    0.676
+## # … with 16 more rows</code></pre>
+<p>The idata and the idesign objects are just the same as for latent RM-ANOVA.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">idata</a></code></pre></div>
+<pre><code>##       Peer    Human
+## 1 negative negative
+## 2 positive negative
+## 3 negative positive
+## 4 positive positive</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">idesign</a></code></pre></div>
+<pre><code>## ~Peer * Human</code></pre>
+<p>Now, let’s run the analysis using the <code>Anova</code> function. Note that the variables in the formula now are actual variables from the dataset (average scores).</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">anova_model &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">cbind</span>(NN, PN, NP, PP) <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, d_mean_wide)</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">anova_fit &lt;-<span class="st"> </span><span class="kw">Anova</span>(anova_model,</a>
+<a class="sourceLine" id="cb20-3" data-line-number="3">                   <span class="dt">idata =</span> idata,</a>
+<a class="sourceLine" id="cb20-4" data-line-number="4">                   <span class="dt">idesign =</span> idesign,</a>
+<a class="sourceLine" id="cb20-5" data-line-number="5">                   <span class="dt">type =</span> <span class="st">&quot;III&quot;</span>)</a>
+<a class="sourceLine" id="cb20-6" data-line-number="6"><span class="kw">summary</span>(anova_fit)</a></code></pre></div>
+<pre><code>## 
+## Type III Repeated Measures MANOVA Tests:
+## 
+## ------------------------------------------
+##  
+## Term: (Intercept) 
+## 
+##  Response transformation matrix:
+##    (Intercept)
+## NN           1
+## PN           1
+## NP           1
+## PP           1
+## 
+## Sum of squares and products for the hypothesis:
+##             (Intercept)
+## (Intercept)    2.234811
+## 
+## Multivariate Tests: (Intercept)
+##                  Df test stat  approx F num Df den Df  Pr(&gt;F)
+## Pillai            1 0.0233974 0.5989488      1     25 0.44624
+## Wilks             1 0.9766026 0.5989488      1     25 0.44624
+## Hotelling-Lawley  1 0.0239580 0.5989488      1     25 0.44624
+## Roy               1 0.0239580 0.5989488      1     25 0.44624
+## 
+## ------------------------------------------
+##  
+## Term: Peer 
+## 
+##  Response transformation matrix:
+##    Peer1
+## NN     1
+## PN    -1
+## NP     1
+## PP    -1
+## 
+## Sum of squares and products for the hypothesis:
+##           Peer1
+## Peer1 0.1304386
+## 
+## Multivariate Tests: Peer
+##                  Df test stat  approx F num Df den Df Pr(&gt;F)
+## Pillai            1 0.0047895 0.1203125      1     25 0.7316
+## Wilks             1 0.9952105 0.1203125      1     25 0.7316
+## Hotelling-Lawley  1 0.0048125 0.1203125      1     25 0.7316
+## Roy               1 0.0048125 0.1203125      1     25 0.7316
+## 
+## ------------------------------------------
+##  
+## Term: Human 
+## 
+##  Response transformation matrix:
+##    Human1
+## NN      1
+## PN      1
+## NP     -1
+## PP     -1
+## 
+## Sum of squares and products for the hypothesis:
+##          Human1
+## Human1 50.63608
+## 
+## Multivariate Tests: Human
+##                  Df test stat approx F num Df den Df     Pr(&gt;F)    
+## Pillai            1 0.4442502 19.98427      1     25 0.00014706 ***
+## Wilks             1 0.5557498 19.98427      1     25 0.00014706 ***
+## Hotelling-Lawley  1 0.7993709 19.98427      1     25 0.00014706 ***
+## Roy               1 0.7993709 19.98427      1     25 0.00014706 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## ------------------------------------------
+##  
+## Term: Peer:Human 
+## 
+##  Response transformation matrix:
+##    Peer1:Human1
+## NN            1
+## PN           -1
+## NP           -1
+## PP            1
+## 
+## Sum of squares and products for the hypothesis:
+##              Peer1:Human1
+## Peer1:Human1   0.02058027
+## 
+## Multivariate Tests: Peer:Human
+##                  Df test stat   approx F num Df den Df  Pr(&gt;F)
+## Pillai            1 0.0009096 0.02276124      1     25 0.88129
+## Wilks             1 0.9990904 0.02276124      1     25 0.88129
+## Hotelling-Lawley  1 0.0009104 0.02276124      1     25 0.88129
+## Roy               1 0.0009104 0.02276124      1     25 0.88129
+## 
+## Univariate Type III Repeated-Measures ANOVA Assuming Sphericity
+## 
+##              Sum Sq num Df Error SS den Df F value    Pr(&gt;F)    
+## (Intercept)  0.5587      1  23.3201     25  0.5989 0.4462367    
+## Peer         0.0326      1   6.7760     25  0.1203 0.7315986    
+## Human       12.6590      1  15.8362     25 19.9843 0.0001471 ***
+## Peer:Human   0.0051      1   5.6511     25  0.0228 0.8812904    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="installation.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="latent-repeated-measures-anova.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="under-construction-fit-measures.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

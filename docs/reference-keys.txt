@@ -10,7 +10,10 @@ latent-repeated-measures-anova
 arguments
 the-first-analysis
 traditional-anova
-under-construction-fit-measures
+model-inspection
+lavaan-object
+model-string
+fit-measures
 under-construction-interindividual-differences
 under-construction-custom-contrasts
 under-construction-between-subject-factors

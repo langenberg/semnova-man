@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>References | semnova: An R package for latent repeated measures ANOVA</title>
   <meta name="description" content="References | semnova: An R package for latent repeated measures ANOVA" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
   <meta property="og:title" content="References | semnova: An R package for latent repeated measures ANOVA" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="References | semnova: An R package for latent repeated measures ANOVA" />
   <meta name="github-repo" content="langenberg/semnova-man" />
@@ -21,19 +20,20 @@
   <meta name="twitter:description" content="References | semnova: An R package for latent repeated measures ANOVA" />
   
 
-<meta name="author" content="Benedikt Langenberg and Axel Mayer" />
+<meta name="author" content="Benedikt Langenberg, Jonathan L. Helm, and Axel Mayer" />
 
 
-<meta name="date" content="2021-01-04" />
+<meta name="date" content="2023-01-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="outlook.html"/>
-
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link rel="prev" href="further-developments.html"/>
+<link rel="next" href="power-script-example.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,29 +49,33 @@
 
 
 
-
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -80,9 +84,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -115,6 +119,29 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -131,44 +158,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./index.html">HOME</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
-<li><a href="index.html#about-semnova">About <code>semnova</code></a></li>
-<li><a href="index.html#citing-semnova">Citing <code>semnova</code></a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#changelog"><i class="fa fa-check"></i>Changelog</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-this-tutorial"><i class="fa fa-check"></i>About this Tutorial</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>1</b> Installation</a><ul>
-<li class="chapter" data-level="1.1" data-path="installation.html"><a href="installation.html#installation-via-devtools-recommended"><i class="fa fa-check"></i><b>1.1</b> Installation via <code>devtools</code> (recommended)</a></li>
-<li class="chapter" data-level="1.2" data-path="installation.html"><a href="installation.html#installation-via-cran"><i class="fa fa-check"></i><b>1.2</b> Installation via <code>cran</code></a></li>
+<li class="chapter" data-level="1" data-path="motivating-example.html"><a href="motivating-example.html"><i class="fa fa-check"></i><b>1</b> Motivating Example</a></li>
+<li class="chapter" data-level="2" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>2</b> Installation</a></li>
+<li class="chapter" data-level="3" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html"><i class="fa fa-check"></i><b>3</b> Within-Subjects Designs</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html#sphericity"><i class="fa fa-check"></i><b>3.1</b> Sphericity</a></li>
+<li class="chapter" data-level="3.2" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html#latent-variables"><i class="fa fa-check"></i><b>3.2</b> Latent Variables</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html#measurement-model"><i class="fa fa-check"></i><b>3.2.1</b> Measurement Model</a></li>
+<li class="chapter" data-level="3.2.2" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html#measurement-invariance"><i class="fa fa-check"></i><b>3.2.2</b> Measurement Invariance</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>2</b> Example</a><ul>
-<li class="chapter" data-level="2.1" data-path="example.html"><a href="example.html#getting-the-data"><i class="fa fa-check"></i><b>2.1</b> Getting the Data</a></li>
-<li class="chapter" data-level="2.2" data-path="example.html"><a href="example.html#introducing-the-data"><i class="fa fa-check"></i><b>2.2</b> Introducing the Data</a></li>
-<li class="chapter" data-level="2.3" data-path="example.html"><a href="example.html#preparing-the-data"><i class="fa fa-check"></i><b>2.3</b> Preparing the Data</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="latent-repeated-measures-anova.html"><a href="latent-repeated-measures-anova.html"><i class="fa fa-check"></i><b>3</b> Latent Repeated Measures ANOVA</a><ul>
-<li class="chapter" data-level="3.1" data-path="latent-repeated-measures-anova.html"><a href="latent-repeated-measures-anova.html#arguments"><i class="fa fa-check"></i><b>3.1</b> Arguments</a><ul>
-<li><a href="latent-repeated-measures-anova.html#formula"><code>formula</code></a></li>
-<li><a href="latent-repeated-measures-anova.html#idata"><code>idata</code></a></li>
-<li><a href="latent-repeated-measures-anova.html#idesign"><code>idesign</code></a></li>
-<li><a href="latent-repeated-measures-anova.html#mmodel"><code>mmodel</code></a></li>
+<li class="chapter" data-level="4" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html"><i class="fa fa-check"></i><b>4</b> Between-Subjects Designs</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html#latent-variables-1"><i class="fa fa-check"></i><b>4.1</b> Latent Variables</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html#measurement-model-1"><i class="fa fa-check"></i><b>4.1.1</b> Measurement Model</a></li>
+<li class="chapter" data-level="4.1.2" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html#measurement-invariance-1"><i class="fa fa-check"></i><b>4.1.2</b> Measurement Invariance</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="latent-repeated-measures-anova.html"><a href="latent-repeated-measures-anova.html#the-first-analysis"><i class="fa fa-check"></i><b>3.2</b> The First Analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="traditional-anova.html"><a href="traditional-anova.html"><i class="fa fa-check"></i><b>4</b> Traditional ANOVA</a></li>
-<li class="chapter" data-level="5" data-path="model-inspection.html"><a href="model-inspection.html"><i class="fa fa-check"></i><b>5</b> Model Inspection</a><ul>
-<li class="chapter" data-level="5.1" data-path="model-inspection.html"><a href="model-inspection.html#lavaan-object"><i class="fa fa-check"></i><b>5.1</b> <code>lavaan</code> Object</a></li>
-<li class="chapter" data-level="5.2" data-path="model-inspection.html"><a href="model-inspection.html#model-string"><i class="fa fa-check"></i><b>5.2</b> Model String</a></li>
-<li class="chapter" data-level="5.3" data-path="model-inspection.html"><a href="model-inspection.html#fit-measures"><i class="fa fa-check"></i><b>5.3</b> Fit Measures</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="under-construction-interindividual-differences.html"><a href="under-construction-interindividual-differences.html"><i class="fa fa-check"></i><b>6</b> [under construction] Interindividual Differences</a></li>
-<li class="chapter" data-level="7" data-path="under-construction-custom-contrasts.html"><a href="under-construction-custom-contrasts.html"><i class="fa fa-check"></i><b>7</b> [under construction] Custom Contrasts</a></li>
-<li class="chapter" data-level="8" data-path="under-construction-between-subject-factors.html"><a href="under-construction-between-subject-factors.html"><i class="fa fa-check"></i><b>8</b> [under construction] Between-Subject Factors</a></li>
-<li class="chapter" data-level="9" data-path="under-construction-covariance-structures.html"><a href="under-construction-covariance-structures.html"><i class="fa fa-check"></i><b>9</b> [under construction] Covariance Structures</a></li>
-<li class="chapter" data-level="10" data-path="under-construction-visualization.html"><a href="under-construction-visualization.html"><i class="fa fa-check"></i><b>10</b> [under construction] Visualization</a></li>
-<li class="chapter" data-level="11" data-path="outlook.html"><a href="outlook.html"><i class="fa fa-check"></i><b>11</b> Outlook</a><ul>
-<li class="chapter" data-level="11.1" data-path="outlook.html"><a href="outlook.html#roadmap"><i class="fa fa-check"></i><b>11.1</b> Roadmap</a></li>
-</ul></li>
+<li class="chapter" data-level="5" data-path="covariates.html"><a href="covariates.html"><i class="fa fa-check"></i><b>5</b> Covariates</a></li>
+<li class="chapter" data-level="6" data-path="power-analysis.html"><a href="power-analysis.html"><i class="fa fa-check"></i><b>6</b> Power Analysis</a></li>
+<li class="chapter" data-level="7" data-path="further-arguments.html"><a href="further-arguments.html"><i class="fa fa-check"></i><b>7</b> Further Arguments</a></li>
+<li class="chapter" data-level="8" data-path="further-developments.html"><a href="further-developments.html"><i class="fa fa-check"></i><b>8</b> Further Developments</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="power-script-example.html"><a href="power-script-example.html"><i class="fa fa-check"></i><b>A</b> Power Script Example</a></li>
+<li class="chapter" data-level="B" data-path="filled-power-script-example.html"><a href="filled-power-script-example.html"><i class="fa fa-check"></i><b>B</b> Filled Power Script Example</a></li>
 </ul>
 
       </nav>
@@ -186,44 +206,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="references" class="section level1 unnumbered">
-<h1>References</h1>
-<div id="refs_normal">
-
+<div id="references" class="section level1 unnumbered hasAnchor">
+<h1>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="refs" class="references csl-bib-body hanging-indent" line-spacing="2">
+<div id="ref-Achenbach1991a" class="csl-entry">
+Achenbach, T. M. (1991). <em>Manual for the child behavior checklist/4-18 and 1991 profile</em>. University of Vermont, Department of Psychiatry.
+</div>
+<div id="ref-Graefe2020a" class="csl-entry">
+Gräfe, L., Hahn, S., &amp; Mayer, A. (2022). On the relationship between <span>ANOVA</span> main effects and average treatment effects. <em>Multivariate Behavioral Research</em>. <a href="https://doi.org/10.1080/00273171.2022.2068122">https://doi.org/10.1080/00273171.2022.2068122</a>
+</div>
+<div id="ref-Hu1999a" class="csl-entry">
+Hu, L., &amp; Bentler, P. M. (1999). Cutoff criteria for fit indexes in covariance structure analysis: Conventional criteria versus new alternatives. <em>Structural Equation Modeling: A Multidisciplinary Journal</em>, <em>6</em>(1), 1–55. <a href="https://doi.org/10.1080/10705519909540118">https://doi.org/10.1080/10705519909540118</a>
+</div>
+<div id="ref-Lane2016a" class="csl-entry">
+Lane, D. M. (2016). The assumption of sphericity in repeated-measures designs: What it means and what to do when it is violated. <em>The Quantitative Methods for Psychology</em>, <em>12</em>(2), 114–122. <a href="https://doi.org/10.20982/tqmp.12.2.p114">https://doi.org/10.20982/tqmp.12.2.p114</a>
+</div>
+<div id="ref-Langenberg2022z" class="csl-entry">
+Langenberg, B. (2022). <em>Repeated measures ANOVA with latent variables: A new approach based on structural equation modeling</em> [Dissertation, Bielefeld University]. <a href="https://doi.org/unibi/2963576">https://doi.org/unibi/2963576</a>
+</div>
+<div id="ref-Little2006a" class="csl-entry">
+Little, T. D., Siegers, D. W., &amp; Card, N. A. (2006). A non-arbitrary method of identifying and scaling latent variables in <span>SEM</span> and <span>MACS</span> models. <em>Structural Equation Modeling</em>, <em>13</em>(1), 59–72. <a href="https://doi.org/10.1207/s15328007sem1301\_3">https://doi.org/10.1207/s15328007sem1301\_3</a>
+</div>
+<div id="ref-Mauchly1940a" class="csl-entry">
+Mauchly, J. W. (1940). <em>Significance test for sphericity of a normal <span class="math inline">\(n\)</span>-variate distribution</em>. <em>11</em>(2), 204–209. <a href="https://doi.org/10.1214/aoms/1177731915">https://doi.org/10.1214/aoms/1177731915</a>
+</div>
+<div id="ref-Muller1989a" class="csl-entry">
+Muller, K. E., &amp; Barton, C. N. (1989). Approximate power for repeated-measures anova lacking sphericity. <em>Journal of the American Statistical Association</em>, <em>84</em>(406), 549–555. <a href="https://doi.org/10.1080/01621459.1989.10478802">https://doi.org/10.1080/01621459.1989.10478802</a>
+</div>
+<div id="ref-R2021a" class="csl-entry">
+R Core Team. (2021). <em><span>R</span>: A language and environment for statistical computing</em>.
+</div>
+<div id="ref-Rosseel2012a" class="csl-entry">
+Rosseel, Y. (2012). <span class="nocase">lavaan</span>: An <span>R</span> package for structural equation modeling. <em>Journal of Statistical Software</em>, <em>48</em>(2), 1–20. <a href="https://doi.org/10.18637/jss.v048.i02">https://doi.org/10.18637/jss.v048.i02</a>
+</div>
 </div>
 
-<div id="refs" class="references">
-<div id="ref-Fox2019a">
-<p>Fox, J., &amp; Weisberg, S. (2019). <em>An r companion to applied regression</em> (3rd ed.). Sage.</p>
 </div>
-<div id="ref-Langenberg2020b">
-<p>Langenberg, B., Helm, J. L., &amp; Mayer, A. (2020). Repeated measures ANOVA with latent variables to analyze interindividual differences in contrasts. <em>Multivariate Behavioral Research</em>, 1–19. <a href="https://doi.org/10.1080/00273171.2020.1803038">https://doi.org/10.1080/00273171.2020.1803038</a></p>
-</div>
-<div id="ref-Little2006a">
-<p>Little, T. D., Siegers, D. W., &amp; Card, N. A. (2006). A non-arbitrary method of identifying and scaling latent variables in SEM and MACS models. <em>Structural Equation Modeling</em>, <em>13</em>(1), 59–72. <a href="https://doi.org/10.1207/s15328007sem1301\_3">https://doi.org/10.1207/s15328007sem1301\_3</a></p>
-</div>
-<div id="ref-Qu2015a">
-<p>Qu, C., Ling, Y., Heynderickx, I., &amp; Brinkman, W. P. (2015). Virtual bystanders in a language lesson: Examining the effect of social evaluation, vicarious experience, cognitive consistency and praising on students’ beliefs, self-efficacy and anxiety in a virtual reality environment. <em>PLoS ONE</em>, <em>10</em>(4), 1–26. <a href="https://doi.org/10.1371/journal.pone.0125279">https://doi.org/10.1371/journal.pone.0125279</a></p>
-</div>
-<div id="ref-Rosseel2012a">
-<p>Rosseel, Y. (2012). Lavaan: An r package for structural equation modeling. <em>Journal of Statistical Software</em>, <em>48</em>(2), 1–20. <a href="https://doi.org/10.18637/jss.v048.i02">https://doi.org/10.18637/jss.v048.i02</a></p>
-</div>
-<div id="ref-Wickham2019a">
-<p>Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L. D., François, R., Grolemund, G., Hayes, A., Henry, L., Hester, J., Kuhn, M., Pedersen, T. L., Miller, E., Bache, S. M., Müller, K., Ooms, J., Robinson, D., Seidel, D. P., Spinu, V., … Yutani, H. (2019). Welcome to the tidyverse. <em>Journal of Open Source Software</em>, <em>4</em>(43), 1686. <a href="https://doi.org/10.21105/joss.01686">https://doi.org/10.21105/joss.01686</a></p>
-</div>
-</div>
-</div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="outlook.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="further-developments.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="power-script-example.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -253,8 +284,12 @@ gitbook.start({
 "text": null
 },
 "download": ["semnova-man.pdf", "semnova-man.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
-"collapse": "section",
+"collapse": "subsection",
 "scroll_highlight": true
 }
 });
@@ -267,7 +302,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1 Motivating Example | semnova: An R package for latent repeated measures ANOVA</title>
+  <meta name="description" content="1 Motivating Example | semnova: An R package for latent repeated measures ANOVA" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1 Motivating Example | semnova: An R package for latent repeated measures ANOVA" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="1 Motivating Example | semnova: An R package for latent repeated measures ANOVA" />
+  <meta name="github-repo" content="langenberg/semnova-man" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1 Motivating Example | semnova: An R package for latent repeated measures ANOVA" />
+  
+  <meta name="twitter:description" content="1 Motivating Example | semnova: An R package for latent repeated measures ANOVA" />
+  
+
+<meta name="author" content="Benedikt Langenberg, Jonathan L. Helm, and Axel Mayer" />
+
+
+<meta name="date" content="2023-01-31" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="installation.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./index.html">HOME</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-this-tutorial"><i class="fa fa-check"></i>About this Tutorial</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="motivating-example.html"><a href="motivating-example.html"><i class="fa fa-check"></i><b>1</b> Motivating Example</a></li>
+<li class="chapter" data-level="2" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>2</b> Installation</a></li>
+<li class="chapter" data-level="3" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html"><i class="fa fa-check"></i><b>3</b> Within-Subjects Designs</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html#sphericity"><i class="fa fa-check"></i><b>3.1</b> Sphericity</a></li>
+<li class="chapter" data-level="3.2" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html#latent-variables"><i class="fa fa-check"></i><b>3.2</b> Latent Variables</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html#measurement-model"><i class="fa fa-check"></i><b>3.2.1</b> Measurement Model</a></li>
+<li class="chapter" data-level="3.2.2" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html#measurement-invariance"><i class="fa fa-check"></i><b>3.2.2</b> Measurement Invariance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html"><i class="fa fa-check"></i><b>4</b> Between-Subjects Designs</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html#latent-variables-1"><i class="fa fa-check"></i><b>4.1</b> Latent Variables</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html#measurement-model-1"><i class="fa fa-check"></i><b>4.1.1</b> Measurement Model</a></li>
+<li class="chapter" data-level="4.1.2" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html#measurement-invariance-1"><i class="fa fa-check"></i><b>4.1.2</b> Measurement Invariance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="covariates.html"><a href="covariates.html"><i class="fa fa-check"></i><b>5</b> Covariates</a></li>
+<li class="chapter" data-level="6" data-path="power-analysis.html"><a href="power-analysis.html"><i class="fa fa-check"></i><b>6</b> Power Analysis</a></li>
+<li class="chapter" data-level="7" data-path="further-arguments.html"><a href="further-arguments.html"><i class="fa fa-check"></i><b>7</b> Further Arguments</a></li>
+<li class="chapter" data-level="8" data-path="further-developments.html"><a href="further-developments.html"><i class="fa fa-check"></i><b>8</b> Further Developments</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="power-script-example.html"><a href="power-script-example.html"><i class="fa fa-check"></i><b>A</b> Power Script Example</a></li>
+<li class="chapter" data-level="B" data-path="filled-power-script-example.html"><a href="filled-power-script-example.html"><i class="fa fa-check"></i><b>B</b> Filled Power Script Example</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>semnova</code>: An R package for latent repeated measures ANOVA</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="motivating-example" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">1</span> Motivating Example<a href="motivating-example.html#motivating-example" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>The open-source R <span class="citation">(<a href="references.html#ref-R2021a" role="doc-biblioref">R Core Team, 2021</a>)</span> software package <em>semnova</em> implements many of the methods demonstrated in this dissertation. The <em>semnova</em> package is based on the open-source R software package <em>lavaan</em> <span class="citation">(<a href="references.html#ref-Rosseel2012a" role="doc-biblioref">Rosseel, 2012</a>)</span> which implements a wide range of methods for estimating structural equation models. This chapter gives an overview of the available features and explains the output by means of code examples using data from the motivating example about reading development in children from the introduction <span class="citation">(see <a href="references.html#ref-Langenberg2022z" role="doc-biblioref">Langenberg, 2022, sec. 1.1.1</a> “Motivating Example”)</span>. Recall, in the study, <span class="math inline">\(N = 267\)</span> children had to read two types of sentences: regular sentences or Landolt sentences in which characters are replaced by circles. The study included three measurements in the first, second, and fourth grade of school. Female and male children participated in the study. The dependent variables were re-fixation time<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, initial landing position<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>, and fixation count<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>. The experimental design consists of a <span class="math inline">\(3 \times 2 \times 2\)</span> mixed design, with the within-subjects factors grade (Factor A: A1 = grade one, A2 = grade two, A3 = grade four) and sentence type (Factor B: B1 = regular sentences, B2 = Landolt sentences). In this tutorial we additionally introduce the between-subjects factor sex (Factor C: C1 = female, C2 = male). Figure <a href="motivating-example.html#fig:variables">1.1</a> shows the means and standard errors of re-fixation time, initial landing position, and fixation count across all six conditions for both genders. The data are included in the <em>semnova</em> package as a manifest and a latent version (<code>reading_manifest</code> and <code>reading_latent</code>). The data sets do not need to be explicitly loaded and can immediately be accessed after loading the package.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:variables"></span>
+<img src="semnova-man_files/figure-html/variables-1.png" alt="Re-fixation time (solid line), initial landing position (dotted line), and fixation count (dashed line) depending on sentence type (left panel: regular sentences; right panel: Landolt sentences), and sex (top panel: female; bottom panel: male) for the three measurement occasions (grade 1, grade 2, grade 4). The three variables were first averaged within children, then log-transformed and standardized. Shown are means across children. Error bars indicate standard errors." width="100%" />
+<p class="caption">
+Figure 1.1: Re-fixation time (solid line), initial landing position (dotted line), and fixation count (dashed line) depending on sentence type (left panel: regular sentences; right panel: Landolt sentences), and sex (top panel: female; bottom panel: male) for the three measurement occasions (grade 1, grade 2, grade 4). The three variables were first averaged within children, then log-transformed and standardized. Shown are means across children. Error bars indicate standard errors.
+</p>
+</div>
+<!-- \begin{figure}[H] -->
+<!--     \centering -->
+<!--     \includegraphics[width=\textwidth*\real{15.76}/\real{16}]{figures/example/example_2x3x2_latent_width_15.76cm.pdf} -->
+<!--     \caption{Re-fixation time (solid line), initial landing position (dotted line), and fixation count (dashed line) depending on sentence type (left panel: regular sentences; right panel: Landolt sentences), and sex (top panel: female; bottom panel: male) for the three measurement occasions (grade 1, grade 2, grade 4). The three variables were first averaged within children, then log-transformed and standardized. Shown are means across children. Error bars indicate standard errors.} -->
+<!--     \label{fig:software_variables} -->
+<!-- \end{figure} -->
+<p>We will use the same contrast matrix for the within-subjects design as in the introduction <span class="citation">(see <a href="references.html#ref-Langenberg2022z" role="doc-biblioref">Langenberg, 2022, sec. 1.2</a> “Latent Repeated Measures ANOVA”)</span>. It is an orthogonal (i.e., linearly independent rows with length equal to one) polynomial contrast matrix and is given by:</p>
+<p><span class="math display" id="eq:introduction-c-matrix">\[
+\mathbf{C} = \begin{pmatrix}
+    0.408 &amp; 0.408 &amp; 0.408 &amp; 0.408 &amp; 0.408 &amp; 0.408\\
+    -0.5 &amp; 0 &amp; 0.5 &amp; -0.5 &amp; 0 &amp; 0.5\\
+    0.289 &amp; -0.577 &amp; 0.289 &amp; 0.289 &amp; -0.577 &amp; 0.289\\
+    -0.408 &amp; -0.408 &amp; -0.408 &amp; 0.408 &amp; 0.408 &amp; 0.408\\
+    0.5 &amp; 0 &amp; -0.5 &amp; -0.5 &amp; 0 &amp; 0.5\\
+    -0.289 &amp; 0.577 &amp; -0.289 &amp; 0.289 &amp; -0.577 &amp; 0.289
+\end{pmatrix}
+\tag{1.1}
+\]</span></p>
+<p>In the following subsections, we will show numerous structural equation model (SEM) path diagrams that represent the estimated models. The entries from the inverse of the <span class="math inline">\(\mathbf{C}\)</span> matrix (i.e. the <span class="math inline">\(\mathbf{B}^{*}\)</span> matrix) can be found on the regression arrows from the <span class="math inline">\(\boldsymbol{\pi}\)</span> variables to the <span class="math inline">\(\boldsymbol{\eta}\)</span> variables. It is noteworthy that the inverse of the <span class="math inline">\(\mathbf{C}\)</span> matrix equals its transpose because it is an orthonormal matrix. This is a convenient property because the regression coefficients from the path diagrams can be found in both the <span class="math inline">\(\mathbf{B}^{*}\)</span> and the (``rotated’’) <span class="math inline">\(\mathbf{C}\)</span> matrix. Thus, no inversion is needed to compare the path diagrams with the <span class="math inline">\(\mathbf{C}\)</span> matrix.</p>
+
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Re-fixation time includes the total duration of fixations during the first gaze at a word excluding saccades in-between fixations. The variable is measured in milliseconds.<a href="motivating-example.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Initial landing position is the position of the letter of a word that was fixated first. The variable ranges from 0 to 6.<a href="motivating-example.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>Fixation count is the number of fixations on a word during all gazes. The variable is a positive integer.<a href="motivating-example.html#fnref3" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="installation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["semnova-man.pdf", "semnova-man.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>A Power Script Example | semnova: An R package for latent repeated measures ANOVA</title>
+  <meta name="description" content="A Power Script Example | semnova: An R package for latent repeated measures ANOVA" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="A Power Script Example | semnova: An R package for latent repeated measures ANOVA" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="A Power Script Example | semnova: An R package for latent repeated measures ANOVA" />
+  <meta name="github-repo" content="langenberg/semnova-man" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="A Power Script Example | semnova: An R package for latent repeated measures ANOVA" />
+  
+  <meta name="twitter:description" content="A Power Script Example | semnova: An R package for latent repeated measures ANOVA" />
+  
+
+<meta name="author" content="Benedikt Langenberg, Jonathan L. Helm, and Axel Mayer" />
+
+
+<meta name="date" content="2023-01-31" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="references.html"/>
+<link rel="next" href="filled-power-script-example.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./index.html">HOME</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-this-tutorial"><i class="fa fa-check"></i>About this Tutorial</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="motivating-example.html"><a href="motivating-example.html"><i class="fa fa-check"></i><b>1</b> Motivating Example</a></li>
+<li class="chapter" data-level="2" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>2</b> Installation</a></li>
+<li class="chapter" data-level="3" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html"><i class="fa fa-check"></i><b>3</b> Within-Subjects Designs</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html#sphericity"><i class="fa fa-check"></i><b>3.1</b> Sphericity</a></li>
+<li class="chapter" data-level="3.2" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html#latent-variables"><i class="fa fa-check"></i><b>3.2</b> Latent Variables</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html#measurement-model"><i class="fa fa-check"></i><b>3.2.1</b> Measurement Model</a></li>
+<li class="chapter" data-level="3.2.2" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html#measurement-invariance"><i class="fa fa-check"></i><b>3.2.2</b> Measurement Invariance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html"><i class="fa fa-check"></i><b>4</b> Between-Subjects Designs</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html#latent-variables-1"><i class="fa fa-check"></i><b>4.1</b> Latent Variables</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html#measurement-model-1"><i class="fa fa-check"></i><b>4.1.1</b> Measurement Model</a></li>
+<li class="chapter" data-level="4.1.2" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html#measurement-invariance-1"><i class="fa fa-check"></i><b>4.1.2</b> Measurement Invariance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="covariates.html"><a href="covariates.html"><i class="fa fa-check"></i><b>5</b> Covariates</a></li>
+<li class="chapter" data-level="6" data-path="power-analysis.html"><a href="power-analysis.html"><i class="fa fa-check"></i><b>6</b> Power Analysis</a></li>
+<li class="chapter" data-level="7" data-path="further-arguments.html"><a href="further-arguments.html"><i class="fa fa-check"></i><b>7</b> Further Arguments</a></li>
+<li class="chapter" data-level="8" data-path="further-developments.html"><a href="further-developments.html"><i class="fa fa-check"></i><b>8</b> Further Developments</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="power-script-example.html"><a href="power-script-example.html"><i class="fa fa-check"></i><b>A</b> Power Script Example</a></li>
+<li class="chapter" data-level="B" data-path="filled-power-script-example.html"><a href="filled-power-script-example.html"><i class="fa fa-check"></i><b>B</b> Filled Power Script Example</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>semnova</code>: An R package for latent repeated measures ANOVA</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="power-script-example" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">A</span> Power Script Example<a href="power-script-example.html#power-script-example" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<!-- \label{app:power_template} -->
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="power-script-example.html#cb31-1" aria-hidden="true" tabindex="-1"></a>data_syntax <span class="ot">&lt;-</span> <span class="st">&quot;</span></span>
+<span id="cb31-2"><a href="power-script-example.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="st">.eta1 =~</span></span>
+<span id="cb31-3"><a href="power-script-example.html#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.lambda_y__1_, .lambda_y__1_, .lambda_y__1_, .lambda_y__1_)*.Y1_W1_1_W2_1 +</span></span>
+<span id="cb31-4"><a href="power-script-example.html#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.lambda_y__2_, .lambda_y__2_, .lambda_y__2_, .lambda_y__2_)*.Y2_W1_1_W2_1 +</span></span>
+<span id="cb31-5"><a href="power-script-example.html#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.lambda_y__3_, .lambda_y__3_, .lambda_y__3_, .lambda_y__3_)*.Y3_W1_1_W2_1</span></span>
+<span id="cb31-6"><a href="power-script-example.html#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="st">.eta2 =~</span></span>
+<span id="cb31-7"><a href="power-script-example.html#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.lambda_y__1_, .lambda_y__1_, .lambda_y__1_, .lambda_y__1_)*.Y1_W1_2_W2_1 +</span></span>
+<span id="cb31-8"><a href="power-script-example.html#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.lambda_y__2_, .lambda_y__2_, .lambda_y__2_, .lambda_y__2_)*.Y2_W1_2_W2_1 +</span></span>
+<span id="cb31-9"><a href="power-script-example.html#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.lambda_y__3_, .lambda_y__3_, .lambda_y__3_, .lambda_y__3_)*.Y3_W1_2_W2_1</span></span>
+<span id="cb31-10"><a href="power-script-example.html#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="st">.eta3 =~</span></span>
+<span id="cb31-11"><a href="power-script-example.html#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.lambda_y__1_, .lambda_y__1_, .lambda_y__1_, .lambda_y__1_)*.Y1_W1_1_W2_2 +</span></span>
+<span id="cb31-12"><a href="power-script-example.html#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.lambda_y__2_, .lambda_y__2_, .lambda_y__2_, .lambda_y__2_)*.Y2_W1_1_W2_2 +</span></span>
+<span id="cb31-13"><a href="power-script-example.html#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.lambda_y__3_, .lambda_y__3_, .lambda_y__3_, .lambda_y__3_)*.Y3_W1_1_W2_2</span></span>
+<span id="cb31-14"><a href="power-script-example.html#cb31-14" aria-hidden="true" tabindex="-1"></a><span class="st">.eta4 =~</span></span>
+<span id="cb31-15"><a href="power-script-example.html#cb31-15" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.lambda_y__1_, .lambda_y__1_, .lambda_y__1_, .lambda_y__1_)*.Y1_W1_2_W2_2 +</span></span>
+<span id="cb31-16"><a href="power-script-example.html#cb31-16" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.lambda_y__2_, .lambda_y__2_, .lambda_y__2_, .lambda_y__2_)*.Y2_W1_2_W2_2 +</span></span>
+<span id="cb31-17"><a href="power-script-example.html#cb31-17" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.lambda_y__3_, .lambda_y__3_, .lambda_y__3_, .lambda_y__3_)*.Y3_W1_2_W2_2</span></span>
+<span id="cb31-18"><a href="power-script-example.html#cb31-18" aria-hidden="true" tabindex="-1"></a><span class="st">.eta5 =~</span></span>
+<span id="cb31-19"><a href="power-script-example.html#cb31-19" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.lambda_y__1_, .lambda_y__1_, .lambda_y__1_, .lambda_y__1_)*.Y1_W1_1_W2_3 +</span></span>
+<span id="cb31-20"><a href="power-script-example.html#cb31-20" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.lambda_y__2_, .lambda_y__2_, .lambda_y__2_, .lambda_y__2_)*.Y2_W1_1_W2_3 +</span></span>
+<span id="cb31-21"><a href="power-script-example.html#cb31-21" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.lambda_y__3_, .lambda_y__3_, .lambda_y__3_, .lambda_y__3_)*.Y3_W1_1_W2_3</span></span>
+<span id="cb31-22"><a href="power-script-example.html#cb31-22" aria-hidden="true" tabindex="-1"></a><span class="st">.eta6 =~</span></span>
+<span id="cb31-23"><a href="power-script-example.html#cb31-23" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.lambda_y__1_, .lambda_y__1_, .lambda_y__1_, .lambda_y__1_)*.Y1_W1_2_W2_3 +</span></span>
+<span id="cb31-24"><a href="power-script-example.html#cb31-24" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.lambda_y__2_, .lambda_y__2_, .lambda_y__2_, .lambda_y__2_)*.Y2_W1_2_W2_3 +</span></span>
+<span id="cb31-25"><a href="power-script-example.html#cb31-25" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.lambda_y__3_, .lambda_y__3_, .lambda_y__3_, .lambda_y__3_)*.Y3_W1_2_W2_3</span></span>
+<span id="cb31-26"><a href="power-script-example.html#cb31-26" aria-hidden="true" tabindex="-1"></a><span class="st">.pi1 =~</span></span>
+<span id="cb31-27"><a href="power-script-example.html#cb31-27" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*.eta1 +</span></span>
+<span id="cb31-28"><a href="power-script-example.html#cb31-28" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*.eta2 +</span></span>
+<span id="cb31-29"><a href="power-script-example.html#cb31-29" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*.eta3 +</span></span>
+<span id="cb31-30"><a href="power-script-example.html#cb31-30" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*.eta4 +</span></span>
+<span id="cb31-31"><a href="power-script-example.html#cb31-31" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*.eta5 +</span></span>
+<span id="cb31-32"><a href="power-script-example.html#cb31-32" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*.eta6</span></span>
+<span id="cb31-33"><a href="power-script-example.html#cb31-33" aria-hidden="true" tabindex="-1"></a><span class="st">.pi2 =~</span></span>
+<span id="cb31-34"><a href="power-script-example.html#cb31-34" aria-hidden="true" tabindex="-1"></a><span class="st">    c(-0.707106781186547, -0.707106781186547, -0.707106781186547, -0.707106781186547)*.eta1 +</span></span>
+<span id="cb31-35"><a href="power-script-example.html#cb31-35" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.707106781186547, 0.707106781186547, 0.707106781186547, 0.707106781186547)*.eta2 +</span></span>
+<span id="cb31-36"><a href="power-script-example.html#cb31-36" aria-hidden="true" tabindex="-1"></a><span class="st">    c(-0.707106781186547, -0.707106781186547, -0.707106781186547, -0.707106781186547)*.eta3 +</span></span>
+<span id="cb31-37"><a href="power-script-example.html#cb31-37" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.707106781186547, 0.707106781186547, 0.707106781186547, 0.707106781186547)*.eta4 +</span></span>
+<span id="cb31-38"><a href="power-script-example.html#cb31-38" aria-hidden="true" tabindex="-1"></a><span class="st">    c(-0.707106781186547, -0.707106781186547, -0.707106781186547, -0.707106781186547)*.eta5 +</span></span>
+<span id="cb31-39"><a href="power-script-example.html#cb31-39" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.707106781186547, 0.707106781186547, 0.707106781186547, 0.707106781186547)*.eta6</span></span>
+<span id="cb31-40"><a href="power-script-example.html#cb31-40" aria-hidden="true" tabindex="-1"></a><span class="st">.pi3 =~</span></span>
+<span id="cb31-41"><a href="power-script-example.html#cb31-41" aria-hidden="true" tabindex="-1"></a><span class="st">    c(-0.707106781186548, -0.707106781186548, -0.707106781186548, -0.707106781186548)*.eta1 +</span></span>
+<span id="cb31-42"><a href="power-script-example.html#cb31-42" aria-hidden="true" tabindex="-1"></a><span class="st">    c(-0.707106781186548, -0.707106781186548, -0.707106781186548, -0.707106781186548)*.eta2 +</span></span>
+<span id="cb31-43"><a href="power-script-example.html#cb31-43" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta3 +</span></span>
+<span id="cb31-44"><a href="power-script-example.html#cb31-44" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta4 +</span></span>
+<span id="cb31-45"><a href="power-script-example.html#cb31-45" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.707106781186547, 0.707106781186547, 0.707106781186547, 0.707106781186547)*.eta5 +</span></span>
+<span id="cb31-46"><a href="power-script-example.html#cb31-46" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.707106781186547, 0.707106781186547, 0.707106781186547, 0.707106781186547)*.eta6</span></span>
+<span id="cb31-47"><a href="power-script-example.html#cb31-47" aria-hidden="true" tabindex="-1"></a><span class="st">.pi4 =~</span></span>
+<span id="cb31-48"><a href="power-script-example.html#cb31-48" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.408248290463863, 0.408248290463863, 0.408248290463863, 0.408248290463863)*.eta1 +</span></span>
+<span id="cb31-49"><a href="power-script-example.html#cb31-49" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.408248290463863, 0.408248290463863, 0.408248290463863, 0.408248290463863)*.eta2 +</span></span>
+<span id="cb31-50"><a href="power-script-example.html#cb31-50" aria-hidden="true" tabindex="-1"></a><span class="st">    c(-0.816496580927726, -0.816496580927726, -0.816496580927726, -0.816496580927726)*.eta3 +</span></span>
+<span id="cb31-51"><a href="power-script-example.html#cb31-51" aria-hidden="true" tabindex="-1"></a><span class="st">    c(-0.816496580927726, -0.816496580927726, -0.816496580927726, -0.816496580927726)*.eta4 +</span></span>
+<span id="cb31-52"><a href="power-script-example.html#cb31-52" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.408248290463863, 0.408248290463863, 0.408248290463863, 0.408248290463863)*.eta5 +</span></span>
+<span id="cb31-53"><a href="power-script-example.html#cb31-53" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.408248290463863, 0.408248290463863, 0.408248290463863, 0.408248290463863)*.eta6</span></span>
+<span id="cb31-54"><a href="power-script-example.html#cb31-54" aria-hidden="true" tabindex="-1"></a><span class="st">.pi5 =~</span></span>
+<span id="cb31-55"><a href="power-script-example.html#cb31-55" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.5, 0.5, 0.5, 0.5)*.eta1 +</span></span>
+<span id="cb31-56"><a href="power-script-example.html#cb31-56" aria-hidden="true" tabindex="-1"></a><span class="st">    c(-0.5, -0.5, -0.5, -0.5)*.eta2 +</span></span>
+<span id="cb31-57"><a href="power-script-example.html#cb31-57" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta3 +</span></span>
+<span id="cb31-58"><a href="power-script-example.html#cb31-58" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta4 +</span></span>
+<span id="cb31-59"><a href="power-script-example.html#cb31-59" aria-hidden="true" tabindex="-1"></a><span class="st">    c(-0.5, -0.5, -0.5, -0.5)*.eta5 +</span></span>
+<span id="cb31-60"><a href="power-script-example.html#cb31-60" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.5, 0.5, 0.5, 0.5)*.eta6</span></span>
+<span id="cb31-61"><a href="power-script-example.html#cb31-61" aria-hidden="true" tabindex="-1"></a><span class="st">.pi6 =~</span></span>
+<span id="cb31-62"><a href="power-script-example.html#cb31-62" aria-hidden="true" tabindex="-1"></a><span class="st">    c(-0.288675134594813, -0.288675134594813, -0.288675134594813, -0.288675134594813)*.eta1 +</span></span>
+<span id="cb31-63"><a href="power-script-example.html#cb31-63" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.288675134594813, 0.288675134594813, 0.288675134594813, 0.288675134594813)*.eta2 +</span></span>
+<span id="cb31-64"><a href="power-script-example.html#cb31-64" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.577350269189626, 0.577350269189626, 0.577350269189626, 0.577350269189626)*.eta3 +</span></span>
+<span id="cb31-65"><a href="power-script-example.html#cb31-65" aria-hidden="true" tabindex="-1"></a><span class="st">    c(-0.577350269189626, -0.577350269189626, -0.577350269189626, -0.577350269189626)*.eta4 +</span></span>
+<span id="cb31-66"><a href="power-script-example.html#cb31-66" aria-hidden="true" tabindex="-1"></a><span class="st">    c(-0.288675134594813, -0.288675134594813, -0.288675134594813, -0.288675134594813)*.eta5 +</span></span>
+<span id="cb31-67"><a href="power-script-example.html#cb31-67" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.288675134594813, 0.288675134594813, 0.288675134594813, 0.288675134594813)*.eta6</span></span>
+<span id="cb31-68"><a href="power-script-example.html#cb31-68" aria-hidden="true" tabindex="-1"></a><span class="st">covariate2 =~</span></span>
+<span id="cb31-69"><a href="power-script-example.html#cb31-69" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.lambda_cov_2_1_, .lambda_cov_2_1_, .lambda_cov_2_1_, .lambda_cov_2_1_)*covariate2_1 +</span></span>
+<span id="cb31-70"><a href="power-script-example.html#cb31-70" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.lambda_cov_2_2_, .lambda_cov_2_2_, .lambda_cov_2_2_, .lambda_cov_2_2_)*covariate2_2</span></span>
+<span id="cb31-71"><a href="power-script-example.html#cb31-71" aria-hidden="true" tabindex="-1"></a><span class="st">.pi1 ~</span></span>
+<span id="cb31-72"><a href="power-script-example.html#cb31-72" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.beta_1_1_1, .beta_1_1_2, .beta_1_1_3, .beta_1_1_4)*covariate1 +</span></span>
+<span id="cb31-73"><a href="power-script-example.html#cb31-73" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.beta_1_2_1, .beta_1_2_2, .beta_1_2_3, .beta_1_2_4)*covariate2</span></span>
+<span id="cb31-74"><a href="power-script-example.html#cb31-74" aria-hidden="true" tabindex="-1"></a><span class="st">.pi2 ~</span></span>
+<span id="cb31-75"><a href="power-script-example.html#cb31-75" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.beta_2_1_1, .beta_2_1_2, .beta_2_1_3, .beta_2_1_4)*covariate1 +</span></span>
+<span id="cb31-76"><a href="power-script-example.html#cb31-76" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.beta_2_2_1, .beta_2_2_2, .beta_2_2_3, .beta_2_2_4)*covariate2</span></span>
+<span id="cb31-77"><a href="power-script-example.html#cb31-77" aria-hidden="true" tabindex="-1"></a><span class="st">.pi3 ~</span></span>
+<span id="cb31-78"><a href="power-script-example.html#cb31-78" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.beta_3_1_1, .beta_3_1_2, .beta_3_1_3, .beta_3_1_4)*covariate1 +</span></span>
+<span id="cb31-79"><a href="power-script-example.html#cb31-79" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.beta_3_2_1, .beta_3_2_2, .beta_3_2_3, .beta_3_2_4)*covariate2</span></span>
+<span id="cb31-80"><a href="power-script-example.html#cb31-80" aria-hidden="true" tabindex="-1"></a><span class="st">.pi4 ~</span></span>
+<span id="cb31-81"><a href="power-script-example.html#cb31-81" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.beta_4_1_1, .beta_4_1_2, .beta_4_1_3, .beta_4_1_4)*covariate1 +</span></span>
+<span id="cb31-82"><a href="power-script-example.html#cb31-82" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.beta_4_2_1, .beta_4_2_2, .beta_4_2_3, .beta_4_2_4)*covariate2</span></span>
+<span id="cb31-83"><a href="power-script-example.html#cb31-83" aria-hidden="true" tabindex="-1"></a><span class="st">.pi5 ~</span></span>
+<span id="cb31-84"><a href="power-script-example.html#cb31-84" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.beta_5_1_1, .beta_5_1_2, .beta_5_1_3, .beta_5_1_4)*covariate1 +</span></span>
+<span id="cb31-85"><a href="power-script-example.html#cb31-85" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.beta_5_2_1, .beta_5_2_2, .beta_5_2_3, .beta_5_2_4)*covariate2</span></span>
+<span id="cb31-86"><a href="power-script-example.html#cb31-86" aria-hidden="true" tabindex="-1"></a><span class="st">.pi6 ~</span></span>
+<span id="cb31-87"><a href="power-script-example.html#cb31-87" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.beta_6_1_1, .beta_6_1_2, .beta_6_1_3, .beta_6_1_4)*covariate1 +</span></span>
+<span id="cb31-88"><a href="power-script-example.html#cb31-88" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.beta_6_2_1, .beta_6_2_2, .beta_6_2_3, .beta_6_2_4)*covariate2</span></span>
+<span id="cb31-89"><a href="power-script-example.html#cb31-89" aria-hidden="true" tabindex="-1"></a><span class="st">.eta1 ~~</span></span>
+<span id="cb31-90"><a href="power-script-example.html#cb31-90" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta1 +</span></span>
+<span id="cb31-91"><a href="power-script-example.html#cb31-91" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta2 +</span></span>
+<span id="cb31-92"><a href="power-script-example.html#cb31-92" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta3 +</span></span>
+<span id="cb31-93"><a href="power-script-example.html#cb31-93" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta4 +</span></span>
+<span id="cb31-94"><a href="power-script-example.html#cb31-94" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta5 +</span></span>
+<span id="cb31-95"><a href="power-script-example.html#cb31-95" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta6</span></span>
+<span id="cb31-96"><a href="power-script-example.html#cb31-96" aria-hidden="true" tabindex="-1"></a><span class="st">.eta2 ~~</span></span>
+<span id="cb31-97"><a href="power-script-example.html#cb31-97" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta2 +</span></span>
+<span id="cb31-98"><a href="power-script-example.html#cb31-98" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta3 +</span></span>
+<span id="cb31-99"><a href="power-script-example.html#cb31-99" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta4 +</span></span>
+<span id="cb31-100"><a href="power-script-example.html#cb31-100" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta5 +</span></span>
+<span id="cb31-101"><a href="power-script-example.html#cb31-101" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta6</span></span>
+<span id="cb31-102"><a href="power-script-example.html#cb31-102" aria-hidden="true" tabindex="-1"></a><span class="st">.eta3 ~~</span></span>
+<span id="cb31-103"><a href="power-script-example.html#cb31-103" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta3 +</span></span>
+<span id="cb31-104"><a href="power-script-example.html#cb31-104" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta4 +</span></span>
+<span id="cb31-105"><a href="power-script-example.html#cb31-105" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta5 +</span></span>
+<span id="cb31-106"><a href="power-script-example.html#cb31-106" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta6</span></span>
+<span id="cb31-107"><a href="power-script-example.html#cb31-107" aria-hidden="true" tabindex="-1"></a><span class="st">.eta4 ~~</span></span>
+<span id="cb31-108"><a href="power-script-example.html#cb31-108" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta4 +</span></span>
+<span id="cb31-109"><a href="power-script-example.html#cb31-109" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta5 +</span></span>
+<span id="cb31-110"><a href="power-script-example.html#cb31-110" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta6</span></span>
+<span id="cb31-111"><a href="power-script-example.html#cb31-111" aria-hidden="true" tabindex="-1"></a><span class="st">.eta5 ~~</span></span>
+<span id="cb31-112"><a href="power-script-example.html#cb31-112" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta5 +</span></span>
+<span id="cb31-113"><a href="power-script-example.html#cb31-113" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta6</span></span>
+<span id="cb31-114"><a href="power-script-example.html#cb31-114" aria-hidden="true" tabindex="-1"></a><span class="st">.eta6 ~~</span></span>
+<span id="cb31-115"><a href="power-script-example.html#cb31-115" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta6</span></span>
+<span id="cb31-116"><a href="power-script-example.html#cb31-116" aria-hidden="true" tabindex="-1"></a><span class="st">.pi1 ~~</span></span>
+<span id="cb31-117"><a href="power-script-example.html#cb31-117" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.sigma_pi_1_1_1, .sigma_pi_1_1_2, .sigma_pi_1_1_3, .sigma_pi_1_1_4)*.pi1 +</span></span>
+<span id="cb31-118"><a href="power-script-example.html#cb31-118" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.sigma_pi_1_2_1, .sigma_pi_1_2_2, .sigma_pi_1_2_3, .sigma_pi_1_2_4)*.pi2 +</span></span>
+<span id="cb31-119"><a href="power-script-example.html#cb31-119" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.sigma_pi_1_3_1, .sigma_pi_1_3_2, .sigma_pi_1_3_3, .sigma_pi_1_3_4)*.pi3 +</span></span>
+<span id="cb31-120"><a href="power-script-example.html#cb31-120" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.sigma_pi_1_4_1, .sigma_pi_1_4_2, .sigma_pi_1_4_3, .sigma_pi_1_4_4)*.pi4 +</span></span>
+<span id="cb31-121"><a href="power-script-example.html#cb31-121" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.sigma_pi_1_5_1, .sigma_pi_1_5_2, .sigma_pi_1_5_3, .sigma_pi_1_5_4)*.pi5 +</span></span>
+<span id="cb31-122"><a href="power-script-example.html#cb31-122" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.sigma_pi_1_6_1, .sigma_pi_1_6_2, .sigma_pi_1_6_3, .sigma_pi_1_6_4)*.pi6</span></span>
+<span id="cb31-123"><a href="power-script-example.html#cb31-123" aria-hidden="true" tabindex="-1"></a><span class="st">.pi2 ~~</span></span>
+<span id="cb31-124"><a href="power-script-example.html#cb31-124" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.sigma_pi_2_2_1, .sigma_pi_2_2_2, .sigma_pi_2_2_3, .sigma_pi_2_2_4)*.pi2 +</span></span>
+<span id="cb31-125"><a href="power-script-example.html#cb31-125" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.sigma_pi_2_3_1, .sigma_pi_2_3_2, .sigma_pi_2_3_3, .sigma_pi_2_3_4)*.pi3 +</span></span>
+<span id="cb31-126"><a href="power-script-example.html#cb31-126" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.sigma_pi_2_4_1, .sigma_pi_2_4_2, .sigma_pi_2_4_3, .sigma_pi_2_4_4)*.pi4 +</span></span>
+<span id="cb31-127"><a href="power-script-example.html#cb31-127" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.sigma_pi_2_5_1, .sigma_pi_2_5_2, .sigma_pi_2_5_3, .sigma_pi_2_5_4)*.pi5 +</span></span>
+<span id="cb31-128"><a href="power-script-example.html#cb31-128" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.sigma_pi_2_6_1, .sigma_pi_2_6_2, .sigma_pi_2_6_3, .sigma_pi_2_6_4)*.pi6</span></span>
+<span id="cb31-129"><a href="power-script-example.html#cb31-129" aria-hidden="true" tabindex="-1"></a><span class="st">.pi3 ~~</span></span>
+<span id="cb31-130"><a href="power-script-example.html#cb31-130" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.sigma_pi_1__1, .sigma_pi_1__2, .sigma_pi_1__3, .sigma_pi_1__4)*.pi3 +</span></span>
+<span id="cb31-131"><a href="power-script-example.html#cb31-131" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.pi4 +</span></span>
+<span id="cb31-132"><a href="power-script-example.html#cb31-132" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.sigma_pi_3_5_1, .sigma_pi_3_5_2, .sigma_pi_3_5_3, .sigma_pi_3_5_4)*.pi5 +</span></span>
+<span id="cb31-133"><a href="power-script-example.html#cb31-133" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.sigma_pi_3_6_1, .sigma_pi_3_6_2, .sigma_pi_3_6_3, .sigma_pi_3_6_4)*.pi6</span></span>
+<span id="cb31-134"><a href="power-script-example.html#cb31-134" aria-hidden="true" tabindex="-1"></a><span class="st">.pi4 ~~</span></span>
+<span id="cb31-135"><a href="power-script-example.html#cb31-135" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.sigma_pi_1__1, .sigma_pi_1__2, .sigma_pi_1__3, .sigma_pi_1__4)*.pi4 +</span></span>
+<span id="cb31-136"><a href="power-script-example.html#cb31-136" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.sigma_pi_4_5_1, .sigma_pi_4_5_2, .sigma_pi_4_5_3, .sigma_pi_4_5_4)*.pi5 +</span></span>
+<span id="cb31-137"><a href="power-script-example.html#cb31-137" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.sigma_pi_4_6_1, .sigma_pi_4_6_2, .sigma_pi_4_6_3, .sigma_pi_4_6_4)*.pi6</span></span>
+<span id="cb31-138"><a href="power-script-example.html#cb31-138" aria-hidden="true" tabindex="-1"></a><span class="st">.pi5 ~~</span></span>
+<span id="cb31-139"><a href="power-script-example.html#cb31-139" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.sigma_pi_5_5_1, .sigma_pi_5_5_2, .sigma_pi_5_5_3, .sigma_pi_5_5_4)*.pi5 +</span></span>
+<span id="cb31-140"><a href="power-script-example.html#cb31-140" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.sigma_pi_5_6_1, .sigma_pi_5_6_2, .sigma_pi_5_6_3, .sigma_pi_5_6_4)*.pi6</span></span>
+<span id="cb31-141"><a href="power-script-example.html#cb31-141" aria-hidden="true" tabindex="-1"></a><span class="st">.pi6 ~~</span></span>
+<span id="cb31-142"><a href="power-script-example.html#cb31-142" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.sigma_pi_6_6_1, .sigma_pi_6_6_2, .sigma_pi_6_6_3, .sigma_pi_6_6_4)*.pi6</span></span>
+<span id="cb31-143"><a href="power-script-example.html#cb31-143" aria-hidden="true" tabindex="-1"></a><span class="st">.Y1_W1_1_W2_1 ~~</span></span>
+<span id="cb31-144"><a href="power-script-example.html#cb31-144" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.epsilon_y_1_1_1, .epsilon_y_1_1_2, .epsilon_y_1_1_3, .epsilon_y_1_1_4)*.Y1_W1_1_W2_1</span></span>
+<span id="cb31-145"><a href="power-script-example.html#cb31-145" aria-hidden="true" tabindex="-1"></a><span class="st">.Y1_W1_1_W2_2 ~~</span></span>
+<span id="cb31-146"><a href="power-script-example.html#cb31-146" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.epsilon_y_3_1_1, .epsilon_y_3_1_2, .epsilon_y_3_1_3, .epsilon_y_3_1_4)*.Y1_W1_1_W2_2</span></span>
+<span id="cb31-147"><a href="power-script-example.html#cb31-147" aria-hidden="true" tabindex="-1"></a><span class="st">.Y1_W1_1_W2_3 ~~</span></span>
+<span id="cb31-148"><a href="power-script-example.html#cb31-148" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.epsilon_y_5_1_1, .epsilon_y_5_1_2, .epsilon_y_5_1_3, .epsilon_y_5_1_4)*.Y1_W1_1_W2_3</span></span>
+<span id="cb31-149"><a href="power-script-example.html#cb31-149" aria-hidden="true" tabindex="-1"></a><span class="st">.Y1_W1_2_W2_1 ~~</span></span>
+<span id="cb31-150"><a href="power-script-example.html#cb31-150" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.epsilon_y_2_1_1, .epsilon_y_2_1_2, .epsilon_y_2_1_3, .epsilon_y_2_1_4)*.Y1_W1_2_W2_1</span></span>
+<span id="cb31-151"><a href="power-script-example.html#cb31-151" aria-hidden="true" tabindex="-1"></a><span class="st">.Y1_W1_2_W2_2 ~~</span></span>
+<span id="cb31-152"><a href="power-script-example.html#cb31-152" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.epsilon_y_4_1_1, .epsilon_y_4_1_2, .epsilon_y_4_1_3, .epsilon_y_4_1_4)*.Y1_W1_2_W2_2</span></span>
+<span id="cb31-153"><a href="power-script-example.html#cb31-153" aria-hidden="true" tabindex="-1"></a><span class="st">.Y1_W1_2_W2_3 ~~</span></span>
+<span id="cb31-154"><a href="power-script-example.html#cb31-154" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.epsilon_y_6_1_1, .epsilon_y_6_1_2, .epsilon_y_6_1_3, .epsilon_y_6_1_4)*.Y1_W1_2_W2_3</span></span>
+<span id="cb31-155"><a href="power-script-example.html#cb31-155" aria-hidden="true" tabindex="-1"></a><span class="st">.Y2_W1_1_W2_1 ~~</span></span>
+<span id="cb31-156"><a href="power-script-example.html#cb31-156" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.epsilon_y_1_2_1, .epsilon_y_1_2_2, .epsilon_y_1_2_3, .epsilon_y_1_2_4)*.Y2_W1_1_W2_1</span></span>
+<span id="cb31-157"><a href="power-script-example.html#cb31-157" aria-hidden="true" tabindex="-1"></a><span class="st">.Y2_W1_1_W2_2 ~~</span></span>
+<span id="cb31-158"><a href="power-script-example.html#cb31-158" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.epsilon_y_3_2_1, .epsilon_y_3_2_2, .epsilon_y_3_2_3, .epsilon_y_3_2_4)*.Y2_W1_1_W2_2</span></span>
+<span id="cb31-159"><a href="power-script-example.html#cb31-159" aria-hidden="true" tabindex="-1"></a><span class="st">.Y2_W1_1_W2_3 ~~</span></span>
+<span id="cb31-160"><a href="power-script-example.html#cb31-160" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.epsilon_y_5_2_1, .epsilon_y_5_2_2, .epsilon_y_5_2_3, .epsilon_y_5_2_4)*.Y2_W1_1_W2_3</span></span>
+<span id="cb31-161"><a href="power-script-example.html#cb31-161" aria-hidden="true" tabindex="-1"></a><span class="st">.Y2_W1_2_W2_1 ~~</span></span>
+<span id="cb31-162"><a href="power-script-example.html#cb31-162" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.epsilon_y_2_2_1, .epsilon_y_2_2_2, .epsilon_y_2_2_3, .epsilon_y_2_2_4)*.Y2_W1_2_W2_1</span></span>
+<span id="cb31-163"><a href="power-script-example.html#cb31-163" aria-hidden="true" tabindex="-1"></a><span class="st">.Y2_W1_2_W2_2 ~~</span></span>
+<span id="cb31-164"><a href="power-script-example.html#cb31-164" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.epsilon_y_4_2_1, .epsilon_y_4_2_2, .epsilon_y_4_2_3, .epsilon_y_4_2_4)*.Y2_W1_2_W2_2</span></span>
+<span id="cb31-165"><a href="power-script-example.html#cb31-165" aria-hidden="true" tabindex="-1"></a><span class="st">.Y2_W1_2_W2_3 ~~</span></span>
+<span id="cb31-166"><a href="power-script-example.html#cb31-166" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.epsilon_y_6_2_1, .epsilon_y_6_2_2, .epsilon_y_6_2_3, .epsilon_y_6_2_4)*.Y2_W1_2_W2_3</span></span>
+<span id="cb31-167"><a href="power-script-example.html#cb31-167" aria-hidden="true" tabindex="-1"></a><span class="st">.Y3_W1_1_W2_1 ~~</span></span>
+<span id="cb31-168"><a href="power-script-example.html#cb31-168" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.epsilon_y_1_3_1, .epsilon_y_1_3_2, .epsilon_y_1_3_3, .epsilon_y_1_3_4)*.Y3_W1_1_W2_1</span></span>
+<span id="cb31-169"><a href="power-script-example.html#cb31-169" aria-hidden="true" tabindex="-1"></a><span class="st">.Y3_W1_1_W2_2 ~~</span></span>
+<span id="cb31-170"><a href="power-script-example.html#cb31-170" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.epsilon_y_3_3_1, .epsilon_y_3_3_2, .epsilon_y_3_3_3, .epsilon_y_3_3_4)*.Y3_W1_1_W2_2</span></span>
+<span id="cb31-171"><a href="power-script-example.html#cb31-171" aria-hidden="true" tabindex="-1"></a><span class="st">.Y3_W1_1_W2_3 ~~</span></span>
+<span id="cb31-172"><a href="power-script-example.html#cb31-172" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.epsilon_y_5_3_1, .epsilon_y_5_3_2, .epsilon_y_5_3_3, .epsilon_y_5_3_4)*.Y3_W1_1_W2_3</span></span>
+<span id="cb31-173"><a href="power-script-example.html#cb31-173" aria-hidden="true" tabindex="-1"></a><span class="st">.Y3_W1_2_W2_1 ~~</span></span>
+<span id="cb31-174"><a href="power-script-example.html#cb31-174" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.epsilon_y_2_3_1, .epsilon_y_2_3_2, .epsilon_y_2_3_3, .epsilon_y_2_3_4)*.Y3_W1_2_W2_1</span></span>
+<span id="cb31-175"><a href="power-script-example.html#cb31-175" aria-hidden="true" tabindex="-1"></a><span class="st">.Y3_W1_2_W2_2 ~~</span></span>
+<span id="cb31-176"><a href="power-script-example.html#cb31-176" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.epsilon_y_4_3_1, .epsilon_y_4_3_2, .epsilon_y_4_3_3, .epsilon_y_4_3_4)*.Y3_W1_2_W2_2</span></span>
+<span id="cb31-177"><a href="power-script-example.html#cb31-177" aria-hidden="true" tabindex="-1"></a><span class="st">.Y3_W1_2_W2_3 ~~</span></span>
+<span id="cb31-178"><a href="power-script-example.html#cb31-178" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.epsilon_y_6_3_1, .epsilon_y_6_3_2, .epsilon_y_6_3_3, .epsilon_y_6_3_4)*.Y3_W1_2_W2_3</span></span>
+<span id="cb31-179"><a href="power-script-example.html#cb31-179" aria-hidden="true" tabindex="-1"></a><span class="st">covariate1 ~~</span></span>
+<span id="cb31-180"><a href="power-script-example.html#cb31-180" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.epsilon_cov_1__1, .epsilon_cov_1__2, .epsilon_cov_1__3, .epsilon_cov_1__4)*covariate1</span></span>
+<span id="cb31-181"><a href="power-script-example.html#cb31-181" aria-hidden="true" tabindex="-1"></a><span class="st">covariate2 ~~</span></span>
+<span id="cb31-182"><a href="power-script-example.html#cb31-182" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.sigma_cov_2__1, .sigma_cov_2__2, .sigma_cov_2__3, .sigma_cov_2__4)*covariate2</span></span>
+<span id="cb31-183"><a href="power-script-example.html#cb31-183" aria-hidden="true" tabindex="-1"></a><span class="st">covariate2_1 ~~</span></span>
+<span id="cb31-184"><a href="power-script-example.html#cb31-184" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.epsilon_cov_2_1_1, .epsilon_cov_2_1_2, .epsilon_cov_2_1_3, .epsilon_cov_2_1_4)*covariate2_1</span></span>
+<span id="cb31-185"><a href="power-script-example.html#cb31-185" aria-hidden="true" tabindex="-1"></a><span class="st">covariate2_2 ~~</span></span>
+<span id="cb31-186"><a href="power-script-example.html#cb31-186" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.epsilon_cov_2_2_1, .epsilon_cov_2_2_2, .epsilon_cov_2_2_3, .epsilon_cov_2_2_4)*covariate2_2</span></span>
+<span id="cb31-187"><a href="power-script-example.html#cb31-187" aria-hidden="true" tabindex="-1"></a><span class="st">.eta1 ~</span></span>
+<span id="cb31-188"><a href="power-script-example.html#cb31-188" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb31-189"><a href="power-script-example.html#cb31-189" aria-hidden="true" tabindex="-1"></a><span class="st">.eta2 ~</span></span>
+<span id="cb31-190"><a href="power-script-example.html#cb31-190" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb31-191"><a href="power-script-example.html#cb31-191" aria-hidden="true" tabindex="-1"></a><span class="st">.eta3 ~</span></span>
+<span id="cb31-192"><a href="power-script-example.html#cb31-192" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb31-193"><a href="power-script-example.html#cb31-193" aria-hidden="true" tabindex="-1"></a><span class="st">.eta4 ~</span></span>
+<span id="cb31-194"><a href="power-script-example.html#cb31-194" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb31-195"><a href="power-script-example.html#cb31-195" aria-hidden="true" tabindex="-1"></a><span class="st">.eta5 ~</span></span>
+<span id="cb31-196"><a href="power-script-example.html#cb31-196" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb31-197"><a href="power-script-example.html#cb31-197" aria-hidden="true" tabindex="-1"></a><span class="st">.eta6 ~</span></span>
+<span id="cb31-198"><a href="power-script-example.html#cb31-198" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb31-199"><a href="power-script-example.html#cb31-199" aria-hidden="true" tabindex="-1"></a><span class="st">.pi1 ~</span></span>
+<span id="cb31-200"><a href="power-script-example.html#cb31-200" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.alpha_pi_1_1, .alpha_pi_1_2, .alpha_pi_1_3, .alpha_pi_1_4)*1</span></span>
+<span id="cb31-201"><a href="power-script-example.html#cb31-201" aria-hidden="true" tabindex="-1"></a><span class="st">.pi2 ~</span></span>
+<span id="cb31-202"><a href="power-script-example.html#cb31-202" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.alpha_pi_2_1, .alpha_pi_2_2, .alpha_pi_2_3, .alpha_pi_2_4)*1</span></span>
+<span id="cb31-203"><a href="power-script-example.html#cb31-203" aria-hidden="true" tabindex="-1"></a><span class="st">.pi3 ~</span></span>
+<span id="cb31-204"><a href="power-script-example.html#cb31-204" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.alpha_pi_3_1, .alpha_pi_3_2, .alpha_pi_3_3, .alpha_pi_3_4)*1</span></span>
+<span id="cb31-205"><a href="power-script-example.html#cb31-205" aria-hidden="true" tabindex="-1"></a><span class="st">.pi4 ~</span></span>
+<span id="cb31-206"><a href="power-script-example.html#cb31-206" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.alpha_pi_4_1, .alpha_pi_4_2, .alpha_pi_4_3, .alpha_pi_4_4)*1</span></span>
+<span id="cb31-207"><a href="power-script-example.html#cb31-207" aria-hidden="true" tabindex="-1"></a><span class="st">.pi5 ~</span></span>
+<span id="cb31-208"><a href="power-script-example.html#cb31-208" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.alpha_pi_5_1, .alpha_pi_5_2, .alpha_pi_5_3, .alpha_pi_5_4)*1</span></span>
+<span id="cb31-209"><a href="power-script-example.html#cb31-209" aria-hidden="true" tabindex="-1"></a><span class="st">.pi6 ~</span></span>
+<span id="cb31-210"><a href="power-script-example.html#cb31-210" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.alpha_pi_6_1, .alpha_pi_6_2, .alpha_pi_6_3, .alpha_pi_6_4)*1</span></span>
+<span id="cb31-211"><a href="power-script-example.html#cb31-211" aria-hidden="true" tabindex="-1"></a><span class="st">.Y1_W1_1_W2_1 ~</span></span>
+<span id="cb31-212"><a href="power-script-example.html#cb31-212" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.nu_y__1_, .nu_y__1_, .nu_y__1_, .nu_y__1_)*1</span></span>
+<span id="cb31-213"><a href="power-script-example.html#cb31-213" aria-hidden="true" tabindex="-1"></a><span class="st">.Y1_W1_1_W2_2 ~</span></span>
+<span id="cb31-214"><a href="power-script-example.html#cb31-214" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.nu_y__1_, .nu_y__1_, .nu_y__1_, .nu_y__1_)*1</span></span>
+<span id="cb31-215"><a href="power-script-example.html#cb31-215" aria-hidden="true" tabindex="-1"></a><span class="st">.Y1_W1_1_W2_3 ~</span></span>
+<span id="cb31-216"><a href="power-script-example.html#cb31-216" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.nu_y__1_, .nu_y__1_, .nu_y__1_, .nu_y__1_)*1</span></span>
+<span id="cb31-217"><a href="power-script-example.html#cb31-217" aria-hidden="true" tabindex="-1"></a><span class="st">.Y1_W1_2_W2_1 ~</span></span>
+<span id="cb31-218"><a href="power-script-example.html#cb31-218" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.nu_y__1_, .nu_y__1_, .nu_y__1_, .nu_y__1_)*1</span></span>
+<span id="cb31-219"><a href="power-script-example.html#cb31-219" aria-hidden="true" tabindex="-1"></a><span class="st">.Y1_W1_2_W2_2 ~</span></span>
+<span id="cb31-220"><a href="power-script-example.html#cb31-220" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.nu_y__1_, .nu_y__1_, .nu_y__1_, .nu_y__1_)*1</span></span>
+<span id="cb31-221"><a href="power-script-example.html#cb31-221" aria-hidden="true" tabindex="-1"></a><span class="st">.Y1_W1_2_W2_3 ~</span></span>
+<span id="cb31-222"><a href="power-script-example.html#cb31-222" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.nu_y__1_, .nu_y__1_, .nu_y__1_, .nu_y__1_)*1</span></span>
+<span id="cb31-223"><a href="power-script-example.html#cb31-223" aria-hidden="true" tabindex="-1"></a><span class="st">.Y2_W1_1_W2_1 ~</span></span>
+<span id="cb31-224"><a href="power-script-example.html#cb31-224" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.nu_y__2_, .nu_y__2_, .nu_y__2_, .nu_y__2_)*1</span></span>
+<span id="cb31-225"><a href="power-script-example.html#cb31-225" aria-hidden="true" tabindex="-1"></a><span class="st">.Y2_W1_1_W2_2 ~</span></span>
+<span id="cb31-226"><a href="power-script-example.html#cb31-226" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.nu_y__2_, .nu_y__2_, .nu_y__2_, .nu_y__2_)*1</span></span>
+<span id="cb31-227"><a href="power-script-example.html#cb31-227" aria-hidden="true" tabindex="-1"></a><span class="st">.Y2_W1_1_W2_3 ~</span></span>
+<span id="cb31-228"><a href="power-script-example.html#cb31-228" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.nu_y__2_, .nu_y__2_, .nu_y__2_, .nu_y__2_)*1</span></span>
+<span id="cb31-229"><a href="power-script-example.html#cb31-229" aria-hidden="true" tabindex="-1"></a><span class="st">.Y2_W1_2_W2_1 ~</span></span>
+<span id="cb31-230"><a href="power-script-example.html#cb31-230" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.nu_y__2_, .nu_y__2_, .nu_y__2_, .nu_y__2_)*1</span></span>
+<span id="cb31-231"><a href="power-script-example.html#cb31-231" aria-hidden="true" tabindex="-1"></a><span class="st">.Y2_W1_2_W2_2 ~</span></span>
+<span id="cb31-232"><a href="power-script-example.html#cb31-232" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.nu_y__2_, .nu_y__2_, .nu_y__2_, .nu_y__2_)*1</span></span>
+<span id="cb31-233"><a href="power-script-example.html#cb31-233" aria-hidden="true" tabindex="-1"></a><span class="st">.Y2_W1_2_W2_3 ~</span></span>
+<span id="cb31-234"><a href="power-script-example.html#cb31-234" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.nu_y__2_, .nu_y__2_, .nu_y__2_, .nu_y__2_)*1</span></span>
+<span id="cb31-235"><a href="power-script-example.html#cb31-235" aria-hidden="true" tabindex="-1"></a><span class="st">.Y3_W1_1_W2_1 ~</span></span>
+<span id="cb31-236"><a href="power-script-example.html#cb31-236" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.nu_y__3_, .nu_y__3_, .nu_y__3_, .nu_y__3_)*1</span></span>
+<span id="cb31-237"><a href="power-script-example.html#cb31-237" aria-hidden="true" tabindex="-1"></a><span class="st">.Y3_W1_1_W2_2 ~</span></span>
+<span id="cb31-238"><a href="power-script-example.html#cb31-238" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.nu_y__3_, .nu_y__3_, .nu_y__3_, .nu_y__3_)*1</span></span>
+<span id="cb31-239"><a href="power-script-example.html#cb31-239" aria-hidden="true" tabindex="-1"></a><span class="st">.Y3_W1_1_W2_3 ~</span></span>
+<span id="cb31-240"><a href="power-script-example.html#cb31-240" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.nu_y__3_, .nu_y__3_, .nu_y__3_, .nu_y__3_)*1</span></span>
+<span id="cb31-241"><a href="power-script-example.html#cb31-241" aria-hidden="true" tabindex="-1"></a><span class="st">.Y3_W1_2_W2_1 ~</span></span>
+<span id="cb31-242"><a href="power-script-example.html#cb31-242" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.nu_y__3_, .nu_y__3_, .nu_y__3_, .nu_y__3_)*1</span></span>
+<span id="cb31-243"><a href="power-script-example.html#cb31-243" aria-hidden="true" tabindex="-1"></a><span class="st">.Y3_W1_2_W2_2 ~</span></span>
+<span id="cb31-244"><a href="power-script-example.html#cb31-244" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.nu_y__3_, .nu_y__3_, .nu_y__3_, .nu_y__3_)*1</span></span>
+<span id="cb31-245"><a href="power-script-example.html#cb31-245" aria-hidden="true" tabindex="-1"></a><span class="st">.Y3_W1_2_W2_3 ~</span></span>
+<span id="cb31-246"><a href="power-script-example.html#cb31-246" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.nu_y__3_, .nu_y__3_, .nu_y__3_, .nu_y__3_)*1</span></span>
+<span id="cb31-247"><a href="power-script-example.html#cb31-247" aria-hidden="true" tabindex="-1"></a><span class="st">covariate1 ~</span></span>
+<span id="cb31-248"><a href="power-script-example.html#cb31-248" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.nu_cov_1__1, .nu_cov_1__2, .nu_cov_1__3, .nu_cov_1__4)*1</span></span>
+<span id="cb31-249"><a href="power-script-example.html#cb31-249" aria-hidden="true" tabindex="-1"></a><span class="st">covariate2 ~</span></span>
+<span id="cb31-250"><a href="power-script-example.html#cb31-250" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.alpha_cov_2__1, .alpha_cov_2__2, .alpha_cov_2__3, .alpha_cov_2__4)*1</span></span>
+<span id="cb31-251"><a href="power-script-example.html#cb31-251" aria-hidden="true" tabindex="-1"></a><span class="st">covariate2_1 ~</span></span>
+<span id="cb31-252"><a href="power-script-example.html#cb31-252" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.nu_cov_2_1_, .nu_cov_2_1_, .nu_cov_2_1_, .nu_cov_2_1_)*1</span></span>
+<span id="cb31-253"><a href="power-script-example.html#cb31-253" aria-hidden="true" tabindex="-1"></a><span class="st">covariate2_2 ~</span></span>
+<span id="cb31-254"><a href="power-script-example.html#cb31-254" aria-hidden="true" tabindex="-1"></a><span class="st">    c(.nu_cov_2_2_, .nu_cov_2_2_, .nu_cov_2_2_, .nu_cov_2_2_)*1</span></span>
+<span id="cb31-255"><a href="power-script-example.html#cb31-255" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;</span></span>
+<span id="cb31-256"><a href="power-script-example.html#cb31-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-257"><a href="power-script-example.html#cb31-257" aria-hidden="true" tabindex="-1"></a>power <span class="ot">&lt;-</span> <span class="fu">power_analysis_semnova</span>(</span>
+<span id="cb31-258"><a href="power-script-example.html#cb31-258" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_within =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>),</span>
+<span id="cb31-259"><a href="power-script-example.html#cb31-259" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_between =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>),</span>
+<span id="cb31-260"><a href="power-script-example.html#cb31-260" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_indicator =</span> <span class="dv">3</span>,</span>
+<span id="cb31-261"><a href="power-script-example.html#cb31-261" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_manifest_covariate =</span> <span class="dv">1</span>,</span>
+<span id="cb31-262"><a href="power-script-example.html#cb31-262" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_latent_covariate =</span> <span class="dv">2</span>,</span>
+<span id="cb31-263"><a href="power-script-example.html#cb31-263" aria-hidden="true" tabindex="-1"></a>    <span class="at">sphericity =</span> <span class="fu">list</span>(<span class="dv">2</span>),</span>
+<span id="cb31-264"><a href="power-script-example.html#cb31-264" aria-hidden="true" tabindex="-1"></a>    <span class="at">data_syntax =</span> data_syntax,</span>
+<span id="cb31-265"><a href="power-script-example.html#cb31-265" aria-hidden="true" tabindex="-1"></a>    <span class="at">sample_size =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">100</span>),</span>
+<span id="cb31-266"><a href="power-script-example.html#cb31-266" aria-hidden="true" tabindex="-1"></a>    <span class="at">replications =</span> <span class="dv">500</span></span>
+<span id="cb31-267"><a href="power-script-example.html#cb31-267" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb31-268"><a href="power-script-example.html#cb31-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-269"><a href="power-script-example.html#cb31-269" aria-hidden="true" tabindex="-1"></a><span class="co"># hypothesis tests</span></span>
+<span id="cb31-270"><a href="power-script-example.html#cb31-270" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(power)</span>
+<span id="cb31-271"><a href="power-script-example.html#cb31-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-272"><a href="power-script-example.html#cb31-272" aria-hidden="true" tabindex="-1"></a><span class="co"># parameters</span></span>
+<span id="cb31-273"><a href="power-script-example.html#cb31-273" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(power)</span>
+<span id="cb31-274"><a href="power-script-example.html#cb31-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-275"><a href="power-script-example.html#cb31-275" aria-hidden="true" tabindex="-1"></a><span class="co"># path diagram</span></span>
+<span id="cb31-276"><a href="power-script-example.html#cb31-276" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(power)</span></code></pre></div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="references.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="filled-power-script-example.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["semnova-man.pdf", "semnova-man.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

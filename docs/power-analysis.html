@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6 Power Analysis | semnova: An R package for latent repeated measures ANOVA</title>
+  <meta name="description" content="6 Power Analysis | semnova: An R package for latent repeated measures ANOVA" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6 Power Analysis | semnova: An R package for latent repeated measures ANOVA" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="6 Power Analysis | semnova: An R package for latent repeated measures ANOVA" />
+  <meta name="github-repo" content="langenberg/semnova-man" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6 Power Analysis | semnova: An R package for latent repeated measures ANOVA" />
+  
+  <meta name="twitter:description" content="6 Power Analysis | semnova: An R package for latent repeated measures ANOVA" />
+  
+
+<meta name="author" content="Benedikt Langenberg, Jonathan L. Helm, and Axel Mayer" />
+
+
+<meta name="date" content="2023-01-31" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="covariates.html"/>
+<link rel="next" href="further-arguments.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./index.html">HOME</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-this-tutorial"><i class="fa fa-check"></i>About this Tutorial</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="motivating-example.html"><a href="motivating-example.html"><i class="fa fa-check"></i><b>1</b> Motivating Example</a></li>
+<li class="chapter" data-level="2" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>2</b> Installation</a></li>
+<li class="chapter" data-level="3" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html"><i class="fa fa-check"></i><b>3</b> Within-Subjects Designs</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html#sphericity"><i class="fa fa-check"></i><b>3.1</b> Sphericity</a></li>
+<li class="chapter" data-level="3.2" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html#latent-variables"><i class="fa fa-check"></i><b>3.2</b> Latent Variables</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html#measurement-model"><i class="fa fa-check"></i><b>3.2.1</b> Measurement Model</a></li>
+<li class="chapter" data-level="3.2.2" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html#measurement-invariance"><i class="fa fa-check"></i><b>3.2.2</b> Measurement Invariance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html"><i class="fa fa-check"></i><b>4</b> Between-Subjects Designs</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html#latent-variables-1"><i class="fa fa-check"></i><b>4.1</b> Latent Variables</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html#measurement-model-1"><i class="fa fa-check"></i><b>4.1.1</b> Measurement Model</a></li>
+<li class="chapter" data-level="4.1.2" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html#measurement-invariance-1"><i class="fa fa-check"></i><b>4.1.2</b> Measurement Invariance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="covariates.html"><a href="covariates.html"><i class="fa fa-check"></i><b>5</b> Covariates</a></li>
+<li class="chapter" data-level="6" data-path="power-analysis.html"><a href="power-analysis.html"><i class="fa fa-check"></i><b>6</b> Power Analysis</a></li>
+<li class="chapter" data-level="7" data-path="further-arguments.html"><a href="further-arguments.html"><i class="fa fa-check"></i><b>7</b> Further Arguments</a></li>
+<li class="chapter" data-level="8" data-path="further-developments.html"><a href="further-developments.html"><i class="fa fa-check"></i><b>8</b> Further Developments</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="power-script-example.html"><a href="power-script-example.html"><i class="fa fa-check"></i><b>A</b> Power Script Example</a></li>
+<li class="chapter" data-level="B" data-path="filled-power-script-example.html"><a href="filled-power-script-example.html"><i class="fa fa-check"></i><b>B</b> Filled Power Script Example</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>semnova</code>: An R package for latent repeated measures ANOVA</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="power-analysis" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">6</span> Power Analysis<a href="power-analysis.html#power-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>The <em>semnova</em> package enables the researcher to perform power calculations for within- and between-subjects designs of any complexity. The <code>power_script_semnova()</code> function creates a script template making it very easy to specify population parameters in form of <em>lavaan</em> model syntax. The <code>n_within</code> argument takes an integer vector whose entries each represent a within-subjects factor with the number indicating the number of levels. <code>n_between</code> takes the same input for the between-subjects design. <code>n_indicator</code> takes a single integer representing the number of indicators. <code>n_manifest_covariates</code> takes the same input as <code>n_within</code> and <code>n_between</code>. However, if an entry equals one, the covariate is assumed to be continuous; if the entry is greater than or equal to two the covariate is assumed to be categorical with the number indicating the number of levels. <code>n_latent_covariates</code> take a vector of integers each representing a latent variable with the number indicating the number of manifest variables that measure the latent variable. Latent covariates are always assumed to be continuous. The <code>sphericity</code> argument takes a list of integer vectors and can be used to impose sphericity on effect variables of main or interaction effects. Each vector contains indices that refer to the within-subjects factors specified by <code>n_within</code>. <code>out_file</code> takes a path that the script file will be saved to.</p>
+<p>What follows is an example for a <span class="math inline">\(2 \times 3 \times 2 \times 2\)</span> (within <span class="math inline">\(\times\)</span> within <span class="math inline">\(\times\)</span> between <span class="math inline">\(\times\)</span> between) mixed design with a latent dependent variable measured by three manifest variables, one continuous manifest covariate and one latent covariate measured by two manifest variables.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="power-analysis.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">power_script_semnova</span>(</span>
+<span id="cb26-2"><a href="power-analysis.html#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_within =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>),</span>
+<span id="cb26-3"><a href="power-analysis.html#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_between =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>),</span>
+<span id="cb26-4"><a href="power-analysis.html#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_indicator =</span> <span class="dv">3</span>,</span>
+<span id="cb26-5"><a href="power-analysis.html#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_manifest_covariate =</span> <span class="fu">c</span>(<span class="dv">1</span>),</span>
+<span id="cb26-6"><a href="power-analysis.html#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_latent_covariate =</span> <span class="fu">c</span>(<span class="dv">2</span>),</span>
+<span id="cb26-7"><a href="power-analysis.html#cb26-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">out_file =</span> <span class="st">&quot;power_script.R&quot;</span>,</span>
+<span id="cb26-8"><a href="power-analysis.html#cb26-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">sphericity =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb26-9"><a href="power-analysis.html#cb26-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>The function will automatically name the factors, factor levels and covariates. Alternatively, the names can be given manually. The following code will produce exactly the same result as the previous example.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="power-analysis.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">power_script_semnova</span>(</span>
+<span id="cb27-2"><a href="power-analysis.html#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">within =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="at">W =</span> <span class="fu">c</span>(<span class="st">&quot;W1_1&quot;</span>, <span class="st">&quot;W1_2&quot;</span>), <span class="at">W2 =</span> <span class="fu">c</span>(<span class="st">&quot;W2_1&quot;</span>, <span class="st">&quot;W2_2&quot;</span>, <span class="st">&quot;W2_3&quot;</span>))),</span>
+<span id="cb27-3"><a href="power-analysis.html#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">between =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="at">B =</span> <span class="fu">c</span>(<span class="st">&quot;B1_1&quot;</span>, <span class="st">&quot;B1_2&quot;</span>), <span class="at">B2 =</span> <span class="fu">c</span>(<span class="st">&quot;B2_1&quot;</span>, <span class="st">&quot;B2_2&quot;</span>))),</span>
+<span id="cb27-4"><a href="power-analysis.html#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">indicator =</span> <span class="fu">c</span>(<span class="st">&quot;Y1&quot;</span>, <span class="st">&quot;Y2&quot;</span>, <span class="st">&quot;Y3&quot;</span>),</span>
+<span id="cb27-5"><a href="power-analysis.html#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">manifest_covariate =</span> <span class="fu">c</span>(<span class="st">&quot;covariate1&quot;</span>),</span>
+<span id="cb27-6"><a href="power-analysis.html#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">latent_covariate =</span> <span class="fu">list</span>(<span class="at">covariate2 =</span> <span class="fu">c</span>(<span class="st">&quot;covariate2_1&quot;</span>, <span class="st">&quot;covariate2_1&quot;</span>)),</span>
+<span id="cb27-7"><a href="power-analysis.html#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">out_file =</span> <span class="st">&quot;power_script.R&quot;</span>,</span>
+<span id="cb27-8"><a href="power-analysis.html#cb27-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">sphericity =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&quot;W1&quot;</span>, <span class="st">&quot;W2&quot;</span>))</span>
+<span id="cb27-9"><a href="power-analysis.html#cb27-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>Within-subjects factors are automatically given the prefix <code>"W"</code>, between subjects factors have the prefix <code>"B"</code>, covariates begin with the word <code>"covariate"</code>, indicators of the dependent variables have the prefix <code>"Y"</code>, indicators of the covariates start with the covariate name.</p>
+<p>The function <code>power_script_semnova()</code> will create a script file that consists of three main parts. First, the script contains a <em>lavaan</em> model syntax that represents the specified model. The user has to replace parameter labels in the model syntax by population parameters. Second, the script contains a call to the <code>power_analysis_semnova()</code> function which will perform the power analysis and save the results to an object called <code>power</code>. The function takes the same input that was used to create the script file plus three additional parameters: <code>data_syntax</code> takes the lavaan model syntax containing the population parameters; <code>sample_size</code> takes a vector of sample sizes for the groups specified by the <code>n_between</code> or <code>between</code> (the length of the vector must be one or equal to the number of groups); <code>replications</code> takes the number of replications for the power analysis. Third, the three functions <code>summary()</code>, <code>print()</code>, and <code>plot()</code> are suggested to extract information from the resulting object. The following code is the result from the previous call to <code>power_script_semnova</code> saved to the specified output file.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="power-analysis.html#cb28-1" aria-hidden="true" tabindex="-1"></a>data_syntax <span class="ot">&lt;-</span> <span class="st">&quot;</span></span>
+<span id="cb28-2"><a href="power-analysis.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="st">[...]</span></span>
+<span id="cb28-3"><a href="power-analysis.html#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;</span></span>
+<span id="cb28-4"><a href="power-analysis.html#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="power-analysis.html#cb28-5" aria-hidden="true" tabindex="-1"></a>power <span class="ot">&lt;-</span> <span class="fu">power_analysis_semnova</span>(</span>
+<span id="cb28-6"><a href="power-analysis.html#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_within =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>),</span>
+<span id="cb28-7"><a href="power-analysis.html#cb28-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_between =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>),</span>
+<span id="cb28-8"><a href="power-analysis.html#cb28-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_indicator =</span> <span class="dv">3</span>,</span>
+<span id="cb28-9"><a href="power-analysis.html#cb28-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_manifest_covariates =</span> <span class="dv">1</span>,</span>
+<span id="cb28-10"><a href="power-analysis.html#cb28-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_latent_covariates =</span> <span class="fu">c</span>(<span class="dv">2</span>),</span>
+<span id="cb28-11"><a href="power-analysis.html#cb28-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">sphericity =</span> <span class="fu">list</span>(<span class="dv">2</span>),</span>
+<span id="cb28-12"><a href="power-analysis.html#cb28-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">data_syntax =</span> data_syntax,</span>
+<span id="cb28-13"><a href="power-analysis.html#cb28-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">sample_size =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">100</span>),</span>
+<span id="cb28-14"><a href="power-analysis.html#cb28-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">replications =</span> <span class="dv">500</span></span>
+<span id="cb28-15"><a href="power-analysis.html#cb28-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-16"><a href="power-analysis.html#cb28-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-17"><a href="power-analysis.html#cb28-17" aria-hidden="true" tabindex="-1"></a><span class="co"># hypothesis tests</span></span>
+<span id="cb28-18"><a href="power-analysis.html#cb28-18" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(power)</span>
+<span id="cb28-19"><a href="power-analysis.html#cb28-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-20"><a href="power-analysis.html#cb28-20" aria-hidden="true" tabindex="-1"></a><span class="co"># parameters</span></span>
+<span id="cb28-21"><a href="power-analysis.html#cb28-21" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(power)</span>
+<span id="cb28-22"><a href="power-analysis.html#cb28-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-23"><a href="power-analysis.html#cb28-23" aria-hidden="true" tabindex="-1"></a><span class="co"># path diagram</span></span>
+<span id="cb28-24"><a href="power-analysis.html#cb28-24" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(power)</span></code></pre></div>
+<p>The contents of the <code>data_syntax</code> variable are omitted due to the large number of lines. The complete syntax can be found in <a href="power-script-example.html#power-script-example">Appendix A</a>.</p>
+<p><a href="filled-power-script-example.html#filled-power-script-example">Appendix B</a> further contains a copy of the previously created power script filled with example population parameters. Means of latent variables and regression coefficients are set to 0.1. Variances of latent variables are set to 1 and covariances to 0.5. Loadings of manifest variables are set to 1 and intercepts to 0. Residual variances are 0.4 and residual covariances are set to 0.</p>
+<p>Depending on the number of replications and the complexity of the model, the power analysis may need some time to finish. After the analysis, the <code>summary(power)</code> function can be used to print a table that contains the power for the main and interaction effects of the model. In the following output, the results are truncated after the sixth hypothesis.</p>
+<pre><code>## Table: Hypotheses
+## 
+## hypothesis                    power
+## -----------------------  ----------
+## B1                        0.0456349
+## B1:B2                     0.0456349
+## B1:B2:covariate1          0.0357143
+## B1:B2:covariate2          0.0634921
+## B1:covariate1             0.0515873
+## B1:covariate2             0.0595238
+## [...]</code></pre>
+<p>We can further use the <code>print(power)</code> function to print the power and descriptive statistics for each of the model parameters separated by between-subjects factors (i.e., groups).</p>
+<pre><code>## Table: B1_1_B2_1
+## 
+## parameter                    mean          sd   pctNA       power       pct2.5        pct25       median       pct75     pct97.5
+## --------------------  -----------  ----------  ------  ----------  -----------  -----------  -----------  ----------  ----------
+## alpha_{pi,1,1}          0.0958489   0.1104171       0   0.1686508   -0.1392029    0.0188608    0.0999591   0.1698754   0.2996886
+## alpha_{pi,2,1}          0.0977477   0.1118119       0   0.1666667   -0.1278233    0.0249539    0.0941303   0.1751148   0.3133758
+## alpha_{pi,3,1}          0.0982346   0.1079209       0   0.1488095   -0.1170303    0.0220173    0.1044154   0.1701154   0.3070397
+## alpha_{pi,4,1}          0.0994142   0.1099875       0   0.1428571   -0.1081087    0.0272029    0.1013290   0.1711141   0.3308732
+## alpha_{pi,5,1}          0.1043942   0.1102061       0   0.1865079   -0.1095376    0.0330251    0.1028613   0.1854620   0.3055859
+## alpha_{pi,6,1}          0.0997237   0.1035536       0   0.1329365   -0.0902241    0.0244948    0.1036009   0.1689088   0.2871981
+## [...]</code></pre>
+<p>Lastly, the <code>plot(power)</code> function plots a path diagram for the model. The diagram will include parameter labels but no estimates.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:software-power"></span>
+<img src="semnova-man_files/figure-html/software-power-1.png" alt="Path diagram created by `plot(power)` for a $2   imes 3  imes 2  imes 2$ (within $   imes$ within $  imes$ between $ imes$ between) mixed design with a latent dependent variable, one manifest covariates, and one latent covariate measured by two manifest variables." width="100%" />
+<p class="caption">
+Figure 6.1: Path diagram created by <code>plot(power)</code> for a <span class="math inline">\(2 imes 3 imes 2 imes 2\)</span> (within $ imes$ within $ imes$ between $ imes$ between) mixed design with a latent dependent variable, one manifest covariates, and one latent covariate measured by two manifest variables.
+</p>
+</div>
+<!-- \begin{figure}[H] -->
+<!--      \centering -->
+<!--      \includegraphics[width=\textwidth]{figures/tutorial/power_width_0.442cm.pdf} -->
+<!--      \caption{Path diagram created by `plot(power)` for a $2 \times 3 \times 2 \times 2$ (within $\times$ within $\times$ between $\times$ between) mixed design with a latent dependent variable, one manifest covariates, and one latent covariate measured by two manifest variables.} -->
+<!--      \label{fig:software_power} -->
+<!-- \end{figure} -->
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="covariates.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="further-arguments.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["semnova-man.pdf", "semnova-man.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

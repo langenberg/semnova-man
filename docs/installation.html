@@ -4,36 +4,36 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1 Installation | semnova: An R package for latent repeated measures ANOVA</title>
-  <meta name="description" content="1 Installation | semnova: An R package for latent repeated measures ANOVA" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <title>2 Installation | semnova: An R package for latent repeated measures ANOVA</title>
+  <meta name="description" content="2 Installation | semnova: An R package for latent repeated measures ANOVA" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1 Installation | semnova: An R package for latent repeated measures ANOVA" />
+  <meta property="og:title" content="2 Installation | semnova: An R package for latent repeated measures ANOVA" />
   <meta property="og:type" content="book" />
   
-  
-  <meta property="og:description" content="1 Installation | semnova: An R package for latent repeated measures ANOVA" />
+  <meta property="og:description" content="2 Installation | semnova: An R package for latent repeated measures ANOVA" />
   <meta name="github-repo" content="langenberg/semnova-man" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1 Installation | semnova: An R package for latent repeated measures ANOVA" />
+  <meta name="twitter:title" content="2 Installation | semnova: An R package for latent repeated measures ANOVA" />
   
-  <meta name="twitter:description" content="1 Installation | semnova: An R package for latent repeated measures ANOVA" />
+  <meta name="twitter:description" content="2 Installation | semnova: An R package for latent repeated measures ANOVA" />
   
 
-<meta name="author" content="Benedikt Langenberg and Axel Mayer" />
+<meta name="author" content="Benedikt Langenberg, Jonathan L. Helm, and Axel Mayer" />
 
 
-<meta name="date" content="2021-01-04" />
+<meta name="date" content="2023-01-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="example.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link rel="prev" href="motivating-example.html"/>
+<link rel="next" href="within-subjects-designs.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,29 +49,33 @@
 
 
 
-
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -80,9 +84,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -115,6 +119,29 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -131,44 +158,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./index.html">HOME</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
-<li><a href="index.html#about-semnova">About <code>semnova</code></a></li>
-<li><a href="index.html#citing-semnova">Citing <code>semnova</code></a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#changelog"><i class="fa fa-check"></i>Changelog</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-this-tutorial"><i class="fa fa-check"></i>About this Tutorial</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>1</b> Installation</a><ul>
-<li class="chapter" data-level="1.1" data-path="installation.html"><a href="installation.html#installation-via-devtools-recommended"><i class="fa fa-check"></i><b>1.1</b> Installation via <code>devtools</code> (recommended)</a></li>
-<li class="chapter" data-level="1.2" data-path="installation.html"><a href="installation.html#installation-via-cran"><i class="fa fa-check"></i><b>1.2</b> Installation via <code>cran</code></a></li>
+<li class="chapter" data-level="1" data-path="motivating-example.html"><a href="motivating-example.html"><i class="fa fa-check"></i><b>1</b> Motivating Example</a></li>
+<li class="chapter" data-level="2" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>2</b> Installation</a></li>
+<li class="chapter" data-level="3" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html"><i class="fa fa-check"></i><b>3</b> Within-Subjects Designs</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html#sphericity"><i class="fa fa-check"></i><b>3.1</b> Sphericity</a></li>
+<li class="chapter" data-level="3.2" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html#latent-variables"><i class="fa fa-check"></i><b>3.2</b> Latent Variables</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html#measurement-model"><i class="fa fa-check"></i><b>3.2.1</b> Measurement Model</a></li>
+<li class="chapter" data-level="3.2.2" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html#measurement-invariance"><i class="fa fa-check"></i><b>3.2.2</b> Measurement Invariance</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i><b>2</b> Example</a><ul>
-<li class="chapter" data-level="2.1" data-path="example.html"><a href="example.html#getting-the-data"><i class="fa fa-check"></i><b>2.1</b> Getting the Data</a></li>
-<li class="chapter" data-level="2.2" data-path="example.html"><a href="example.html#introducing-the-data"><i class="fa fa-check"></i><b>2.2</b> Introducing the Data</a></li>
-<li class="chapter" data-level="2.3" data-path="example.html"><a href="example.html#preparing-the-data"><i class="fa fa-check"></i><b>2.3</b> Preparing the Data</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="latent-repeated-measures-anova.html"><a href="latent-repeated-measures-anova.html"><i class="fa fa-check"></i><b>3</b> Latent Repeated Measures ANOVA</a><ul>
-<li class="chapter" data-level="3.1" data-path="latent-repeated-measures-anova.html"><a href="latent-repeated-measures-anova.html#arguments"><i class="fa fa-check"></i><b>3.1</b> Arguments</a><ul>
-<li><a href="latent-repeated-measures-anova.html#formula"><code>formula</code></a></li>
-<li><a href="latent-repeated-measures-anova.html#idata"><code>idata</code></a></li>
-<li><a href="latent-repeated-measures-anova.html#idesign"><code>idesign</code></a></li>
-<li><a href="latent-repeated-measures-anova.html#mmodel"><code>mmodel</code></a></li>
+<li class="chapter" data-level="4" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html"><i class="fa fa-check"></i><b>4</b> Between-Subjects Designs</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html#latent-variables-1"><i class="fa fa-check"></i><b>4.1</b> Latent Variables</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html#measurement-model-1"><i class="fa fa-check"></i><b>4.1.1</b> Measurement Model</a></li>
+<li class="chapter" data-level="4.1.2" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html#measurement-invariance-1"><i class="fa fa-check"></i><b>4.1.2</b> Measurement Invariance</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="latent-repeated-measures-anova.html"><a href="latent-repeated-measures-anova.html#the-first-analysis"><i class="fa fa-check"></i><b>3.2</b> The First Analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="traditional-anova.html"><a href="traditional-anova.html"><i class="fa fa-check"></i><b>4</b> Traditional ANOVA</a></li>
-<li class="chapter" data-level="5" data-path="model-inspection.html"><a href="model-inspection.html"><i class="fa fa-check"></i><b>5</b> Model Inspection</a><ul>
-<li class="chapter" data-level="5.1" data-path="model-inspection.html"><a href="model-inspection.html#lavaan-object"><i class="fa fa-check"></i><b>5.1</b> <code>lavaan</code> Object</a></li>
-<li class="chapter" data-level="5.2" data-path="model-inspection.html"><a href="model-inspection.html#model-string"><i class="fa fa-check"></i><b>5.2</b> Model String</a></li>
-<li class="chapter" data-level="5.3" data-path="model-inspection.html"><a href="model-inspection.html#fit-measures"><i class="fa fa-check"></i><b>5.3</b> Fit Measures</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="under-construction-interindividual-differences.html"><a href="under-construction-interindividual-differences.html"><i class="fa fa-check"></i><b>6</b> [under construction] Interindividual Differences</a></li>
-<li class="chapter" data-level="7" data-path="under-construction-custom-contrasts.html"><a href="under-construction-custom-contrasts.html"><i class="fa fa-check"></i><b>7</b> [under construction] Custom Contrasts</a></li>
-<li class="chapter" data-level="8" data-path="under-construction-between-subject-factors.html"><a href="under-construction-between-subject-factors.html"><i class="fa fa-check"></i><b>8</b> [under construction] Between-Subject Factors</a></li>
-<li class="chapter" data-level="9" data-path="under-construction-covariance-structures.html"><a href="under-construction-covariance-structures.html"><i class="fa fa-check"></i><b>9</b> [under construction] Covariance Structures</a></li>
-<li class="chapter" data-level="10" data-path="under-construction-visualization.html"><a href="under-construction-visualization.html"><i class="fa fa-check"></i><b>10</b> [under construction] Visualization</a></li>
-<li class="chapter" data-level="11" data-path="outlook.html"><a href="outlook.html"><i class="fa fa-check"></i><b>11</b> Outlook</a><ul>
-<li class="chapter" data-level="11.1" data-path="outlook.html"><a href="outlook.html#roadmap"><i class="fa fa-check"></i><b>11.1</b> Roadmap</a></li>
-</ul></li>
+<li class="chapter" data-level="5" data-path="covariates.html"><a href="covariates.html"><i class="fa fa-check"></i><b>5</b> Covariates</a></li>
+<li class="chapter" data-level="6" data-path="power-analysis.html"><a href="power-analysis.html"><i class="fa fa-check"></i><b>6</b> Power Analysis</a></li>
+<li class="chapter" data-level="7" data-path="further-arguments.html"><a href="further-arguments.html"><i class="fa fa-check"></i><b>7</b> Further Arguments</a></li>
+<li class="chapter" data-level="8" data-path="further-developments.html"><a href="further-developments.html"><i class="fa fa-check"></i><b>8</b> Further Developments</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="power-script-example.html"><a href="power-script-example.html"><i class="fa fa-check"></i><b>A</b> Power Script Example</a></li>
+<li class="chapter" data-level="B" data-path="filled-power-script-example.html"><a href="filled-power-script-example.html"><i class="fa fa-check"></i><b>B</b> Filled Power Script Example</a></li>
 </ul>
 
       </nav>
@@ -186,36 +206,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="installation" class="section level1">
-<h1><span class="header-section-number">1</span> Installation</h1>
-<p><code>semnova</code> is available on <code>cran</code>. It is, however, recommended to install the latest version from github via the <code>devtools</code> package. In the installation process, a couple of other packages will be installed. In particular, <code>semnova</code> strongly depends on the structural equation modeling software <code>lavaan</code> <span class="citation">(Rosseel, <a href="references.html#ref-Rosseel2012a">2012</a>)</span>.</p>
-<div id="installation-via-devtools-recommended" class="section level2">
-<h2><span class="header-section-number">1.1</span> Installation via <code>devtools</code> (recommended)</h2>
-<p>Make sure to install <code>devtools</code> first. Just copy and run the following lines within <code>R</code>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&quot;devtools&quot;</span>, <span class="dt">character.only =</span> T)) {</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">}</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;langenberg/semnova&quot;</span>)</a></code></pre></div>
-</div>
-<div id="installation-via-cran" class="section level2">
-<h2><span class="header-section-number">1.2</span> Installation via <code>cran</code></h2>
-<p>Simply run this code to install <code>semnova</code> via cran.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&quot;semnova&quot;</span>)</a></code></pre></div>
+<div id="installation" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">2</span> Installation<a href="installation.html#installation" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This chapter will use Version 0.2.0 of the <em>semnova</em> package. <em>semnova</em> can be installed from <em>CRAN</em><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>. However, we recommend to download the latest version from <em>GitHub</em><a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>. The following lines of code can be used to install the package.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="installation.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span>
+<span id="cb1-2"><a href="installation.html#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="installation.html#cb1-3" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;langenberg/semnova@v0.2.0&quot;</span>)</span>
+<span id="cb1-4"><a href="installation.html#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="installation.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(semnova)</span></code></pre></div>
+<p>Note that the <em>devtools</em> package must be installed in order to be able to install software from <em>GitHub</em>.</p>
 
 </div>
+<div class="footnotes">
+<hr />
+<ol start="4">
+<li id="fn4"><p><a href="https://cran.r-project.org">https://cran.r-project.org</a><a href="installation.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p><a href="https://github.com">https://github.com</a><a href="installation.html#fnref5" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="example.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="motivating-example.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="within-subjects-designs.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -245,8 +263,12 @@ gitbook.start({
 "text": null
 },
 "download": ["semnova-man.pdf", "semnova-man.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
-"collapse": "section",
+"collapse": "subsection",
 "scroll_highlight": true
 }
 });
@@ -259,7 +281,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

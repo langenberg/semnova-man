@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>B Filled Power Script Example | semnova: An R package for latent repeated measures ANOVA</title>
+  <meta name="description" content="B Filled Power Script Example | semnova: An R package for latent repeated measures ANOVA" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="B Filled Power Script Example | semnova: An R package for latent repeated measures ANOVA" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="B Filled Power Script Example | semnova: An R package for latent repeated measures ANOVA" />
+  <meta name="github-repo" content="langenberg/semnova-man" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="B Filled Power Script Example | semnova: An R package for latent repeated measures ANOVA" />
+  
+  <meta name="twitter:description" content="B Filled Power Script Example | semnova: An R package for latent repeated measures ANOVA" />
+  
+
+<meta name="author" content="Benedikt Langenberg, Jonathan L. Helm, and Axel Mayer" />
+
+
+<meta name="date" content="2023-01-31" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="power-script-example.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./index.html">HOME</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-this-tutorial"><i class="fa fa-check"></i>About this Tutorial</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="motivating-example.html"><a href="motivating-example.html"><i class="fa fa-check"></i><b>1</b> Motivating Example</a></li>
+<li class="chapter" data-level="2" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>2</b> Installation</a></li>
+<li class="chapter" data-level="3" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html"><i class="fa fa-check"></i><b>3</b> Within-Subjects Designs</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html#sphericity"><i class="fa fa-check"></i><b>3.1</b> Sphericity</a></li>
+<li class="chapter" data-level="3.2" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html#latent-variables"><i class="fa fa-check"></i><b>3.2</b> Latent Variables</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html#measurement-model"><i class="fa fa-check"></i><b>3.2.1</b> Measurement Model</a></li>
+<li class="chapter" data-level="3.2.2" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html#measurement-invariance"><i class="fa fa-check"></i><b>3.2.2</b> Measurement Invariance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html"><i class="fa fa-check"></i><b>4</b> Between-Subjects Designs</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html#latent-variables-1"><i class="fa fa-check"></i><b>4.1</b> Latent Variables</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html#measurement-model-1"><i class="fa fa-check"></i><b>4.1.1</b> Measurement Model</a></li>
+<li class="chapter" data-level="4.1.2" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html#measurement-invariance-1"><i class="fa fa-check"></i><b>4.1.2</b> Measurement Invariance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="covariates.html"><a href="covariates.html"><i class="fa fa-check"></i><b>5</b> Covariates</a></li>
+<li class="chapter" data-level="6" data-path="power-analysis.html"><a href="power-analysis.html"><i class="fa fa-check"></i><b>6</b> Power Analysis</a></li>
+<li class="chapter" data-level="7" data-path="further-arguments.html"><a href="further-arguments.html"><i class="fa fa-check"></i><b>7</b> Further Arguments</a></li>
+<li class="chapter" data-level="8" data-path="further-developments.html"><a href="further-developments.html"><i class="fa fa-check"></i><b>8</b> Further Developments</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="power-script-example.html"><a href="power-script-example.html"><i class="fa fa-check"></i><b>A</b> Power Script Example</a></li>
+<li class="chapter" data-level="B" data-path="filled-power-script-example.html"><a href="filled-power-script-example.html"><i class="fa fa-check"></i><b>B</b> Filled Power Script Example</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>semnova</code>: An R package for latent repeated measures ANOVA</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="filled-power-script-example" class="section level1 hasAnchor" number="10">
+<h1><span class="header-section-number">B</span> Filled Power Script Example<a href="filled-power-script-example.html#filled-power-script-example" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<!-- \label{app:filled_power_template} -->
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="filled-power-script-example.html#cb32-1" aria-hidden="true" tabindex="-1"></a>data_syntax <span class="ot">&lt;-</span> <span class="st">&quot;</span></span>
+<span id="cb32-2"><a href="filled-power-script-example.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="st">.eta1 =~</span></span>
+<span id="cb32-3"><a href="filled-power-script-example.html#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*.Y1_W1_1_W2_1 +</span></span>
+<span id="cb32-4"><a href="filled-power-script-example.html#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*.Y2_W1_1_W2_1 +</span></span>
+<span id="cb32-5"><a href="filled-power-script-example.html#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*.Y3_W1_1_W2_1</span></span>
+<span id="cb32-6"><a href="filled-power-script-example.html#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="st">.eta2 =~</span></span>
+<span id="cb32-7"><a href="filled-power-script-example.html#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*.Y1_W1_2_W2_1 +</span></span>
+<span id="cb32-8"><a href="filled-power-script-example.html#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*.Y2_W1_2_W2_1 +</span></span>
+<span id="cb32-9"><a href="filled-power-script-example.html#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*.Y3_W1_2_W2_1</span></span>
+<span id="cb32-10"><a href="filled-power-script-example.html#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="st">.eta3 =~</span></span>
+<span id="cb32-11"><a href="filled-power-script-example.html#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*.Y1_W1_1_W2_2 +</span></span>
+<span id="cb32-12"><a href="filled-power-script-example.html#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*.Y2_W1_1_W2_2 +</span></span>
+<span id="cb32-13"><a href="filled-power-script-example.html#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*.Y3_W1_1_W2_2</span></span>
+<span id="cb32-14"><a href="filled-power-script-example.html#cb32-14" aria-hidden="true" tabindex="-1"></a><span class="st">.eta4 =~</span></span>
+<span id="cb32-15"><a href="filled-power-script-example.html#cb32-15" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*.Y1_W1_2_W2_2 +</span></span>
+<span id="cb32-16"><a href="filled-power-script-example.html#cb32-16" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*.Y2_W1_2_W2_2 +</span></span>
+<span id="cb32-17"><a href="filled-power-script-example.html#cb32-17" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*.Y3_W1_2_W2_2</span></span>
+<span id="cb32-18"><a href="filled-power-script-example.html#cb32-18" aria-hidden="true" tabindex="-1"></a><span class="st">.eta5 =~</span></span>
+<span id="cb32-19"><a href="filled-power-script-example.html#cb32-19" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*.Y1_W1_1_W2_3 +</span></span>
+<span id="cb32-20"><a href="filled-power-script-example.html#cb32-20" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*.Y2_W1_1_W2_3 +</span></span>
+<span id="cb32-21"><a href="filled-power-script-example.html#cb32-21" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*.Y3_W1_1_W2_3</span></span>
+<span id="cb32-22"><a href="filled-power-script-example.html#cb32-22" aria-hidden="true" tabindex="-1"></a><span class="st">.eta6 =~</span></span>
+<span id="cb32-23"><a href="filled-power-script-example.html#cb32-23" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*.Y1_W1_2_W2_3 +</span></span>
+<span id="cb32-24"><a href="filled-power-script-example.html#cb32-24" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*.Y2_W1_2_W2_3 +</span></span>
+<span id="cb32-25"><a href="filled-power-script-example.html#cb32-25" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*.Y3_W1_2_W2_3</span></span>
+<span id="cb32-26"><a href="filled-power-script-example.html#cb32-26" aria-hidden="true" tabindex="-1"></a><span class="st">.pi1 =~</span></span>
+<span id="cb32-27"><a href="filled-power-script-example.html#cb32-27" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.408248290463863, 0.408248290463863, 0.408248290463863, 0.408248290463863)*.eta1 +</span></span>
+<span id="cb32-28"><a href="filled-power-script-example.html#cb32-28" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.408248290463863, 0.408248290463863, 0.408248290463863, 0.408248290463863)*.eta2 +</span></span>
+<span id="cb32-29"><a href="filled-power-script-example.html#cb32-29" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.408248290463863, 0.408248290463863, 0.408248290463863, 0.408248290463863)*.eta3 +</span></span>
+<span id="cb32-30"><a href="filled-power-script-example.html#cb32-30" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.408248290463863, 0.408248290463863, 0.408248290463863, 0.408248290463863)*.eta4 +</span></span>
+<span id="cb32-31"><a href="filled-power-script-example.html#cb32-31" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.408248290463863, 0.408248290463863, 0.408248290463863, 0.408248290463863)*.eta5 +</span></span>
+<span id="cb32-32"><a href="filled-power-script-example.html#cb32-32" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.408248290463863, 0.408248290463863, 0.408248290463863, 0.408248290463863)*.eta6</span></span>
+<span id="cb32-33"><a href="filled-power-script-example.html#cb32-33" aria-hidden="true" tabindex="-1"></a><span class="st">.pi2 =~</span></span>
+<span id="cb32-34"><a href="filled-power-script-example.html#cb32-34" aria-hidden="true" tabindex="-1"></a><span class="st">    c(-0.408248290463863, -0.408248290463863, -0.408248290463863, -0.408248290463863)*.eta1 +</span></span>
+<span id="cb32-35"><a href="filled-power-script-example.html#cb32-35" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.408248290463863, 0.408248290463863, 0.408248290463863, 0.408248290463863)*.eta2 +</span></span>
+<span id="cb32-36"><a href="filled-power-script-example.html#cb32-36" aria-hidden="true" tabindex="-1"></a><span class="st">    c(-0.408248290463863, -0.408248290463863, -0.408248290463863, -0.408248290463863)*.eta3 +</span></span>
+<span id="cb32-37"><a href="filled-power-script-example.html#cb32-37" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.408248290463863, 0.408248290463863, 0.408248290463863, 0.408248290463863)*.eta4 +</span></span>
+<span id="cb32-38"><a href="filled-power-script-example.html#cb32-38" aria-hidden="true" tabindex="-1"></a><span class="st">    c(-0.408248290463863, -0.408248290463863, -0.408248290463863, -0.408248290463863)*.eta5 +</span></span>
+<span id="cb32-39"><a href="filled-power-script-example.html#cb32-39" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.408248290463863, 0.408248290463863, 0.408248290463863, 0.408248290463863)*.eta6</span></span>
+<span id="cb32-40"><a href="filled-power-script-example.html#cb32-40" aria-hidden="true" tabindex="-1"></a><span class="st">.pi3 =~</span></span>
+<span id="cb32-41"><a href="filled-power-script-example.html#cb32-41" aria-hidden="true" tabindex="-1"></a><span class="st">    c(-0.5, -0.5, -0.5, -0.5)*.eta1 +</span></span>
+<span id="cb32-42"><a href="filled-power-script-example.html#cb32-42" aria-hidden="true" tabindex="-1"></a><span class="st">    c(-0.5, -0.5, -0.5, -0.5)*.eta2 +</span></span>
+<span id="cb32-43"><a href="filled-power-script-example.html#cb32-43" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta3 +</span></span>
+<span id="cb32-44"><a href="filled-power-script-example.html#cb32-44" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta4 +</span></span>
+<span id="cb32-45"><a href="filled-power-script-example.html#cb32-45" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.5, 0.5, 0.5, 0.5)*.eta5 +</span></span>
+<span id="cb32-46"><a href="filled-power-script-example.html#cb32-46" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.5, 0.5, 0.5, 0.5)*.eta6</span></span>
+<span id="cb32-47"><a href="filled-power-script-example.html#cb32-47" aria-hidden="true" tabindex="-1"></a><span class="st">.pi4 =~</span></span>
+<span id="cb32-48"><a href="filled-power-script-example.html#cb32-48" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.288675134594813, 0.288675134594813, 0.288675134594813, 0.288675134594813)*.eta1 +</span></span>
+<span id="cb32-49"><a href="filled-power-script-example.html#cb32-49" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.288675134594813, 0.288675134594813, 0.288675134594813, 0.288675134594813)*.eta2 +</span></span>
+<span id="cb32-50"><a href="filled-power-script-example.html#cb32-50" aria-hidden="true" tabindex="-1"></a><span class="st">    c(-0.577350269189626, -0.577350269189626, -0.577350269189626, -0.577350269189626)*.eta3 +</span></span>
+<span id="cb32-51"><a href="filled-power-script-example.html#cb32-51" aria-hidden="true" tabindex="-1"></a><span class="st">    c(-0.577350269189626, -0.577350269189626, -0.577350269189626, -0.577350269189626)*.eta4 +</span></span>
+<span id="cb32-52"><a href="filled-power-script-example.html#cb32-52" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.288675134594813, 0.288675134594813, 0.288675134594813, 0.288675134594813)*.eta5 +</span></span>
+<span id="cb32-53"><a href="filled-power-script-example.html#cb32-53" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.288675134594813, 0.288675134594813, 0.288675134594813, 0.288675134594813)*.eta6</span></span>
+<span id="cb32-54"><a href="filled-power-script-example.html#cb32-54" aria-hidden="true" tabindex="-1"></a><span class="st">.pi5 =~</span></span>
+<span id="cb32-55"><a href="filled-power-script-example.html#cb32-55" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.5, 0.5, 0.5, 0.5)*.eta1 +</span></span>
+<span id="cb32-56"><a href="filled-power-script-example.html#cb32-56" aria-hidden="true" tabindex="-1"></a><span class="st">    c(-0.5, -0.5, -0.5, -0.5)*.eta2 +</span></span>
+<span id="cb32-57"><a href="filled-power-script-example.html#cb32-57" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta3 +</span></span>
+<span id="cb32-58"><a href="filled-power-script-example.html#cb32-58" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta4 +</span></span>
+<span id="cb32-59"><a href="filled-power-script-example.html#cb32-59" aria-hidden="true" tabindex="-1"></a><span class="st">    c(-0.5, -0.5, -0.5, -0.5)*.eta5 +</span></span>
+<span id="cb32-60"><a href="filled-power-script-example.html#cb32-60" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.5, 0.5, 0.5, 0.5)*.eta6</span></span>
+<span id="cb32-61"><a href="filled-power-script-example.html#cb32-61" aria-hidden="true" tabindex="-1"></a><span class="st">.pi6 =~</span></span>
+<span id="cb32-62"><a href="filled-power-script-example.html#cb32-62" aria-hidden="true" tabindex="-1"></a><span class="st">    c(-0.288675134594813, -0.288675134594813, -0.288675134594813, -0.288675134594813)*.eta1 +</span></span>
+<span id="cb32-63"><a href="filled-power-script-example.html#cb32-63" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.288675134594813, 0.288675134594813, 0.288675134594813, 0.288675134594813)*.eta2 +</span></span>
+<span id="cb32-64"><a href="filled-power-script-example.html#cb32-64" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.577350269189626, 0.577350269189626, 0.577350269189626, 0.577350269189626)*.eta3 +</span></span>
+<span id="cb32-65"><a href="filled-power-script-example.html#cb32-65" aria-hidden="true" tabindex="-1"></a><span class="st">    c(-0.577350269189626, -0.577350269189626, -0.577350269189626, -0.577350269189626)*.eta4 +</span></span>
+<span id="cb32-66"><a href="filled-power-script-example.html#cb32-66" aria-hidden="true" tabindex="-1"></a><span class="st">    c(-0.288675134594813, -0.288675134594813, -0.288675134594813, -0.288675134594813)*.eta5 +</span></span>
+<span id="cb32-67"><a href="filled-power-script-example.html#cb32-67" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.288675134594813, 0.288675134594813, 0.288675134594813, 0.288675134594813)*.eta6</span></span>
+<span id="cb32-68"><a href="filled-power-script-example.html#cb32-68" aria-hidden="true" tabindex="-1"></a><span class="st">covariate2 =~</span></span>
+<span id="cb32-69"><a href="filled-power-script-example.html#cb32-69" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*covariate2_1 +</span></span>
+<span id="cb32-70"><a href="filled-power-script-example.html#cb32-70" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*covariate2_2</span></span>
+<span id="cb32-71"><a href="filled-power-script-example.html#cb32-71" aria-hidden="true" tabindex="-1"></a><span class="st">.pi1 ~</span></span>
+<span id="cb32-72"><a href="filled-power-script-example.html#cb32-72" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.1, 0.1, 0.1, 0.1)*covariate1 +</span></span>
+<span id="cb32-73"><a href="filled-power-script-example.html#cb32-73" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.1, 0.1, 0.1, 0.1)*covariate2</span></span>
+<span id="cb32-74"><a href="filled-power-script-example.html#cb32-74" aria-hidden="true" tabindex="-1"></a><span class="st">.pi2 ~</span></span>
+<span id="cb32-75"><a href="filled-power-script-example.html#cb32-75" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.1, 0.1, 0.1, 0.1)*covariate1 +</span></span>
+<span id="cb32-76"><a href="filled-power-script-example.html#cb32-76" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.1, 0.1, 0.1, 0.1)*covariate2</span></span>
+<span id="cb32-77"><a href="filled-power-script-example.html#cb32-77" aria-hidden="true" tabindex="-1"></a><span class="st">.pi3 ~</span></span>
+<span id="cb32-78"><a href="filled-power-script-example.html#cb32-78" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.1, 0.1, 0.1, 0.1)*covariate1 +</span></span>
+<span id="cb32-79"><a href="filled-power-script-example.html#cb32-79" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.1, 0.1, 0.1, 0.1)*covariate2</span></span>
+<span id="cb32-80"><a href="filled-power-script-example.html#cb32-80" aria-hidden="true" tabindex="-1"></a><span class="st">.pi4 ~</span></span>
+<span id="cb32-81"><a href="filled-power-script-example.html#cb32-81" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.1, 0.1, 0.1, 0.1)*covariate1 +</span></span>
+<span id="cb32-82"><a href="filled-power-script-example.html#cb32-82" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.1, 0.1, 0.1, 0.1)*covariate2</span></span>
+<span id="cb32-83"><a href="filled-power-script-example.html#cb32-83" aria-hidden="true" tabindex="-1"></a><span class="st">.pi5 ~</span></span>
+<span id="cb32-84"><a href="filled-power-script-example.html#cb32-84" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.1, 0.1, 0.1, 0.1)*covariate1 +</span></span>
+<span id="cb32-85"><a href="filled-power-script-example.html#cb32-85" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.1, 0.1, 0.1, 0.1)*covariate2</span></span>
+<span id="cb32-86"><a href="filled-power-script-example.html#cb32-86" aria-hidden="true" tabindex="-1"></a><span class="st">.pi6 ~</span></span>
+<span id="cb32-87"><a href="filled-power-script-example.html#cb32-87" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.1, 0.1, 0.1, 0.1)*covariate1 +</span></span>
+<span id="cb32-88"><a href="filled-power-script-example.html#cb32-88" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.1, 0.1, 0.1, 0.1)*covariate2</span></span>
+<span id="cb32-89"><a href="filled-power-script-example.html#cb32-89" aria-hidden="true" tabindex="-1"></a><span class="st">.eta1 ~~</span></span>
+<span id="cb32-90"><a href="filled-power-script-example.html#cb32-90" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta1 +</span></span>
+<span id="cb32-91"><a href="filled-power-script-example.html#cb32-91" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta2 +</span></span>
+<span id="cb32-92"><a href="filled-power-script-example.html#cb32-92" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta3 +</span></span>
+<span id="cb32-93"><a href="filled-power-script-example.html#cb32-93" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta4 +</span></span>
+<span id="cb32-94"><a href="filled-power-script-example.html#cb32-94" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta5 +</span></span>
+<span id="cb32-95"><a href="filled-power-script-example.html#cb32-95" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta6</span></span>
+<span id="cb32-96"><a href="filled-power-script-example.html#cb32-96" aria-hidden="true" tabindex="-1"></a><span class="st">.eta2 ~~</span></span>
+<span id="cb32-97"><a href="filled-power-script-example.html#cb32-97" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta2 +</span></span>
+<span id="cb32-98"><a href="filled-power-script-example.html#cb32-98" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta3 +</span></span>
+<span id="cb32-99"><a href="filled-power-script-example.html#cb32-99" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta4 +</span></span>
+<span id="cb32-100"><a href="filled-power-script-example.html#cb32-100" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta5 +</span></span>
+<span id="cb32-101"><a href="filled-power-script-example.html#cb32-101" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta6</span></span>
+<span id="cb32-102"><a href="filled-power-script-example.html#cb32-102" aria-hidden="true" tabindex="-1"></a><span class="st">.eta3 ~~</span></span>
+<span id="cb32-103"><a href="filled-power-script-example.html#cb32-103" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta3 +</span></span>
+<span id="cb32-104"><a href="filled-power-script-example.html#cb32-104" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta4 +</span></span>
+<span id="cb32-105"><a href="filled-power-script-example.html#cb32-105" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta5 +</span></span>
+<span id="cb32-106"><a href="filled-power-script-example.html#cb32-106" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta6</span></span>
+<span id="cb32-107"><a href="filled-power-script-example.html#cb32-107" aria-hidden="true" tabindex="-1"></a><span class="st">.eta4 ~~</span></span>
+<span id="cb32-108"><a href="filled-power-script-example.html#cb32-108" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta4 +</span></span>
+<span id="cb32-109"><a href="filled-power-script-example.html#cb32-109" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta5 +</span></span>
+<span id="cb32-110"><a href="filled-power-script-example.html#cb32-110" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta6</span></span>
+<span id="cb32-111"><a href="filled-power-script-example.html#cb32-111" aria-hidden="true" tabindex="-1"></a><span class="st">.eta5 ~~</span></span>
+<span id="cb32-112"><a href="filled-power-script-example.html#cb32-112" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta5 +</span></span>
+<span id="cb32-113"><a href="filled-power-script-example.html#cb32-113" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta6</span></span>
+<span id="cb32-114"><a href="filled-power-script-example.html#cb32-114" aria-hidden="true" tabindex="-1"></a><span class="st">.eta6 ~~</span></span>
+<span id="cb32-115"><a href="filled-power-script-example.html#cb32-115" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.eta6</span></span>
+<span id="cb32-116"><a href="filled-power-script-example.html#cb32-116" aria-hidden="true" tabindex="-1"></a><span class="st">.pi1 ~~</span></span>
+<span id="cb32-117"><a href="filled-power-script-example.html#cb32-117" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*.pi1 +</span></span>
+<span id="cb32-118"><a href="filled-power-script-example.html#cb32-118" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.5, 0.5, 0.5, 0.5)*.pi2 +</span></span>
+<span id="cb32-119"><a href="filled-power-script-example.html#cb32-119" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.5, 0.5, 0.5, 0.5)*.pi3 +</span></span>
+<span id="cb32-120"><a href="filled-power-script-example.html#cb32-120" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.5, 0.5, 0.5, 0.5)*.pi4 +</span></span>
+<span id="cb32-121"><a href="filled-power-script-example.html#cb32-121" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.5, 0.5, 0.5, 0.5)*.pi5 +</span></span>
+<span id="cb32-122"><a href="filled-power-script-example.html#cb32-122" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.5, 0.5, 0.5, 0.5)*.pi6</span></span>
+<span id="cb32-123"><a href="filled-power-script-example.html#cb32-123" aria-hidden="true" tabindex="-1"></a><span class="st">.pi2 ~~</span></span>
+<span id="cb32-124"><a href="filled-power-script-example.html#cb32-124" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*.pi2 +</span></span>
+<span id="cb32-125"><a href="filled-power-script-example.html#cb32-125" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.5, 0.5, 0.5, 0.5)*.pi3 +</span></span>
+<span id="cb32-126"><a href="filled-power-script-example.html#cb32-126" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.5, 0.5, 0.5, 0.5)*.pi4 +</span></span>
+<span id="cb32-127"><a href="filled-power-script-example.html#cb32-127" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.5, 0.5, 0.5, 0.5)*.pi5 +</span></span>
+<span id="cb32-128"><a href="filled-power-script-example.html#cb32-128" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.5, 0.5, 0.5, 0.5)*.pi6</span></span>
+<span id="cb32-129"><a href="filled-power-script-example.html#cb32-129" aria-hidden="true" tabindex="-1"></a><span class="st">.pi3 ~~</span></span>
+<span id="cb32-130"><a href="filled-power-script-example.html#cb32-130" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*.pi3 +</span></span>
+<span id="cb32-131"><a href="filled-power-script-example.html#cb32-131" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*.pi4 +</span></span>
+<span id="cb32-132"><a href="filled-power-script-example.html#cb32-132" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.5, 0.5, 0.5, 0.5)*.pi5 +</span></span>
+<span id="cb32-133"><a href="filled-power-script-example.html#cb32-133" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.5, 0.5, 0.5, 0.5)*.pi6</span></span>
+<span id="cb32-134"><a href="filled-power-script-example.html#cb32-134" aria-hidden="true" tabindex="-1"></a><span class="st">.pi4 ~~</span></span>
+<span id="cb32-135"><a href="filled-power-script-example.html#cb32-135" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*.pi4 +</span></span>
+<span id="cb32-136"><a href="filled-power-script-example.html#cb32-136" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.5, 0.5, 0.5, 0.5)*.pi5 +</span></span>
+<span id="cb32-137"><a href="filled-power-script-example.html#cb32-137" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.5, 0.5, 0.5, 0.5)*.pi6</span></span>
+<span id="cb32-138"><a href="filled-power-script-example.html#cb32-138" aria-hidden="true" tabindex="-1"></a><span class="st">.pi5 ~~</span></span>
+<span id="cb32-139"><a href="filled-power-script-example.html#cb32-139" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*.pi5 +</span></span>
+<span id="cb32-140"><a href="filled-power-script-example.html#cb32-140" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.5, 0.5, 0.5, 0.5)*.pi6</span></span>
+<span id="cb32-141"><a href="filled-power-script-example.html#cb32-141" aria-hidden="true" tabindex="-1"></a><span class="st">.pi6 ~~</span></span>
+<span id="cb32-142"><a href="filled-power-script-example.html#cb32-142" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*.pi6</span></span>
+<span id="cb32-143"><a href="filled-power-script-example.html#cb32-143" aria-hidden="true" tabindex="-1"></a><span class="st">.Y1_W1_1_W2_1 ~~</span></span>
+<span id="cb32-144"><a href="filled-power-script-example.html#cb32-144" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.4, 0.4, 0.4, 0.4)*.Y1_W1_1_W2_1</span></span>
+<span id="cb32-145"><a href="filled-power-script-example.html#cb32-145" aria-hidden="true" tabindex="-1"></a><span class="st">.Y1_W1_1_W2_2 ~~</span></span>
+<span id="cb32-146"><a href="filled-power-script-example.html#cb32-146" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.4, 0.4, 0.4, 0.4)*.Y1_W1_1_W2_2</span></span>
+<span id="cb32-147"><a href="filled-power-script-example.html#cb32-147" aria-hidden="true" tabindex="-1"></a><span class="st">.Y1_W1_1_W2_3 ~~</span></span>
+<span id="cb32-148"><a href="filled-power-script-example.html#cb32-148" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.4, 0.4, 0.4, 0.4)*.Y1_W1_1_W2_3</span></span>
+<span id="cb32-149"><a href="filled-power-script-example.html#cb32-149" aria-hidden="true" tabindex="-1"></a><span class="st">.Y1_W1_2_W2_1 ~~</span></span>
+<span id="cb32-150"><a href="filled-power-script-example.html#cb32-150" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.4, 0.4, 0.4, 0.4)*.Y1_W1_2_W2_1</span></span>
+<span id="cb32-151"><a href="filled-power-script-example.html#cb32-151" aria-hidden="true" tabindex="-1"></a><span class="st">.Y1_W1_2_W2_2 ~~</span></span>
+<span id="cb32-152"><a href="filled-power-script-example.html#cb32-152" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.4, 0.4, 0.4, 0.4)*.Y1_W1_2_W2_2</span></span>
+<span id="cb32-153"><a href="filled-power-script-example.html#cb32-153" aria-hidden="true" tabindex="-1"></a><span class="st">.Y1_W1_2_W2_3 ~~</span></span>
+<span id="cb32-154"><a href="filled-power-script-example.html#cb32-154" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.4, 0.4, 0.4, 0.4)*.Y1_W1_2_W2_3</span></span>
+<span id="cb32-155"><a href="filled-power-script-example.html#cb32-155" aria-hidden="true" tabindex="-1"></a><span class="st">.Y2_W1_1_W2_1 ~~</span></span>
+<span id="cb32-156"><a href="filled-power-script-example.html#cb32-156" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.4, 0.4, 0.4, 0.4)*.Y2_W1_1_W2_1</span></span>
+<span id="cb32-157"><a href="filled-power-script-example.html#cb32-157" aria-hidden="true" tabindex="-1"></a><span class="st">.Y2_W1_1_W2_2 ~~</span></span>
+<span id="cb32-158"><a href="filled-power-script-example.html#cb32-158" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.4, 0.4, 0.4, 0.4)*.Y2_W1_1_W2_2</span></span>
+<span id="cb32-159"><a href="filled-power-script-example.html#cb32-159" aria-hidden="true" tabindex="-1"></a><span class="st">.Y2_W1_1_W2_3 ~~</span></span>
+<span id="cb32-160"><a href="filled-power-script-example.html#cb32-160" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.4, 0.4, 0.4, 0.4)*.Y2_W1_1_W2_3</span></span>
+<span id="cb32-161"><a href="filled-power-script-example.html#cb32-161" aria-hidden="true" tabindex="-1"></a><span class="st">.Y2_W1_2_W2_1 ~~</span></span>
+<span id="cb32-162"><a href="filled-power-script-example.html#cb32-162" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.4, 0.4, 0.4, 0.4)*.Y2_W1_2_W2_1</span></span>
+<span id="cb32-163"><a href="filled-power-script-example.html#cb32-163" aria-hidden="true" tabindex="-1"></a><span class="st">.Y2_W1_2_W2_2 ~~</span></span>
+<span id="cb32-164"><a href="filled-power-script-example.html#cb32-164" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.4, 0.4, 0.4, 0.4)*.Y2_W1_2_W2_2</span></span>
+<span id="cb32-165"><a href="filled-power-script-example.html#cb32-165" aria-hidden="true" tabindex="-1"></a><span class="st">.Y2_W1_2_W2_3 ~~</span></span>
+<span id="cb32-166"><a href="filled-power-script-example.html#cb32-166" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.4, 0.4, 0.4, 0.4)*.Y2_W1_2_W2_3</span></span>
+<span id="cb32-167"><a href="filled-power-script-example.html#cb32-167" aria-hidden="true" tabindex="-1"></a><span class="st">.Y3_W1_1_W2_1 ~~</span></span>
+<span id="cb32-168"><a href="filled-power-script-example.html#cb32-168" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.4, 0.4, 0.4, 0.4)*.Y3_W1_1_W2_1</span></span>
+<span id="cb32-169"><a href="filled-power-script-example.html#cb32-169" aria-hidden="true" tabindex="-1"></a><span class="st">.Y3_W1_1_W2_2 ~~</span></span>
+<span id="cb32-170"><a href="filled-power-script-example.html#cb32-170" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.4, 0.4, 0.4, 0.4)*.Y3_W1_1_W2_2</span></span>
+<span id="cb32-171"><a href="filled-power-script-example.html#cb32-171" aria-hidden="true" tabindex="-1"></a><span class="st">.Y3_W1_1_W2_3 ~~</span></span>
+<span id="cb32-172"><a href="filled-power-script-example.html#cb32-172" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.4, 0.4, 0.4, 0.4)*.Y3_W1_1_W2_3</span></span>
+<span id="cb32-173"><a href="filled-power-script-example.html#cb32-173" aria-hidden="true" tabindex="-1"></a><span class="st">.Y3_W1_2_W2_1 ~~</span></span>
+<span id="cb32-174"><a href="filled-power-script-example.html#cb32-174" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.4, 0.4, 0.4, 0.4)*.Y3_W1_2_W2_1</span></span>
+<span id="cb32-175"><a href="filled-power-script-example.html#cb32-175" aria-hidden="true" tabindex="-1"></a><span class="st">.Y3_W1_2_W2_2 ~~</span></span>
+<span id="cb32-176"><a href="filled-power-script-example.html#cb32-176" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.4, 0.4, 0.4, 0.4)*.Y3_W1_2_W2_2</span></span>
+<span id="cb32-177"><a href="filled-power-script-example.html#cb32-177" aria-hidden="true" tabindex="-1"></a><span class="st">.Y3_W1_2_W2_3 ~~</span></span>
+<span id="cb32-178"><a href="filled-power-script-example.html#cb32-178" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.4, 0.4, 0.4, 0.4)*.Y3_W1_2_W2_3</span></span>
+<span id="cb32-179"><a href="filled-power-script-example.html#cb32-179" aria-hidden="true" tabindex="-1"></a><span class="st">covariate1 ~~</span></span>
+<span id="cb32-180"><a href="filled-power-script-example.html#cb32-180" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.4, 0.4, 0.4, 0.4)*covariate1</span></span>
+<span id="cb32-181"><a href="filled-power-script-example.html#cb32-181" aria-hidden="true" tabindex="-1"></a><span class="st">covariate2 ~~</span></span>
+<span id="cb32-182"><a href="filled-power-script-example.html#cb32-182" aria-hidden="true" tabindex="-1"></a><span class="st">    c(1, 1, 1, 1)*covariate2</span></span>
+<span id="cb32-183"><a href="filled-power-script-example.html#cb32-183" aria-hidden="true" tabindex="-1"></a><span class="st">covariate2_1 ~~</span></span>
+<span id="cb32-184"><a href="filled-power-script-example.html#cb32-184" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.4, 0.4, 0.4, 0.4)*covariate2_1</span></span>
+<span id="cb32-185"><a href="filled-power-script-example.html#cb32-185" aria-hidden="true" tabindex="-1"></a><span class="st">covariate2_2 ~~</span></span>
+<span id="cb32-186"><a href="filled-power-script-example.html#cb32-186" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.4, 0.4, 0.4, 0.4)*covariate2_2</span></span>
+<span id="cb32-187"><a href="filled-power-script-example.html#cb32-187" aria-hidden="true" tabindex="-1"></a><span class="st">.eta1 ~</span></span>
+<span id="cb32-188"><a href="filled-power-script-example.html#cb32-188" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb32-189"><a href="filled-power-script-example.html#cb32-189" aria-hidden="true" tabindex="-1"></a><span class="st">.eta2 ~</span></span>
+<span id="cb32-190"><a href="filled-power-script-example.html#cb32-190" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb32-191"><a href="filled-power-script-example.html#cb32-191" aria-hidden="true" tabindex="-1"></a><span class="st">.eta3 ~</span></span>
+<span id="cb32-192"><a href="filled-power-script-example.html#cb32-192" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb32-193"><a href="filled-power-script-example.html#cb32-193" aria-hidden="true" tabindex="-1"></a><span class="st">.eta4 ~</span></span>
+<span id="cb32-194"><a href="filled-power-script-example.html#cb32-194" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb32-195"><a href="filled-power-script-example.html#cb32-195" aria-hidden="true" tabindex="-1"></a><span class="st">.eta5 ~</span></span>
+<span id="cb32-196"><a href="filled-power-script-example.html#cb32-196" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb32-197"><a href="filled-power-script-example.html#cb32-197" aria-hidden="true" tabindex="-1"></a><span class="st">.eta6 ~</span></span>
+<span id="cb32-198"><a href="filled-power-script-example.html#cb32-198" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb32-199"><a href="filled-power-script-example.html#cb32-199" aria-hidden="true" tabindex="-1"></a><span class="st">.pi1 ~</span></span>
+<span id="cb32-200"><a href="filled-power-script-example.html#cb32-200" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.1, 0.1, 0.1, 0.1)*1</span></span>
+<span id="cb32-201"><a href="filled-power-script-example.html#cb32-201" aria-hidden="true" tabindex="-1"></a><span class="st">.pi2 ~</span></span>
+<span id="cb32-202"><a href="filled-power-script-example.html#cb32-202" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.1, 0.1, 0.1, 0.1)*1</span></span>
+<span id="cb32-203"><a href="filled-power-script-example.html#cb32-203" aria-hidden="true" tabindex="-1"></a><span class="st">.pi3 ~</span></span>
+<span id="cb32-204"><a href="filled-power-script-example.html#cb32-204" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.1, 0.1, 0.1, 0.1)*1</span></span>
+<span id="cb32-205"><a href="filled-power-script-example.html#cb32-205" aria-hidden="true" tabindex="-1"></a><span class="st">.pi4 ~</span></span>
+<span id="cb32-206"><a href="filled-power-script-example.html#cb32-206" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.1, 0.1, 0.1, 0.1)*1</span></span>
+<span id="cb32-207"><a href="filled-power-script-example.html#cb32-207" aria-hidden="true" tabindex="-1"></a><span class="st">.pi5 ~</span></span>
+<span id="cb32-208"><a href="filled-power-script-example.html#cb32-208" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.1, 0.1, 0.1, 0.1)*1</span></span>
+<span id="cb32-209"><a href="filled-power-script-example.html#cb32-209" aria-hidden="true" tabindex="-1"></a><span class="st">.pi6 ~</span></span>
+<span id="cb32-210"><a href="filled-power-script-example.html#cb32-210" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.1, 0.1, 0.1, 0.1)*1</span></span>
+<span id="cb32-211"><a href="filled-power-script-example.html#cb32-211" aria-hidden="true" tabindex="-1"></a><span class="st">.Y1_W1_1_W2_1 ~</span></span>
+<span id="cb32-212"><a href="filled-power-script-example.html#cb32-212" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb32-213"><a href="filled-power-script-example.html#cb32-213" aria-hidden="true" tabindex="-1"></a><span class="st">.Y1_W1_1_W2_2 ~</span></span>
+<span id="cb32-214"><a href="filled-power-script-example.html#cb32-214" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb32-215"><a href="filled-power-script-example.html#cb32-215" aria-hidden="true" tabindex="-1"></a><span class="st">.Y1_W1_1_W2_3 ~</span></span>
+<span id="cb32-216"><a href="filled-power-script-example.html#cb32-216" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb32-217"><a href="filled-power-script-example.html#cb32-217" aria-hidden="true" tabindex="-1"></a><span class="st">.Y1_W1_2_W2_1 ~</span></span>
+<span id="cb32-218"><a href="filled-power-script-example.html#cb32-218" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb32-219"><a href="filled-power-script-example.html#cb32-219" aria-hidden="true" tabindex="-1"></a><span class="st">.Y1_W1_2_W2_2 ~</span></span>
+<span id="cb32-220"><a href="filled-power-script-example.html#cb32-220" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb32-221"><a href="filled-power-script-example.html#cb32-221" aria-hidden="true" tabindex="-1"></a><span class="st">.Y1_W1_2_W2_3 ~</span></span>
+<span id="cb32-222"><a href="filled-power-script-example.html#cb32-222" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb32-223"><a href="filled-power-script-example.html#cb32-223" aria-hidden="true" tabindex="-1"></a><span class="st">.Y2_W1_1_W2_1 ~</span></span>
+<span id="cb32-224"><a href="filled-power-script-example.html#cb32-224" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb32-225"><a href="filled-power-script-example.html#cb32-225" aria-hidden="true" tabindex="-1"></a><span class="st">.Y2_W1_1_W2_2 ~</span></span>
+<span id="cb32-226"><a href="filled-power-script-example.html#cb32-226" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb32-227"><a href="filled-power-script-example.html#cb32-227" aria-hidden="true" tabindex="-1"></a><span class="st">.Y2_W1_1_W2_3 ~</span></span>
+<span id="cb32-228"><a href="filled-power-script-example.html#cb32-228" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb32-229"><a href="filled-power-script-example.html#cb32-229" aria-hidden="true" tabindex="-1"></a><span class="st">.Y2_W1_2_W2_1 ~</span></span>
+<span id="cb32-230"><a href="filled-power-script-example.html#cb32-230" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb32-231"><a href="filled-power-script-example.html#cb32-231" aria-hidden="true" tabindex="-1"></a><span class="st">.Y2_W1_2_W2_2 ~</span></span>
+<span id="cb32-232"><a href="filled-power-script-example.html#cb32-232" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb32-233"><a href="filled-power-script-example.html#cb32-233" aria-hidden="true" tabindex="-1"></a><span class="st">.Y2_W1_2_W2_3 ~</span></span>
+<span id="cb32-234"><a href="filled-power-script-example.html#cb32-234" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb32-235"><a href="filled-power-script-example.html#cb32-235" aria-hidden="true" tabindex="-1"></a><span class="st">.Y3_W1_1_W2_1 ~</span></span>
+<span id="cb32-236"><a href="filled-power-script-example.html#cb32-236" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb32-237"><a href="filled-power-script-example.html#cb32-237" aria-hidden="true" tabindex="-1"></a><span class="st">.Y3_W1_1_W2_2 ~</span></span>
+<span id="cb32-238"><a href="filled-power-script-example.html#cb32-238" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb32-239"><a href="filled-power-script-example.html#cb32-239" aria-hidden="true" tabindex="-1"></a><span class="st">.Y3_W1_1_W2_3 ~</span></span>
+<span id="cb32-240"><a href="filled-power-script-example.html#cb32-240" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb32-241"><a href="filled-power-script-example.html#cb32-241" aria-hidden="true" tabindex="-1"></a><span class="st">.Y3_W1_2_W2_1 ~</span></span>
+<span id="cb32-242"><a href="filled-power-script-example.html#cb32-242" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb32-243"><a href="filled-power-script-example.html#cb32-243" aria-hidden="true" tabindex="-1"></a><span class="st">.Y3_W1_2_W2_2 ~</span></span>
+<span id="cb32-244"><a href="filled-power-script-example.html#cb32-244" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb32-245"><a href="filled-power-script-example.html#cb32-245" aria-hidden="true" tabindex="-1"></a><span class="st">.Y3_W1_2_W2_3 ~</span></span>
+<span id="cb32-246"><a href="filled-power-script-example.html#cb32-246" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb32-247"><a href="filled-power-script-example.html#cb32-247" aria-hidden="true" tabindex="-1"></a><span class="st">covariate1 ~</span></span>
+<span id="cb32-248"><a href="filled-power-script-example.html#cb32-248" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb32-249"><a href="filled-power-script-example.html#cb32-249" aria-hidden="true" tabindex="-1"></a><span class="st">covariate2 ~</span></span>
+<span id="cb32-250"><a href="filled-power-script-example.html#cb32-250" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0.1, 0.1, 0.1, 0.1)*1</span></span>
+<span id="cb32-251"><a href="filled-power-script-example.html#cb32-251" aria-hidden="true" tabindex="-1"></a><span class="st">covariate2_1 ~</span></span>
+<span id="cb32-252"><a href="filled-power-script-example.html#cb32-252" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb32-253"><a href="filled-power-script-example.html#cb32-253" aria-hidden="true" tabindex="-1"></a><span class="st">covariate2_2 ~</span></span>
+<span id="cb32-254"><a href="filled-power-script-example.html#cb32-254" aria-hidden="true" tabindex="-1"></a><span class="st">    c(0, 0, 0, 0)*1</span></span>
+<span id="cb32-255"><a href="filled-power-script-example.html#cb32-255" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;</span></span>
+<span id="cb32-256"><a href="filled-power-script-example.html#cb32-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-257"><a href="filled-power-script-example.html#cb32-257" aria-hidden="true" tabindex="-1"></a>power <span class="ot">&lt;-</span> <span class="fu">power_analysis_semnova</span>(</span>
+<span id="cb32-258"><a href="filled-power-script-example.html#cb32-258" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_within =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>),</span>
+<span id="cb32-259"><a href="filled-power-script-example.html#cb32-259" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_between =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>),</span>
+<span id="cb32-260"><a href="filled-power-script-example.html#cb32-260" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_indicator =</span> <span class="dv">3</span>,</span>
+<span id="cb32-261"><a href="filled-power-script-example.html#cb32-261" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_manifest_covariate =</span> <span class="dv">1</span>,</span>
+<span id="cb32-262"><a href="filled-power-script-example.html#cb32-262" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_latent_covariate =</span> <span class="dv">2</span>,</span>
+<span id="cb32-263"><a href="filled-power-script-example.html#cb32-263" aria-hidden="true" tabindex="-1"></a>    <span class="at">sphericity =</span> <span class="fu">list</span>(<span class="dv">2</span>),</span>
+<span id="cb32-264"><a href="filled-power-script-example.html#cb32-264" aria-hidden="true" tabindex="-1"></a>    <span class="at">normalize_contrasts =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb32-265"><a href="filled-power-script-example.html#cb32-265" aria-hidden="true" tabindex="-1"></a>    <span class="at">data_syntax =</span> data_syntax,</span>
+<span id="cb32-266"><a href="filled-power-script-example.html#cb32-266" aria-hidden="true" tabindex="-1"></a>    <span class="at">sample_size =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">100</span>),</span>
+<span id="cb32-267"><a href="filled-power-script-example.html#cb32-267" aria-hidden="true" tabindex="-1"></a>    <span class="at">replications =</span> <span class="dv">500</span></span>
+<span id="cb32-268"><a href="filled-power-script-example.html#cb32-268" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb32-269"><a href="filled-power-script-example.html#cb32-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-270"><a href="filled-power-script-example.html#cb32-270" aria-hidden="true" tabindex="-1"></a><span class="co"># hypothesis tests</span></span>
+<span id="cb32-271"><a href="filled-power-script-example.html#cb32-271" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(power)</span>
+<span id="cb32-272"><a href="filled-power-script-example.html#cb32-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-273"><a href="filled-power-script-example.html#cb32-273" aria-hidden="true" tabindex="-1"></a><span class="co"># parameters</span></span>
+<span id="cb32-274"><a href="filled-power-script-example.html#cb32-274" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(power)</span>
+<span id="cb32-275"><a href="filled-power-script-example.html#cb32-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-276"><a href="filled-power-script-example.html#cb32-276" aria-hidden="true" tabindex="-1"></a><span class="co"># path diagram</span></span>
+<span id="cb32-277"><a href="filled-power-script-example.html#cb32-277" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(power)</span></code></pre></div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="power-script-example.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["semnova-man.pdf", "semnova-man.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

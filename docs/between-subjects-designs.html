@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 Between-Subjects Designs | semnova: An R package for latent repeated measures ANOVA</title>
+  <meta name="description" content="4 Between-Subjects Designs | semnova: An R package for latent repeated measures ANOVA" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 Between-Subjects Designs | semnova: An R package for latent repeated measures ANOVA" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="4 Between-Subjects Designs | semnova: An R package for latent repeated measures ANOVA" />
+  <meta name="github-repo" content="langenberg/semnova-man" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 Between-Subjects Designs | semnova: An R package for latent repeated measures ANOVA" />
+  
+  <meta name="twitter:description" content="4 Between-Subjects Designs | semnova: An R package for latent repeated measures ANOVA" />
+  
+
+<meta name="author" content="Benedikt Langenberg, Jonathan L. Helm, and Axel Mayer" />
+
+
+<meta name="date" content="2023-01-31" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="within-subjects-designs.html"/>
+<link rel="next" href="covariates.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./index.html">HOME</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-this-tutorial"><i class="fa fa-check"></i>About this Tutorial</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="motivating-example.html"><a href="motivating-example.html"><i class="fa fa-check"></i><b>1</b> Motivating Example</a></li>
+<li class="chapter" data-level="2" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>2</b> Installation</a></li>
+<li class="chapter" data-level="3" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html"><i class="fa fa-check"></i><b>3</b> Within-Subjects Designs</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html#sphericity"><i class="fa fa-check"></i><b>3.1</b> Sphericity</a></li>
+<li class="chapter" data-level="3.2" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html#latent-variables"><i class="fa fa-check"></i><b>3.2</b> Latent Variables</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html#measurement-model"><i class="fa fa-check"></i><b>3.2.1</b> Measurement Model</a></li>
+<li class="chapter" data-level="3.2.2" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html#measurement-invariance"><i class="fa fa-check"></i><b>3.2.2</b> Measurement Invariance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html"><i class="fa fa-check"></i><b>4</b> Between-Subjects Designs</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html#latent-variables-1"><i class="fa fa-check"></i><b>4.1</b> Latent Variables</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html#measurement-model-1"><i class="fa fa-check"></i><b>4.1.1</b> Measurement Model</a></li>
+<li class="chapter" data-level="4.1.2" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html#measurement-invariance-1"><i class="fa fa-check"></i><b>4.1.2</b> Measurement Invariance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="covariates.html"><a href="covariates.html"><i class="fa fa-check"></i><b>5</b> Covariates</a></li>
+<li class="chapter" data-level="6" data-path="power-analysis.html"><a href="power-analysis.html"><i class="fa fa-check"></i><b>6</b> Power Analysis</a></li>
+<li class="chapter" data-level="7" data-path="further-arguments.html"><a href="further-arguments.html"><i class="fa fa-check"></i><b>7</b> Further Arguments</a></li>
+<li class="chapter" data-level="8" data-path="further-developments.html"><a href="further-developments.html"><i class="fa fa-check"></i><b>8</b> Further Developments</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="power-script-example.html"><a href="power-script-example.html"><i class="fa fa-check"></i><b>A</b> Power Script Example</a></li>
+<li class="chapter" data-level="B" data-path="filled-power-script-example.html"><a href="filled-power-script-example.html"><i class="fa fa-check"></i><b>B</b> Filled Power Script Example</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>semnova</code>: An R package for latent repeated measures ANOVA</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="between-subjects-designs" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">4</span> Between-Subjects Designs<a href="between-subjects-designs.html#between-subjects-designs" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>The <code>semnova()</code> function can also be used with between-subjects factors and covariates. The <code>between</code> argument takes a vector of between-subjects factors (i.e., grouping variables). We estimate the same manifest model as in the very first example with the additional between-subjects factor sex. Using the <code>between</code> argument will cause <em>semnova</em> to estimate a multi-group model:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="between-subjects-designs.html#cb18-1" aria-hidden="true" tabindex="-1"></a>fit_btw <span class="ot">&lt;-</span> <span class="fu">semnova</span>(</span>
+<span id="cb18-2"><a href="between-subjects-designs.html#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> reading_manifest,</span>
+<span id="cb18-3"><a href="between-subjects-designs.html#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> <span class="st">&quot;id&quot;</span>, </span>
+<span id="cb18-4"><a href="between-subjects-designs.html#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">dv =</span> <span class="st">&quot;re_fix_time&quot;</span>,</span>
+<span id="cb18-5"><a href="between-subjects-designs.html#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">within =</span> <span class="fu">c</span>(<span class="st">&quot;grade&quot;</span>, <span class="st">&quot;sentence&quot;</span>),</span>
+<span id="cb18-6"><a href="between-subjects-designs.html#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">between =</span> <span class="st">&quot;sex&quot;</span></span>
+<span id="cb18-7"><a href="between-subjects-designs.html#cb18-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-8"><a href="between-subjects-designs.html#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="between-subjects-designs.html#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_btw)</span></code></pre></div>
+<pre><code>## Main and Interaction Effects:
+##                      Chisq df Pr(&gt;Chisq)    
+## Intercept            1.505  1      0.220    
+## grade              354.755  2     &lt;2e-16 ***
+## sentence           381.882  1     &lt;2e-16 ***
+## grade:sentence      84.370  2     &lt;2e-16 ***
+## sex                  0.192  1      0.661    
+## grade:sex            1.969  2      0.374    
+## sentence:sex         1.800  1      0.180    
+## grade:sentence:sex   1.959  2      0.376    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>When including between-subjects effects, hypothesis tests correspond to Type III sums of squares in ANOVA. Type III sums of squares do not take unbalanced group sizes into account as apposed to average effects <span class="citation">(e.g., <a href="references.html#ref-Graefe2020a" role="doc-biblioref">Gräfe et al., 2022</a>)</span>. Tests for average effects remain work in progress and may be included in future releases.</p>
+<p>Main and interaction effects for the within-subjects factors are again significant. Main and interaction effects involving the between-subjects factor sex are non-significant indicating that no differences exist across genders.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:software-between-manifest"></span>
+<img src="semnova-man_files/figure-html/software-between-manifest-1.png" alt="Path diagram created by `plot(fit_btw)` for a $2 \times 3 \times 2$ (sentence $\times$ grade $\times$ sex) mixed design design with the manifest dependent variable re-fixation time." width="100%" />
+<p class="caption">
+Figure 4.1: Path diagram created by <code>plot(fit_btw)</code> for a <span class="math inline">\(2 \times 3 \times 2\)</span> (sentence <span class="math inline">\(\times\)</span> grade <span class="math inline">\(\times\)</span> sex) mixed design design with the manifest dependent variable re-fixation time.
+</p>
+</div>
+<!-- \begin{figure}[H] -->
+<!--      \centering -->
+<!--      \includegraphics[width=0.783\textwidth]{figures/tutorial/between_manifest_width_0.17cm.pdf} -->
+<!--      \caption{Path diagram created by `plot(fit_btw)` for a $2 \times 3 \times 2$ (sentence $\times$ grade $\times$ sex) mixed design design with the manifest dependent variable re-fixation time.} -->
+<!--      \label{fig:software_between_manifest} -->
+<!-- \end{figure} -->
+<div id="latent-variables-1" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Latent Variables<a href="between-subjects-designs.html#latent-variables-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="measurement-model-1" class="section level3 hasAnchor" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Measurement Model<a href="between-subjects-designs.html#measurement-model-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The multi-group approach can also be used with latent variables. The command is identical to the previous purely within-subjects example that includes latent variables, except for the additional <code>between</code> argument.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="between-subjects-designs.html#cb20-1" aria-hidden="true" tabindex="-1"></a>fit_btw_latent <span class="ot">&lt;-</span> <span class="fu">semnova</span>(</span>
+<span id="cb20-2"><a href="between-subjects-designs.html#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> reading_latent,</span>
+<span id="cb20-3"><a href="between-subjects-designs.html#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> <span class="st">&quot;id&quot;</span>, </span>
+<span id="cb20-4"><a href="between-subjects-designs.html#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">dv =</span> <span class="st">&quot;dv&quot;</span>,</span>
+<span id="cb20-5"><a href="between-subjects-designs.html#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">indicator =</span> <span class="st">&quot;indicator&quot;</span>,</span>
+<span id="cb20-6"><a href="between-subjects-designs.html#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">equal_resid_cov =</span> <span class="fu">list</span>(<span class="st">&quot;ini_land_pos&quot;</span>, <span class="st">&quot;fix_count&quot;</span>),</span>
+<span id="cb20-7"><a href="between-subjects-designs.html#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">between =</span> <span class="st">&quot;sex&quot;</span>,</span>
+<span id="cb20-8"><a href="between-subjects-designs.html#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">within =</span> <span class="fu">c</span>(<span class="st">&quot;grade&quot;</span>, <span class="st">&quot;sentence&quot;</span>),</span>
+<span id="cb20-9"><a href="between-subjects-designs.html#cb20-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">missing =</span> <span class="st">&quot;fiml&quot;</span></span>
+<span id="cb20-10"><a href="between-subjects-designs.html#cb20-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-11"><a href="between-subjects-designs.html#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-12"><a href="between-subjects-designs.html#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_btw_latent)</span></code></pre></div>
+<pre><code>## Fit measures:
+## 
+## Chisq(280) = 693.254, p = 0
+## CFI = 0.833
+## TLI = 0.817
+## RMSEA = 0.105 [0.095, 0.115]
+## 
+## ##############################
+## 
+## Main and Interaction Effects:
+##                      Chisq df Pr(&gt;Chisq)    
+## Intercept            0.035  1      0.852    
+## grade              765.984  2     &lt;2e-16 ***
+## sentence           651.753  1     &lt;2e-16 ***
+## grade:sentence     310.771  2     &lt;2e-16 ***
+## sex                  0.253  1      0.615    
+## grade:sex            1.446  2      0.485    
+## sentence:sex         1.469  1      0.226    
+## grade:sentence:sex   1.993  2      0.369    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>The model fit is again not very good. Hypothesis tests show the same pattern as for the model using only the manifest variable re-fixation time. A path diagram of the model is shown in Figure <a href="between-subjects-designs.html#fig:software-between-latent">4.2</a>.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:software-between-latent"></span>
+<img src="semnova-man_files/figure-html/software-between-latent-1.png" alt="Path diagram created by `plot(fit_btw_latent)` for a $2 \times 3 \times 2$ (sentence $\times$ grade $\times$ sex) mixed design with the latent dependent variable reading ability measured by the three manifest variables re-fixation time, initial landing position and fixation count." width="100%" />
+<p class="caption">
+Figure 4.2: Path diagram created by <code>plot(fit_btw_latent)</code> for a <span class="math inline">\(2 \times 3 \times 2\)</span> (sentence <span class="math inline">\(\times\)</span> grade <span class="math inline">\(\times\)</span> sex) mixed design with the latent dependent variable reading ability measured by the three manifest variables re-fixation time, initial landing position and fixation count.
+</p>
+</div>
+<!-- \begin{figure}[H] -->
+<!--      \centering -->
+<!--      \includegraphics[width=\textwidth]{figures/tutorial/between_latent_width_0.261cm.pdf} -->
+<!--      \caption{Path diagram created by `plot(fit_btw_latent)` for a $2 \times 3 \times 2$ (sentence $\times$ grade $\times$ sex) mixed design with the latent dependent variable reading ability measured by the three manifest variables re-fixation time, initial landing position and fixation count.} -->
+<!--      \label{fig:software_between_latent} -->
+<!-- \end{figure} -->
+</div>
+<div id="measurement-invariance-1" class="section level3 hasAnchor" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> Measurement Invariance<a href="between-subjects-designs.html#measurement-invariance-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Measurement invariance must also be tested across groups. In order to be able to compare means between groups, strong measurement invariance is needed (i.e., equal loadings and intercepts between groups). This can be done by sequentially comparing models that assume different degrees of measurement invariance (i.e., configural, weak, strong, or strict). The <code>invariance_between</code> argument can be set to <code>"configural"</code>, <code>"weak"</code>, <code>"strong"</code>, or <code>"strict"</code>.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="between-subjects-designs.html#cb22-1" aria-hidden="true" tabindex="-1"></a>fit_btw_latent_configMI <span class="ot">&lt;-</span> <span class="fu">semnova</span>(</span>
+<span id="cb22-2"><a href="between-subjects-designs.html#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> reading_latent,</span>
+<span id="cb22-3"><a href="between-subjects-designs.html#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> <span class="st">&quot;id&quot;</span>, </span>
+<span id="cb22-4"><a href="between-subjects-designs.html#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">dv =</span> <span class="st">&quot;dv&quot;</span>,</span>
+<span id="cb22-5"><a href="between-subjects-designs.html#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">indicator =</span> <span class="st">&quot;indicator&quot;</span>,</span>
+<span id="cb22-6"><a href="between-subjects-designs.html#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">equal_resid_cov =</span> <span class="fu">list</span>(<span class="st">&quot;ini_land_pos&quot;</span>, <span class="st">&quot;fix_count&quot;</span>),</span>
+<span id="cb22-7"><a href="between-subjects-designs.html#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">between =</span> <span class="st">&quot;sex&quot;</span>,</span>
+<span id="cb22-8"><a href="between-subjects-designs.html#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">within =</span> <span class="fu">c</span>(<span class="st">&quot;grade&quot;</span>, <span class="st">&quot;sentence&quot;</span>),</span>
+<span id="cb22-9"><a href="between-subjects-designs.html#cb22-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">missing =</span> <span class="st">&quot;fiml&quot;</span>,</span>
+<span id="cb22-10"><a href="between-subjects-designs.html#cb22-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">invariance_between =</span> <span class="st">&quot;configural&quot;</span></span>
+<span id="cb22-11"><a href="between-subjects-designs.html#cb22-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-12"><a href="between-subjects-designs.html#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="between-subjects-designs.html#cb22-13" aria-hidden="true" tabindex="-1"></a>fit_btw_latent_weakMI <span class="ot">&lt;-</span> <span class="fu">semnova</span>(</span>
+<span id="cb22-14"><a href="between-subjects-designs.html#cb22-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> reading_latent,</span>
+<span id="cb22-15"><a href="between-subjects-designs.html#cb22-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> <span class="st">&quot;id&quot;</span>, </span>
+<span id="cb22-16"><a href="between-subjects-designs.html#cb22-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">dv =</span> <span class="st">&quot;dv&quot;</span>,</span>
+<span id="cb22-17"><a href="between-subjects-designs.html#cb22-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">indicator =</span> <span class="st">&quot;indicator&quot;</span>,</span>
+<span id="cb22-18"><a href="between-subjects-designs.html#cb22-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">equal_resid_cov =</span> <span class="fu">list</span>(<span class="st">&quot;ini_land_pos&quot;</span>, <span class="st">&quot;fix_count&quot;</span>),</span>
+<span id="cb22-19"><a href="between-subjects-designs.html#cb22-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">between =</span> <span class="st">&quot;sex&quot;</span>,</span>
+<span id="cb22-20"><a href="between-subjects-designs.html#cb22-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">within =</span> <span class="fu">c</span>(<span class="st">&quot;grade&quot;</span>, <span class="st">&quot;sentence&quot;</span>),</span>
+<span id="cb22-21"><a href="between-subjects-designs.html#cb22-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">missing =</span> <span class="st">&quot;fiml&quot;</span>,</span>
+<span id="cb22-22"><a href="between-subjects-designs.html#cb22-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">invariance_between =</span> <span class="st">&quot;weak&quot;</span></span>
+<span id="cb22-23"><a href="between-subjects-designs.html#cb22-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-24"><a href="between-subjects-designs.html#cb22-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-25"><a href="between-subjects-designs.html#cb22-25" aria-hidden="true" tabindex="-1"></a>fit_btw_latent_strongMI <span class="ot">&lt;-</span> <span class="fu">semnova</span>(</span>
+<span id="cb22-26"><a href="between-subjects-designs.html#cb22-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> reading_latent,</span>
+<span id="cb22-27"><a href="between-subjects-designs.html#cb22-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> <span class="st">&quot;id&quot;</span>, </span>
+<span id="cb22-28"><a href="between-subjects-designs.html#cb22-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">dv =</span> <span class="st">&quot;dv&quot;</span>,</span>
+<span id="cb22-29"><a href="between-subjects-designs.html#cb22-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">indicator =</span> <span class="st">&quot;indicator&quot;</span>,</span>
+<span id="cb22-30"><a href="between-subjects-designs.html#cb22-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">equal_resid_cov =</span> <span class="fu">list</span>(<span class="st">&quot;ini_land_pos&quot;</span>, <span class="st">&quot;fix_count&quot;</span>),</span>
+<span id="cb22-31"><a href="between-subjects-designs.html#cb22-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">between =</span> <span class="st">&quot;sex&quot;</span>,</span>
+<span id="cb22-32"><a href="between-subjects-designs.html#cb22-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">within =</span> <span class="fu">c</span>(<span class="st">&quot;grade&quot;</span>, <span class="st">&quot;sentence&quot;</span>),</span>
+<span id="cb22-33"><a href="between-subjects-designs.html#cb22-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">missing =</span> <span class="st">&quot;fiml&quot;</span>,</span>
+<span id="cb22-34"><a href="between-subjects-designs.html#cb22-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">invariance_between =</span> <span class="st">&quot;strong&quot;</span></span>
+<span id="cb22-35"><a href="between-subjects-designs.html#cb22-35" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-36"><a href="between-subjects-designs.html#cb22-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-37"><a href="between-subjects-designs.html#cb22-37" aria-hidden="true" tabindex="-1"></a>fit_btw_latent_strictMI <span class="ot">&lt;-</span> <span class="fu">semnova</span>(</span>
+<span id="cb22-38"><a href="between-subjects-designs.html#cb22-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> reading_latent,</span>
+<span id="cb22-39"><a href="between-subjects-designs.html#cb22-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> <span class="st">&quot;id&quot;</span>, </span>
+<span id="cb22-40"><a href="between-subjects-designs.html#cb22-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">dv =</span> <span class="st">&quot;dv&quot;</span>,</span>
+<span id="cb22-41"><a href="between-subjects-designs.html#cb22-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">indicator =</span> <span class="st">&quot;indicator&quot;</span>,</span>
+<span id="cb22-42"><a href="between-subjects-designs.html#cb22-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">equal_resid_cov =</span> <span class="fu">list</span>(<span class="st">&quot;ini_land_pos&quot;</span>, <span class="st">&quot;fix_count&quot;</span>),</span>
+<span id="cb22-43"><a href="between-subjects-designs.html#cb22-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">between =</span> <span class="st">&quot;sex&quot;</span>,</span>
+<span id="cb22-44"><a href="between-subjects-designs.html#cb22-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">within =</span> <span class="fu">c</span>(<span class="st">&quot;grade&quot;</span>, <span class="st">&quot;sentence&quot;</span>),</span>
+<span id="cb22-45"><a href="between-subjects-designs.html#cb22-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">missing =</span> <span class="st">&quot;fiml&quot;</span>,</span>
+<span id="cb22-46"><a href="between-subjects-designs.html#cb22-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">invariance_between =</span> <span class="st">&quot;strict&quot;</span></span>
+<span id="cb22-47"><a href="between-subjects-designs.html#cb22-47" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-48"><a href="between-subjects-designs.html#cb22-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-49"><a href="between-subjects-designs.html#cb22-49" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(</span>
+<span id="cb22-50"><a href="between-subjects-designs.html#cb22-50" aria-hidden="true" tabindex="-1"></a>    fit_btw_latent_configMI, </span>
+<span id="cb22-51"><a href="between-subjects-designs.html#cb22-51" aria-hidden="true" tabindex="-1"></a>    fit_btw_latent_weakMI,</span>
+<span id="cb22-52"><a href="between-subjects-designs.html#cb22-52" aria-hidden="true" tabindex="-1"></a>    fit_btw_latent_strongMI,</span>
+<span id="cb22-53"><a href="between-subjects-designs.html#cb22-53" aria-hidden="true" tabindex="-1"></a>    fit_btw_latent_strictMI</span>
+<span id="cb22-54"><a href="between-subjects-designs.html#cb22-54" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Chi-Squared Difference Test
+## 
+##                          Df    AIC    BIC  Chisq Chisq diff Df diff Pr(&gt;Chisq)
+## fit_btw_latent_configMI 272 5636.4 6016.6 686.14                              
+## fit_btw_latent_weakMI   276 5633.9 5999.8 691.62      5.487       4     0.2408
+## fit_btw_latent_strongMI 280 5627.5 5979.1 693.25      1.630       4     0.8034
+## fit_btw_latent_strictMI 298 5677.5 5964.5 779.30     86.043      18  7.356e-11
+##                            
+## fit_btw_latent_configMI    
+## fit_btw_latent_weakMI      
+## fit_btw_latent_strongMI    
+## fit_btw_latent_strictMI ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>The fit of the first model is not very good. These results are in line with the results for the latent model from the previous examples. However, we can see that weak and strong measurement invariance explain the data equally well as compared to configural measurement invariance. The strict measurement invariance model, however, differs in terms of fit as compared to the other three models.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="within-subjects-designs.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="covariates.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["semnova-man.pdf", "semnova-man.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

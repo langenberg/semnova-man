@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Within-Subjects Designs | semnova: An R package for latent repeated measures ANOVA</title>
+  <meta name="description" content="3 Within-Subjects Designs | semnova: An R package for latent repeated measures ANOVA" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Within-Subjects Designs | semnova: An R package for latent repeated measures ANOVA" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="3 Within-Subjects Designs | semnova: An R package for latent repeated measures ANOVA" />
+  <meta name="github-repo" content="langenberg/semnova-man" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Within-Subjects Designs | semnova: An R package for latent repeated measures ANOVA" />
+  
+  <meta name="twitter:description" content="3 Within-Subjects Designs | semnova: An R package for latent repeated measures ANOVA" />
+  
+
+<meta name="author" content="Benedikt Langenberg, Jonathan L. Helm, and Axel Mayer" />
+
+
+<meta name="date" content="2023-01-31" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="installation.html"/>
+<link rel="next" href="between-subjects-designs.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./index.html">HOME</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-this-tutorial"><i class="fa fa-check"></i>About this Tutorial</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="motivating-example.html"><a href="motivating-example.html"><i class="fa fa-check"></i><b>1</b> Motivating Example</a></li>
+<li class="chapter" data-level="2" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>2</b> Installation</a></li>
+<li class="chapter" data-level="3" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html"><i class="fa fa-check"></i><b>3</b> Within-Subjects Designs</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html#sphericity"><i class="fa fa-check"></i><b>3.1</b> Sphericity</a></li>
+<li class="chapter" data-level="3.2" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html#latent-variables"><i class="fa fa-check"></i><b>3.2</b> Latent Variables</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html#measurement-model"><i class="fa fa-check"></i><b>3.2.1</b> Measurement Model</a></li>
+<li class="chapter" data-level="3.2.2" data-path="within-subjects-designs.html"><a href="within-subjects-designs.html#measurement-invariance"><i class="fa fa-check"></i><b>3.2.2</b> Measurement Invariance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html"><i class="fa fa-check"></i><b>4</b> Between-Subjects Designs</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html#latent-variables-1"><i class="fa fa-check"></i><b>4.1</b> Latent Variables</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html#measurement-model-1"><i class="fa fa-check"></i><b>4.1.1</b> Measurement Model</a></li>
+<li class="chapter" data-level="4.1.2" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html#measurement-invariance-1"><i class="fa fa-check"></i><b>4.1.2</b> Measurement Invariance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="covariates.html"><a href="covariates.html"><i class="fa fa-check"></i><b>5</b> Covariates</a></li>
+<li class="chapter" data-level="6" data-path="power-analysis.html"><a href="power-analysis.html"><i class="fa fa-check"></i><b>6</b> Power Analysis</a></li>
+<li class="chapter" data-level="7" data-path="further-arguments.html"><a href="further-arguments.html"><i class="fa fa-check"></i><b>7</b> Further Arguments</a></li>
+<li class="chapter" data-level="8" data-path="further-developments.html"><a href="further-developments.html"><i class="fa fa-check"></i><b>8</b> Further Developments</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="power-script-example.html"><a href="power-script-example.html"><i class="fa fa-check"></i><b>A</b> Power Script Example</a></li>
+<li class="chapter" data-level="B" data-path="filled-power-script-example.html"><a href="filled-power-script-example.html"><i class="fa fa-check"></i><b>B</b> Filled Power Script Example</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>semnova</code>: An R package for latent repeated measures ANOVA</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="within-subjects-designs" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">3</span> Within-Subjects Designs<a href="within-subjects-designs.html#within-subjects-designs" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>For the first code example, we use the two within-subjects factors sentence type and grade from the motivating example with the manifest variable re-fixation time neglecting the between-subjects factor sex. The function <code>semnova()</code> offers a range of features and is used to estimate the first model:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="within-subjects-designs.html#cb2-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">semnova</span>(</span>
+<span id="cb2-2"><a href="within-subjects-designs.html#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> reading_manifest,</span>
+<span id="cb2-3"><a href="within-subjects-designs.html#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> <span class="st">&quot;id&quot;</span>, </span>
+<span id="cb2-4"><a href="within-subjects-designs.html#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">dv =</span> <span class="st">&quot;re_fix_time&quot;</span>,</span>
+<span id="cb2-5"><a href="within-subjects-designs.html#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">within =</span> <span class="fu">c</span>(<span class="st">&quot;grade&quot;</span>, <span class="st">&quot;sentence&quot;</span>)</span>
+<span id="cb2-6"><a href="within-subjects-designs.html#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>The function takes at least three arguments: <code>id</code> is a character vector of variables that uniquely identify the subjects, <code>dv</code> takes the name of the dependent variable, and <code>data</code> takes a data set in the long format (also called narrow format). Furthermore, <code>within</code> takes a vector of variables containing experimental within-subjects factors.</p>
+<p>The next command is the <code>summary()</code> function which we use to extract the results from the model:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="within-subjects-designs.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div>
+<pre><code>## Main and Interaction Effects:
+##                  Chisq df Pr(&gt;Chisq)    
+## Intercept        4.711  1       0.03 *  
+## grade          832.066  2     &lt;2e-16 ***
+## sentence       515.317  1     &lt;2e-16 ***
+## grade:sentence 234.919  2     &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>The function prints hypothesis tests for each of the main and interaction effects. By default, the output contains a Wald test for the effects, future releases will include more statistics such as the likelihood ratio test and an approximate <span class="math inline">\(F\)</span>-test. The factor grade has three levels and the test consequently has two degrees of freedom. All tests are highly significant, leading to the rejection of the null hypothesis and suggesting that the re-fixation time is neither constant across grade nor across the sentence types.</p>
+<p>We can further use the <code>print()</code> function to print parameter estimates for each of the freely estimated model parameters. The following output is truncated after seven rows due to the large number of parameters.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="within-subjects-designs.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fit)</span></code></pre></div>
+<pre><code>## 
+## 
+## parameter                    est          se      pvalue
+## -------------------  -----------  ----------  ----------
+## alpha_{pi,1,1}        -0.0677313   0.0312067   0.0299760
+## sigma_{pi,1,1,1}^2     0.1636084   0.0178511   0.0000000
+## sigma_{pi,1,2,1}^2    -0.0354949   0.0116314   0.0022760
+## sigma_{pi,1,3,1}^2    -0.0165968   0.0082027   0.0430381
+## sigma_{pi,1,4,1}^2    -0.0275617   0.0138830   0.0471122
+## sigma_{pi,1,5,1}^2     0.0400701   0.0143246   0.0051533
+## sigma_{pi,1,6,1}^2     0.0063447   0.0101050   0.5300847
+## alpha_{pi,2,1}        -0.7971504   0.0279478   0.0000000
+## sigma_{pi,2,2,1}^2     0.1312214   0.0143174   0.0000000
+## sigma_{pi,2,3,1}^2    -0.0249054   0.0075061   0.0009066
+## sigma_{pi,2,4,1}^2     0.0258745   0.0124476   0.0376466
+## sigma_{pi,2,5,1}^2    -0.0147721   0.0125781   0.2402218
+## sigma_{pi,2,6,1}^2     0.0255615   0.0092517   0.0057293
+## alpha_{pi,3,1}         0.0681849   0.0200307   0.0006640
+## sigma_{pi,3,3,1}^2     0.0674062   0.0073546   0.0000000
+## sigma_{pi,3,4,1}^2     0.0096321   0.0088372   0.2757335
+## sigma_{pi,3,5,1}^2     0.0341557   0.0093566   0.0002618
+## sigma_{pi,3,6,1}^2     0.0085963   0.0065123   0.1868360
+## alpha_{pi,4,1}        -0.7699475   0.0339175   0.0000000
+## sigma_{pi,4,4,1}^2     0.1932668   0.0210871   0.0000000
+## sigma_{pi,4,5,1}^2    -0.0326321   0.0154091   0.0341988
+## sigma_{pi,4,6,1}^2    -0.0105359   0.0110000   0.3381557
+## alpha_{pi,5,1}         0.5290506   0.0345798   0.0000000
+## sigma_{pi,5,5,1}^2     0.2008881   0.0219187   0.0000000
+## sigma_{pi,5,6,1}^2    -0.0264462   0.0113687   0.0200060
+## alpha_{pi,6,1}        -0.0470649   0.0249530   0.0592762
+## sigma_{pi,6,6,1}^2     0.1046057   0.0114134   0.0000000</code></pre>
+<p>The <code>plot()</code> function further plots a path diagram for the model. shows two path diagrams. Per default, the diagram will only show regression arrows and measurement model arrows (see Figure <a href="within-subjects-designs.html#fig:within-manifest">3.1</a>). The <code>what</code> argument can be used to also draw intercepts, variances, covariances, residual variances and residual covariances (see Figure <a href="within-subjects-designs.html#fig:within-manifest-all">3.2</a>).</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:within-manifest"></span>
+<img src="semnova-man_files/figure-html/within-manifest-1.png" alt="Path diagram for a $2 \times 3$ (sentence $\times$ grade) within-subjects design with the manifest dependent variables re-fixation time. Created by `plot(fit)`." width="35%" />
+<p class="caption">
+Figure 3.1: Path diagram for a <span class="math inline">\(2 \times 3\)</span> (sentence <span class="math inline">\(\times\)</span> grade) within-subjects design with the manifest dependent variables re-fixation time. Created by <code>plot(fit)</code>.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:within-manifest-all"></span>
+<img src="semnova-man_files/figure-html/within-manifest-all-1.png" alt="Path diagram for a $2 \times 3$ (sentence $\times$ grade) within-subjects design with the manifest dependent variables re-fixation time. Created by `plot(fit, what = &quot;all&quot;)`." width="57%" />
+<p class="caption">
+Figure 3.2: Path diagram for a <span class="math inline">\(2 \times 3\)</span> (sentence <span class="math inline">\(\times\)</span> grade) within-subjects design with the manifest dependent variables re-fixation time. Created by <code>plot(fit, what = "all")</code>.
+</p>
+</div>
+<!-- \begin{figure}[H] -->
+<!--      \centering -->
+<!--      \begin{subfigure}[b]{0.35\textwidth} -->
+<!--          \centering -->
+<!--          \includegraphics[width=\textwidth]{figures/tutorial/within_manifest_width_0.078cm.pdf} -->
+<!--          \caption{Created by `plot(fit)`.} -->
+<!--          \label{fig:software_within_manifest_reduced} -->
+<!--      \end{subfigure} -->
+<!--      \hfill -->
+<!--      \begin{subfigure}[b]{0.574\textwidth} -->
+<!--          \centering -->
+<!--          \includegraphics[width=\textwidth]{figures/tutorial/within_manifest_all_width_0.128cm.pdf} -->
+<!--          \caption{Created by `plot(fit, what = "all")`.} -->
+<!--          \label{fig:software_within_manifest_all} -->
+<!--      \end{subfigure} -->
+<!--     \caption{Path diagram for a $2 \times 3$ (sentence $\times$ grade) within-subjects design with the manifest dependent variables re-fixation time.} -->
+<!--     \label{fig:software_within_manifest} -->
+<!-- \end{figure} -->
+<div id="sphericity" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Sphericity<a href="within-subjects-designs.html#sphericity" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The next example shows how <em>semnova</em> can be used to test for sphericity as described in Chapter 4 “Understanding, Testing, and Relaxing Sphericity of Repeated Measures ANOVA with Manifest and Latent Variables Using SEM” <span class="citation">(<a href="references.html#ref-Langenberg2022z" role="doc-biblioref">Langenberg, 2022</a>)</span>. The <code>semnova()</code> function offers the <code>sphericity</code> argument to impose sphericity for a set of experimental factors. By default, the argument is <code>FALSE</code>. The argument can also take a list of vectors of experimental factors. Each vector describes an effect consisting of factor names (i.e., variable names) for which sphericity is to be assumed. For the factor grade, the code looks as follows:</p>
+<pre><code>## Chi-Squared Difference Test
+## 
+##               Df    AIC    BIC  Chisq Chisq diff Df diff Pr(&gt;Chisq)    
+## fit            0 1494.6 1579.0  0.000                                  
+## fit_sph_grade  2 1521.1 1599.2 30.518     30.518       2  2.361e-07 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>All arguments are the same as for the previous example except for the <code>sphericity</code> argument. The factor grade has three levels and thus two effect variables. This command will force the variances of the effect variables <span class="math inline">\(\pi_1\)</span> and <span class="math inline">\(\pi_2\)</span> to be equal and their covariance to be zero. The <code>anova()</code> function can compare multiple models. Comparing a model with unconstrained covariance matrix to a model that imposes sphericity yields a formal test for sphericity.</p>
+<p>The test is significant, suggesting that sphericity cannot be assumed. That is, either the variances of the effect variables are unequal, or the covariance is not zero. Thus, univariate test statistics cannot be used and multivariate tests should be preferred <span class="citation">(e.g., <a href="references.html#ref-Lane2016a" role="doc-biblioref">Lane, 2016</a>)</span>. The test presents an alternative to the often-used Mauchly’s sphericity test <span class="citation">(<a href="references.html#ref-Mauchly1940a" role="doc-biblioref">Mauchly, 1940</a>)</span>.</p>
+<p>The same test can be performed for the interaction of grade and sentence type because the effect consists of the two contrast variables <span class="math inline">\(\pi_4\)</span> and <span class="math inline">\(\pi_5\)</span> (i.e., the effect has two degrees of freedom):</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="within-subjects-designs.html#cb8-1" aria-hidden="true" tabindex="-1"></a>fit_sph_grade_sentence <span class="ot">&lt;-</span> <span class="fu">semnova</span>(</span>
+<span id="cb8-2"><a href="within-subjects-designs.html#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> reading_manifest,</span>
+<span id="cb8-3"><a href="within-subjects-designs.html#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> <span class="st">&quot;id&quot;</span>, </span>
+<span id="cb8-4"><a href="within-subjects-designs.html#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">dv =</span> <span class="st">&quot;re_fix_time&quot;</span>,</span>
+<span id="cb8-5"><a href="within-subjects-designs.html#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">within =</span> <span class="fu">c</span>(<span class="st">&quot;grade&quot;</span>, <span class="st">&quot;sentence&quot;</span>),</span>
+<span id="cb8-6"><a href="within-subjects-designs.html#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">sphericity =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&quot;grade&quot;</span>, <span class="st">&quot;sentence&quot;</span>))</span>
+<span id="cb8-7"><a href="within-subjects-designs.html#cb8-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-8"><a href="within-subjects-designs.html#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="within-subjects-designs.html#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fit, fit_sph_grade_sentence)</span></code></pre></div>
+<pre><code>## Chi-Squared Difference Test
+## 
+##                        Df    AIC  BIC  Chisq Chisq diff Df diff Pr(&gt;Chisq)    
+## fit                     0 1494.6 1579  0.000                                  
+## fit_sph_grade_sentence  2 1513.9 1592 23.262     23.262       2  8.884e-06 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>The <code>sphericity</code> argument is now a list consisting of a character vector with two elements indicating that sphericity is to be assumed for the interaction effect of grade and sentence type. The test is again significant and sphericity does not hold for the interaction effect.</p>
+<p>Lastly, it is possible to perform an omnibus test for sphericity. This test assumes sphericity for all effects that have two or more degrees of freedom. Note that the variances and covariances of, and between, effect variables belonging to different effects (e.g., the contrast variable <span class="math inline">\(\pi_1\)</span> from the main effect of grade and the contrast variable <span class="math inline">\(\pi_4\)</span> from the interaction effect) are not constrained and are freely estimated. The following test will have four degrees of freedom (i.e., the sum of the degrees of freedom of the separate tests).</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="within-subjects-designs.html#cb10-1" aria-hidden="true" tabindex="-1"></a>fit_sph_all <span class="ot">&lt;-</span> <span class="fu">semnova</span>(</span>
+<span id="cb10-2"><a href="within-subjects-designs.html#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> reading_manifest,</span>
+<span id="cb10-3"><a href="within-subjects-designs.html#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> <span class="st">&quot;id&quot;</span>, </span>
+<span id="cb10-4"><a href="within-subjects-designs.html#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">dv =</span> <span class="st">&quot;re_fix_time&quot;</span>,</span>
+<span id="cb10-5"><a href="within-subjects-designs.html#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">within =</span> <span class="fu">c</span>(<span class="st">&quot;grade&quot;</span>, <span class="st">&quot;sentence&quot;</span>),</span>
+<span id="cb10-6"><a href="within-subjects-designs.html#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">sphericity =</span> <span class="fu">list</span>(<span class="st">&quot;grade&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;grade&quot;</span>, <span class="st">&quot;sentence&quot;</span>))</span>
+<span id="cb10-7"><a href="within-subjects-designs.html#cb10-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-8"><a href="within-subjects-designs.html#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="within-subjects-designs.html#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fit, fit_sph_all)</span></code></pre></div>
+<pre><code>## Chi-Squared Difference Test
+## 
+##             Df    AIC  BIC  Chisq Chisq diff Df diff Pr(&gt;Chisq)    
+## fit          0 1494.6 1579  0.000                                  
+## fit_sph_all  4 1536.1 1608 49.511     49.511       4  4.567e-10 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>The test is also significant. We can use the test as an omnibus test to avoid multiple testing issues such as cumulative Type 1 errors. If the test is non-significant, we can assume sphericity for all effects and proceed with the more strict model which may give us a gain in statistical power <span class="citation">(e.g., <a href="references.html#ref-Lane2016a" role="doc-biblioref">Lane, 2016</a>; <a href="references.html#ref-Muller1989a" role="doc-biblioref">Muller &amp; Barton, 1989</a>)</span>. However, if the test is significant, we cannot say which of the effects violates the assumption and we have to perform both sphericity tests separately.</p>
+<p>Note that, instead of <code>list(c("grade", "sentence"), "grade")</code>, the <code>sphericity</code> argument can also be set to <code>TRUE</code> imposing sphericity for all of the effects. The argument can also take a formula such as <code>FALSE ~ grade:sentence</code> which is equivalent to using <code>list(c("grade", "sentence"))</code>. The formula reads as “do not assume sphericity (<code>FALSE</code>) except (<code>~</code>) for the interaction effect of sentence and grade (<code>sentence:grade</code>)”.</p>
+</div>
+<div id="latent-variables" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Latent Variables<a href="within-subjects-designs.html#latent-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="measurement-model" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Measurement Model<a href="within-subjects-designs.html#measurement-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <code>semnova()</code> function can also incorporate latent variables. The input looks the same as for the very first example. Only this time, the <code>indicator</code> argument is provided, which takes the variable name of the data set that contains the names of the indicators. The variable named “indicator” from the example data set contains the values re_fix_dur, <code>"ini_land_pos"</code> and <code>"fix_count"</code>. Furthermore, the argument <code>equal_resid_cov</code> can be used to allow for residual covariances between the indicators. Residual covariances between indicators are forced to be equal across experimental conditions. For instance, the covariances between the manifest variables of re-fixation time will be the same across all of the six experimental conditions. In this example, we use the variables re-fixation time, initial landing position and fixation count to form a latent variable that measures reading ability. By default, <em>semnova</em> uses a congeneric measurement model with strong measurement invariance and the effect-code identification scheme <span class="citation">(<a href="references.html#ref-Little2006a" role="doc-biblioref">Little et al., 2006</a>)</span> to set the scale for the latent variables <span class="citation">(see also <a href="references.html#ref-Langenberg2022z" role="doc-biblioref">Langenberg, 2022, sec. 2.4.1</a> “Defining the Model”)</span>. We will further use full information maximum likelihood for this example because of several missing values by using <code>missing = "fiml"</code>. Full information maximum likelihood is implemented in the <em>lavaan</em> package and the argument is passed on to <em>lavaan</em>.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="within-subjects-designs.html#cb12-1" aria-hidden="true" tabindex="-1"></a>fit_latent <span class="ot">&lt;-</span> <span class="fu">semnova</span>(</span>
+<span id="cb12-2"><a href="within-subjects-designs.html#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> reading_latent,</span>
+<span id="cb12-3"><a href="within-subjects-designs.html#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> <span class="st">&quot;id&quot;</span>, </span>
+<span id="cb12-4"><a href="within-subjects-designs.html#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">dv =</span> <span class="st">&quot;dv&quot;</span>,</span>
+<span id="cb12-5"><a href="within-subjects-designs.html#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">indicator =</span> <span class="st">&quot;indicator&quot;</span>,</span>
+<span id="cb12-6"><a href="within-subjects-designs.html#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">equal_resid_cov =</span> <span class="fu">list</span>(<span class="st">&quot;ini_land_pos&quot;</span>, <span class="st">&quot;fix_count&quot;</span>),</span>
+<span id="cb12-7"><a href="within-subjects-designs.html#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">within =</span> <span class="fu">c</span>(<span class="st">&quot;grade&quot;</span>, <span class="st">&quot;sentence&quot;</span>),</span>
+<span id="cb12-8"><a href="within-subjects-designs.html#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">missing =</span> <span class="st">&quot;fiml&quot;</span></span>
+<span id="cb12-9"><a href="within-subjects-designs.html#cb12-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-10"><a href="within-subjects-designs.html#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="within-subjects-designs.html#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_latent)</span></code></pre></div>
+<pre><code>## Fit measures:
+## 
+## Chisq(138) = 461.551, p = 0
+## CFI = 0.861
+## TLI = 0.845
+## RMSEA = 0.094 [0.084, 0.103]
+## 
+## ##############################
+## 
+## Main and Interaction Effects:
+##                   Chisq df Pr(&gt;Chisq)    
+## Intercept         0.416  1      0.519    
+## grade          1432.334  2     &lt;2e-16 ***
+## sentence       1037.801  1     &lt;2e-16 ***
+## grade:sentence  607.323  2     &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>The output now contains a section for fit indices in addition to hypothesis tests. The hypothesis tests are again significant. The fit is not very good but the example is intended to demonstrate the basic usage of the software package. The fit can be poor for several reasons. For instance, measurement invariance across the experimental conditions may not hold. This assumption will be examined in the next section. As a consequence, we should be very cautious when interpreting parameter estimates and hypothesis tests.</p>
+<p>In complex latent variables models, negative (residual) variances are also an issue. This can happen if the variances of the latent variables are very small as compared to residual variances (i.e., very low reliability of manifest variables) of the manifest variables or vice versa (i.e., manifest variables are highly correlated). The <code>reliabilities()</code> function serves as a diagnostic tool and prints the reliabilities and variances of both the manifest and latent variables:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="within-subjects-designs.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">reliabilities</span>(fit_latent)</span></code></pre></div>
+<pre><code>## indicator      sentence   grade       reliability   sigma_eta      lambda       eps_y
+## -------------  ---------  ---------  ------------  ----------  ----------  ----------
+## fix_count      grade1     sentence      0.6363140   0.4724375   0.9959292   0.2678282
+## ini_land_pos   grade1     sentence      0.4610548   0.4724375   0.9304984   0.4781539
+## re_fix_time    grade1     sentence      0.6672992   0.4724375   1.0735725   0.2714815
+## fix_count      grade2     sentence      0.7140289   0.3885014   0.9959292   0.1543319
+## ini_land_pos   grade2     sentence      0.5883054   0.3885014   0.9304984   0.2353945
+## re_fix_time    grade2     sentence      0.9671821   0.3885014   1.0735725   0.0151935
+## fix_count      grade4     sentence      0.5436482   0.1850009   0.9959292   0.1540326
+## ini_land_pos   grade4     sentence      0.4849815   0.1850009   0.9304984   0.1700994
+## re_fix_time    grade4     sentence      0.8347808   0.1850009   1.0735725   0.0422012
+## fix_count      grade1     landolt       0.5371139   0.1755438   0.9959292   0.1500550
+## ini_land_pos   grade1     landolt       0.4112846   0.1755438   0.9304984   0.2175604
+## re_fix_time    grade1     landolt       0.6084315   0.1755438   1.0735725   0.1302100
+## fix_count      grade2     landolt       0.4555433   0.1123143   0.9959292   0.1331452
+## ini_land_pos   grade2     landolt       0.3650680   0.1123143   0.9304984   0.1691296
+## re_fix_time    grade2     landolt       0.4975977   0.1123143   1.0735725   0.1306986
+## fix_count      grade4     landolt       0.3834018   0.0987020   0.9959292   0.1574457
+## ini_land_pos   grade4     landolt       0.3831102   0.0987020   0.9304984   0.1376071
+## re_fix_time    grade4     landolt       0.3894837   0.0987020   1.0735725   0.1783186</code></pre>
+<p>“sigma_eta” contains the model implied variances of the latent dependent variables <span class="math inline">\(\boldsymbol{\eta}\)</span> (i.e., the variances are fixed to zero in laten repeated measures ANOVA [L-RM-ANOVA] and can be calculated from the variances of the <span class="math inline">\(\boldsymbol{\pi}\)</span> variables). “lambda” contains the factor loadings of the manifest variables on the latent variables. “eps_y” contains the residual variances of the manifest variables. We see that none of the residual variances is negative. The smallest reliability is .37 which is rather low. In contrast, the highest reliability is .97 which is very high. The analysis serves as an example and we will not further examine the reliabilities and residual variances. In practice, however, we should further investigate possible reasons for the poor fit.</p>
+<p>Figure <a href="within-subjects-designs.html#fig:within-latent">3.3</a> shows a path diagram of the model including all of the parameters.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:within-latent"></span>
+<img src="semnova-man_files/figure-html/within-latent-1.png" alt="Path diagram created by `plot(fit_latent, what = &quot;all&quot;)` for a $2 \times 3$ (sentence $\times$ grade) within-subjects design with the latent dependent variable reading ability measured by the three manifest variables re-fixation time, initial landing position and fixation count." width="100%" />
+<p class="caption">
+Figure 3.3: Path diagram created by <code>plot(fit_latent, what = "all")</code> for a <span class="math inline">\(2 \times 3\)</span> (sentence <span class="math inline">\(\times\)</span> grade) within-subjects design with the latent dependent variable reading ability measured by the three manifest variables re-fixation time, initial landing position and fixation count.
+</p>
+</div>
+<!-- \begin{figure}[H] -->
+<!--      \centering -->
+<!--      \includegraphics[width=\textwidth]{figures/tutorial/within_latent_all_width_0.257cm.pdf} -->
+<!--      \caption{Path diagram created by `plot(fit_latent, what = "all")` for a $2 \times 3$ (sentence $\times$ grade) within-subjects design with the latent dependent variable reading ability measured by the three manifest variables re-fixation time, initial landing position and fixation count.} -->
+<!--      \label{fig:software_within_latent} -->
+<!-- \end{figure} -->
+</div>
+<div id="measurement-invariance" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Measurement Invariance<a href="within-subjects-designs.html#measurement-invariance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Measurement invariance is an important assumption when using latent variables. This assumption is oftentimes implicitly assumed when using traditional repeated measures (RM-ANOVA). RM-ANOVA cannot handle latent variables and indicators are averaged to manifest composite or sum scores in order to be able to use RM-ANOVA. This approach implicitly assumes a parallel measurement model across the six experimental conditions but the assumption is not explicitly tested. In order to be able to compare the means of latent variables, we need strong measurement invariance <span class="citation">(see <a href="references.html#ref-Langenberg2022z" role="doc-biblioref">Langenberg, 2022, sec. 2.4</a> “Latent Repeated Measures ANOVA (L-RM-ANOVA)”)</span>, that is, equal loadings and equal intercepts across the experimental conditions. With <em>semnova</em>, we can actually test for measurement invariance. As described in the previous example, <em>semnova</em> uses a congeneric measurement model. The <code>invariance_within</code> argument can be set to either of <code>"configural"</code> (equal model structure), <code>"weak"</code> (equal loadings), <code>"strong"</code> (equal loadings and intercepts), or <code>"strict"</code> (equal loadings, intercepts and residual variances):</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="within-subjects-designs.html#cb16-1" aria-hidden="true" tabindex="-1"></a>fit_latent_configMI <span class="ot">&lt;-</span> <span class="fu">semnova</span>(</span>
+<span id="cb16-2"><a href="within-subjects-designs.html#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> reading_latent,</span>
+<span id="cb16-3"><a href="within-subjects-designs.html#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> <span class="st">&quot;id&quot;</span>, </span>
+<span id="cb16-4"><a href="within-subjects-designs.html#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">dv =</span> <span class="st">&quot;dv&quot;</span>,</span>
+<span id="cb16-5"><a href="within-subjects-designs.html#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">indicator =</span> <span class="st">&quot;indicator&quot;</span>,</span>
+<span id="cb16-6"><a href="within-subjects-designs.html#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">equal_resid_cov =</span> <span class="fu">list</span>(<span class="st">&quot;ini_land_pos&quot;</span>, <span class="st">&quot;fix_count&quot;</span>),</span>
+<span id="cb16-7"><a href="within-subjects-designs.html#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">within =</span> <span class="fu">c</span>(<span class="st">&quot;grade&quot;</span>, <span class="st">&quot;sentence&quot;</span>),</span>
+<span id="cb16-8"><a href="within-subjects-designs.html#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">missing =</span> <span class="st">&quot;fiml&quot;</span>,</span>
+<span id="cb16-9"><a href="within-subjects-designs.html#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">invariance_within =</span> <span class="st">&quot;configural&quot;</span></span>
+<span id="cb16-10"><a href="within-subjects-designs.html#cb16-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-11"><a href="within-subjects-designs.html#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="within-subjects-designs.html#cb16-12" aria-hidden="true" tabindex="-1"></a>fit_latent_weakMI <span class="ot">&lt;-</span> <span class="fu">semnova</span>(</span>
+<span id="cb16-13"><a href="within-subjects-designs.html#cb16-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> reading_latent,</span>
+<span id="cb16-14"><a href="within-subjects-designs.html#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> <span class="st">&quot;id&quot;</span>, </span>
+<span id="cb16-15"><a href="within-subjects-designs.html#cb16-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">dv =</span> <span class="st">&quot;dv&quot;</span>,</span>
+<span id="cb16-16"><a href="within-subjects-designs.html#cb16-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">indicator =</span> <span class="st">&quot;indicator&quot;</span>,</span>
+<span id="cb16-17"><a href="within-subjects-designs.html#cb16-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">equal_resid_cov =</span> <span class="fu">list</span>(<span class="st">&quot;ini_land_pos&quot;</span>, <span class="st">&quot;fix_count&quot;</span>),</span>
+<span id="cb16-18"><a href="within-subjects-designs.html#cb16-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">within =</span> <span class="fu">c</span>(<span class="st">&quot;grade&quot;</span>, <span class="st">&quot;sentence&quot;</span>),</span>
+<span id="cb16-19"><a href="within-subjects-designs.html#cb16-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">missing =</span> <span class="st">&quot;fiml&quot;</span>,</span>
+<span id="cb16-20"><a href="within-subjects-designs.html#cb16-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">invariance_within =</span> <span class="st">&quot;weak&quot;</span></span>
+<span id="cb16-21"><a href="within-subjects-designs.html#cb16-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-22"><a href="within-subjects-designs.html#cb16-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-23"><a href="within-subjects-designs.html#cb16-23" aria-hidden="true" tabindex="-1"></a>fit_latent_strongMI <span class="ot">&lt;-</span> <span class="fu">semnova</span>(</span>
+<span id="cb16-24"><a href="within-subjects-designs.html#cb16-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> reading_latent,</span>
+<span id="cb16-25"><a href="within-subjects-designs.html#cb16-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> <span class="st">&quot;id&quot;</span>, </span>
+<span id="cb16-26"><a href="within-subjects-designs.html#cb16-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">dv =</span> <span class="st">&quot;dv&quot;</span>,</span>
+<span id="cb16-27"><a href="within-subjects-designs.html#cb16-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">indicator =</span> <span class="st">&quot;indicator&quot;</span>,</span>
+<span id="cb16-28"><a href="within-subjects-designs.html#cb16-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">equal_resid_cov =</span> <span class="fu">list</span>(<span class="st">&quot;ini_land_pos&quot;</span>, <span class="st">&quot;fix_count&quot;</span>),</span>
+<span id="cb16-29"><a href="within-subjects-designs.html#cb16-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">within =</span> <span class="fu">c</span>(<span class="st">&quot;grade&quot;</span>, <span class="st">&quot;sentence&quot;</span>),</span>
+<span id="cb16-30"><a href="within-subjects-designs.html#cb16-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">missing =</span> <span class="st">&quot;fiml&quot;</span>,</span>
+<span id="cb16-31"><a href="within-subjects-designs.html#cb16-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">invariance_within =</span> <span class="st">&quot;strong&quot;</span></span>
+<span id="cb16-32"><a href="within-subjects-designs.html#cb16-32" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-33"><a href="within-subjects-designs.html#cb16-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-34"><a href="within-subjects-designs.html#cb16-34" aria-hidden="true" tabindex="-1"></a>fit_latent_strictMI <span class="ot">&lt;-</span> <span class="fu">semnova</span>(</span>
+<span id="cb16-35"><a href="within-subjects-designs.html#cb16-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> reading_latent,</span>
+<span id="cb16-36"><a href="within-subjects-designs.html#cb16-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> <span class="st">&quot;id&quot;</span>, </span>
+<span id="cb16-37"><a href="within-subjects-designs.html#cb16-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">dv =</span> <span class="st">&quot;dv&quot;</span>,</span>
+<span id="cb16-38"><a href="within-subjects-designs.html#cb16-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">indicator =</span> <span class="st">&quot;indicator&quot;</span>,</span>
+<span id="cb16-39"><a href="within-subjects-designs.html#cb16-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">equal_resid_cov =</span> <span class="fu">list</span>(<span class="st">&quot;ini_land_pos&quot;</span>, <span class="st">&quot;fix_count&quot;</span>),</span>
+<span id="cb16-40"><a href="within-subjects-designs.html#cb16-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">within =</span> <span class="fu">c</span>(<span class="st">&quot;grade&quot;</span>, <span class="st">&quot;sentence&quot;</span>),</span>
+<span id="cb16-41"><a href="within-subjects-designs.html#cb16-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">missing =</span> <span class="st">&quot;fiml&quot;</span>,</span>
+<span id="cb16-42"><a href="within-subjects-designs.html#cb16-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">invariance_within =</span> <span class="st">&quot;strict&quot;</span></span>
+<span id="cb16-43"><a href="within-subjects-designs.html#cb16-43" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-44"><a href="within-subjects-designs.html#cb16-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-45"><a href="within-subjects-designs.html#cb16-45" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(</span>
+<span id="cb16-46"><a href="within-subjects-designs.html#cb16-46" aria-hidden="true" tabindex="-1"></a>    fit_latent_configMI, </span>
+<span id="cb16-47"><a href="within-subjects-designs.html#cb16-47" aria-hidden="true" tabindex="-1"></a>    fit_latent_weakMI, </span>
+<span id="cb16-48"><a href="within-subjects-designs.html#cb16-48" aria-hidden="true" tabindex="-1"></a>    fit_latent_strongMI, </span>
+<span id="cb16-49"><a href="within-subjects-designs.html#cb16-49" aria-hidden="true" tabindex="-1"></a>    fit_latent_strictMI</span>
+<span id="cb16-50"><a href="within-subjects-designs.html#cb16-50" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Chi-Squared Difference Test
+## 
+##                      Df    AIC    BIC  Chisq Chisq diff Df diff Pr(&gt;Chisq)    
+## fit_latent_configMI 118 5467.5 5722.2 248.11                                  
+## fit_latent_weakMI   128 5579.8 5798.6 380.44    132.332      10  &lt; 2.2e-16 ***
+## fit_latent_strongMI 138 5640.9 5823.9 461.55     81.114      10  3.036e-13 ***
+## fit_latent_strictMI 153 5875.1 6004.2 725.68    264.131      15  &lt; 2.2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Using the <code>anova()</code> function, we can compare the four models. All tests are highly significant indicating that they do not fit equally well. Thus, we cannot assume any degree of measurement invariance. As a consequence, we should be very cautious when interpreting parameter estimates and hypothesis tests.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="installation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="between-subjects-designs.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["semnova-man.pdf", "semnova-man.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
